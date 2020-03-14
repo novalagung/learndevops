@@ -238,16 +238,16 @@ Next, run `terraform plan`, to see the plan of our infrastructure. This step is 
 
 Last, run the `terraform apply` command to execute the infrastructure plan.
 
-    ```bash
-    cd terraform-automate-aws-ec2-instance
-    terraform apply -auto-approve
-    ```
+```bash
+cd terraform-automate-aws-ec2-instance
+terraform apply -auto-approve
+```
 
-    The `-auto-approve` flag is optional, it will skip the confirmation prompt during execution.
+The `-auto-approve` flag is optional, it will skip the confirmation prompt during execution.
 
-    ![Terraform | AWS EC2 + Internet Gateway + SSH Access | terraform apply](https://i.imgur.com/rK1LX8c.png)
+![Terraform | AWS EC2 + Internet Gateway + SSH Access | terraform apply](https://i.imgur.com/rK1LX8c.png)
 
-    In the infra file we defined two outputs, dns and public IP, it show up after the terraforming process done.
+In the infra file we defined two outputs, DNS and public IP, it show up after the terraforming process done.
 
 ## 5. Test Instance
 
@@ -259,4 +259,4 @@ ssh -i id_rsa ec2-user@ec2-18-140-245-218.ap-southeast-1.compute.amazonaws.com
 
 ![Terraform | AWS EC2 + Internet Gateway + SSH Access | ssh to ec2 instance](https://i.imgur.com/uL1TulT.png)
 
-We can see from image above that we are able to connect to ec2 instance via ssh, and the instance is connected to internet.
+We can see from image above that we are able to connect to ec2 instance via SSH, and the instance is connected to internet.
