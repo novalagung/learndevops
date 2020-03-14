@@ -14,5 +14,3 @@
     * [? Terraform Introduction](terraform-introduction.md)
     * [AWS EC2 + Internet Gateway + SSH Access](terraform-aws-ec2-internet-gateway-ssh.md)
     * [? AWS EC2 + Load Balancer + Auto Scaling](terraform-aws-load-balancer-auto-scaling.md)
-
-Automate AWS EC2 instance creation with Internet Gateway and SSH access enabled
