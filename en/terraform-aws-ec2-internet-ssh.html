@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>AWS EC2 + Internet Gateway + SSH access · GitBook</title>
+        <title>AWS EC2 + Internet Gateway + SSH Access · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,7 +57,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="terraform-automate-aws-autoscaling-alb.md" />
+    <link rel="next" href="terraform-aws-load-balancer-auto-scaling.html" />
     
     
 
@@ -114,25 +114,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="devops-docker-push-image-to-hub.md">
+        <li class="chapter " data-level="1.2.1" data-path="docker-push-image-to-hub.html">
             
-                <span>
+                <a href="docker-push-image-to-hub.html">
             
                     
                     Push Image to hub.docker.com
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="aws-create-individual-iam-user.md">
-            
-                <span>
-            
-                    
-                    Create Individual IAM user
             
                 </a>
             
@@ -150,6 +137,38 @@
                 <span>
             
                     
+                    AWS
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="aws-create-individual-iam-user.html">
+            
+                <a href="aws-create-individual-iam-user.html">
+            
+                    
+                    Create Individual IAM User
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
                     Terraform
             
                 </span>
@@ -159,12 +178,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.3.1" data-path="terraform-automate-aws-ec2-instance.html">
+        <li class="chapter active" data-level="1.4.1" data-path="terraform-aws-ec2-internet-ssh.html">
             
-                <a href="terraform-automate-aws-ec2-instance.html">
+                <a href="terraform-aws-ec2-internet-ssh.html">
             
                     
-                    AWS EC2 + Internet Gateway + SSH access
+                    AWS EC2 + Internet Gateway + SSH Access
             
                 </a>
             
@@ -172,9 +191,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="terraform-automate-aws-autoscaling-alb.md">
+        <li class="chapter " data-level="1.4.2" data-path="terraform-aws-load-balancer-auto-scaling.html">
             
-                <span>
+                <a href="terraform-aws-load-balancer-auto-scaling.html">
             
                     
                     AWS EC2 + Load Balancer + Auto Scaling
@@ -220,7 +239,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >AWS EC2 + Internet Gateway + SSH access</a>
+        <a href="." >AWS EC2 + Internet Gateway + SSH Access</a>
     </h1>
 </div>
 
@@ -235,14 +254,13 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="automate-aws-ec2-instance-creation-with-internet-gateway-and-ssh-access-enabled">Automate AWS EC2 instance creation with Internet Gateway and SSH access enabled</h1>
+                                <h1 id="terraform---aws-ec2--internet-gateway--ssh-access">Terraform - AWS EC2 + Internet Gateway + SSH Access</h1>
 <p>In this post we are going to learn about usage of terraform to automate setup of aws ec2 instance with internet gateway and ssh access enabled.</p>
 <h2 id="1-prerequisites">1. Prerequisites</h2>
 <h4 id="11-terraform-cli">1.1. Terraform CLI</h4>
 <p><a href="https://www.terraform.io/downloads.html" target="_blank">Dowload and install terraform CLI</a> from and then append the binary into <code>$PATH</code> variable (<code>%PATH%</code> for windows).</p>
-<h4 id="12-individual-iam-user">1.2. Individual IAM user</h4>
-<p><a href="aws-create-individual-iam-user.md">Create new individual IAM user</a> with programatic access key enabled and an access to the EC2 management. We will then get <code>access_key</code> and <code>secret_key</code>.</p>
-<p><img src="https://i.imgur.com/i9Eug8N.png" alt="Terraform Automate AWS EC2 Instance - create individual IAM user"></p>
+<h4 id="12-individual-aws-iam-user">1.2. Individual AWS IAM user</h4>
+<p><a href="aws-create-individual-iam-user.html">Create new individual IAM user</a> with programatic access key enabled and an access to the EC2 management. We will then get <code>access_key</code> and <code>secret_key</code>.</p>
 <h4 id="13-ssh-keygen-and-ssh-commands">1.3. <code>ssh-keygen</code> and <code>ssh</code> commands</h4>
 <p>Ensure both <code>ssh-keygen</code> and <code>ssh</code> command are available.</p>
 <h2 id="2-initialization">2. Initialization</h2>
@@ -455,7 +473,7 @@ In the infra file we defined two outputs, dns and public IP, it show up after th
             
                 
                 
-                <a href="terraform-automate-aws-autoscaling-alb.md" class="navigation navigation-next navigation-unique" aria-label="Next page: AWS EC2 + Load Balancer + Auto Scaling">
+                <a href="terraform-aws-load-balancer-auto-scaling.html" class="navigation navigation-next navigation-unique" aria-label="Next page: AWS EC2 + Load Balancer + Auto Scaling">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -466,7 +484,7 @@ In the infra file we defined two outputs, dns and public IP, it show up after th
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"AWS EC2 + Internet Gateway + SSH access","level":"1.3.1","depth":2,"next":{"title":"AWS EC2 + Load Balancer + Auto Scaling","level":"1.3.2","depth":2,"path":"terraform-automate-aws-autoscaling-alb.md","ref":"terraform-automate-aws-autoscaling-alb.md","articles":[]},"previous":{"title":"Terraform","level":"1.3","depth":1,"ref":"","articles":[{"title":"AWS EC2 + Internet Gateway + SSH access","level":"1.3.1","depth":2,"path":"terraform-automate-aws-ec2-instance.md","ref":"terraform-automate-aws-ec2-instance.md","articles":[]},{"title":"AWS EC2 + Load Balancer + Auto Scaling","level":"1.3.2","depth":2,"path":"terraform-automate-aws-autoscaling-alb.md","ref":"terraform-automate-aws-autoscaling-alb.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"terraform-automate-aws-ec2-instance.md","mtime":"2020-03-14T11:35:05.791Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-14T11:35:50.411Z"},"basePath":".","book":{"language":"en"}});
+            gitbook.page.hasChanged({"page":{"title":"AWS EC2 + Internet Gateway + SSH Access","level":"1.4.1","depth":2,"next":{"title":"AWS EC2 + Load Balancer + Auto Scaling","level":"1.4.2","depth":2,"path":"terraform-aws-load-balancer-auto-scaling.md","ref":"terraform-aws-load-balancer-auto-scaling.md","articles":[]},"previous":{"title":"Terraform","level":"1.4","depth":1,"ref":"","articles":[{"title":"AWS EC2 + Internet Gateway + SSH Access","level":"1.4.1","depth":2,"path":"terraform-aws-ec2-internet-ssh.md","ref":"terraform-aws-ec2-internet-ssh.md","articles":[]},{"title":"AWS EC2 + Load Balancer + Auto Scaling","level":"1.4.2","depth":2,"path":"terraform-aws-load-balancer-auto-scaling.md","ref":"terraform-aws-load-balancer-auto-scaling.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"terraform-aws-ec2-internet-ssh.md","mtime":"2020-03-14T11:43:02.513Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-14T11:43:55.768Z"},"basePath":".","book":{"language":"en"}});
         });
     </script>
 </div>
