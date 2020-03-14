@@ -34,7 +34,7 @@
         }
     },
     "styles": {
-        "website": "website.css"
+        "website": "style.css"
     },
     "lunr": {
         "maxIndexSize": 1000000000

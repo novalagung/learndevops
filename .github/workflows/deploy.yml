@@ -21,10 +21,8 @@ jobs:
       run: npm install -g gitbook-cli
     - name: 'Generating distributable files'
       run: |
-        cp book.json.template book.json
         gitbook install
         gitbook build
-        # go run website.go
         cd _book
         rm -rf LICENSE
         rm -rf book*
@@ -32,8 +30,6 @@ jobs:
         rm -rf .gitignore
         rm -rf .github
         rm -rf *.md
-        # rm -rf *.sh
-        # rm -rf *.psd
         rm -rf *.go
     - uses: peaceiris/actions-gh-pages@v2.5.0
       env:
