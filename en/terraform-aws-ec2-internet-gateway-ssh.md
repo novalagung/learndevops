@@ -1,6 +1,6 @@
-# Terraform - AWS EC2 + Internet Gateway + SSH Access
+# Terraform | AWS EC2 + Internet Gateway + SSH Access
 
-In this post we are going to learn about usage of terraform to automate setup of aws ec2 instance with internet gateway and ssh access enabled.
+In this post we are going to learn about the usage of terraform to automate setup of AWS EC2 instance with internet gateway and ssh access enabled.
 
 ## 1. Prerequisites
 
@@ -18,7 +18,7 @@ Ensure both `ssh-keygen` and `ssh` command are available.
 
 ## 2. Initialization
 
-Create new folder with a file named `infrastructure.tf` inside. We will use the file as the infrastructure code. Every setup will be written in HCL language inside the file, including: 
+Create a new folder contains a file named `infrastructure.tf`. We will use the file as the infrastructure code. Every setup will be written in HCL language inside the file, including: 
 
 - Uploading key pair (for ssh access to the instance)
 - Creating EC2 instance
@@ -41,13 +41,17 @@ cd terraform-automate-aws-ec2-instance
 ssh-keygen -t rsa -f ./id_rsa
 ```
 
-![Terraform Automate AWS EC2 Instance - generate key pair](https://i.imgur.com/ZB16oJB.png)
+![Terraform | AWS EC2 + Internet Gateway + SSH Access | generate key pair](https://i.imgur.com/ZB16oJB.png)
 
 ## 3. Infrastructure Code
 
+Now we shall start writing the infrastructure config. Open `infrastructure.tf` in any editor.
+
 #### 3.1. Define AWS provider
 
-Open it in any editor, then define the provider block with [aws as choosen cloud provider](https://www.terraform.io/docs/providers/aws/index.html). Also define these properties: `region`, `access_key`, and `secret_key`; with values derrived from the created IAM user.
+Define the provider block with [aws as choosen cloud provider](https://www.terraform.io/docs/providers/aws/index.html). Also define these properties: `region`, `access_key`, and `secret_key`; with values derrived from the created IAM user.
+
+Write block of code below into `infrastructure.tf`
 
 ```bash
 provider "aws" {
@@ -151,7 +155,7 @@ resource "aws_security_group" "my_vpc_security_group" {
 Above security group is created for `my_vpc` (see `vpc_id = aws_vpc.my_vpc.id`). This particular VPC have three inbound/outbound rules:
 
 - Allow ssh access from anywhere. Later we need to remotelly connect to the instance to see whether it's properly set up or not.
-- Allow incoming access trhough port 80. This might be required, so we can perform any tools/dependency installations, etc.
+- Allow incoming access trhough port `80`. This might be required, so we can perform any tools/dependency installations, etc.
 - Allow all kind of outgoing accesses from anywhere. By doing this we will be able to perform remote access, download, etc to anywhere from the instance.
 
 > ingress is equivalent to inbound, and egress for outbound
@@ -224,7 +228,7 @@ First, run the `terraform init` command. This command will do some setup/initial
     run
     ```
 
-    ![Terraform Automate AWS EC2 Instance - terraform init](https://i.imgur.com/6PnpyNc.png)
+    ![Terraform | AWS EC2 + Internet Gateway + SSH Access | terraform init](https://i.imgur.com/6PnpyNc.png)
 
 #### 4.2. Terraform plan
 
@@ -241,7 +245,7 @@ Last, run the `terraform apply` command to execute the infrastructure plan.
 
     The `-auto-approve` flag is optional, it will skip the confirmation prompt during execution.
 
-    ![Terraform Automate AWS EC2 Instance - terraform apply](https://i.imgur.com/rK1LX8c.png)
+    ![Terraform | AWS EC2 + Internet Gateway + SSH Access | terraform apply](https://i.imgur.com/rK1LX8c.png)
 
     In the infra file we defined two outputs, dns and public IP, it show up after the terraforming process done.
 
@@ -253,6 +257,6 @@ Now we shall test the instance. Use the `ssh` command to remotelly connect to th
 ssh -i id_rsa ec2-user@ec2-18-140-245-218.ap-southeast-1.compute.amazonaws.com
 ```
 
-![Terraform Automate AWS EC2 Instance - ssh to ec2 instance](https://i.imgur.com/uL1TulT.png)
+![Terraform | AWS EC2 + Internet Gateway + SSH Access | ssh to ec2 instance](https://i.imgur.com/uL1TulT.png)
 
 We can see from image above that we are able to connect to ec2 instance via ssh, and the instance is connected to internet.
