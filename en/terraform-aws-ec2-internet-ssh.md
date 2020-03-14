@@ -1,4 +1,4 @@
-# Automate AWS EC2 instance creation with Internet Gateway and SSH access enabled
+# Terraform - AWS EC2 + Internet Gateway + SSH Access
 
 In this post we are going to learn about usage of terraform to automate setup of aws ec2 instance with internet gateway and ssh access enabled.
 
@@ -8,11 +8,9 @@ In this post we are going to learn about usage of terraform to automate setup of
 
 [Dowload and install terraform CLI](https://www.terraform.io/downloads.html) from and then append the binary into `$PATH` variable (`%PATH%` for windows).
 
-#### 1.2. Individual IAM user
+#### 1.2. Individual AWS IAM user
 
 [Create new individual IAM user](aws-create-individual-iam-user.md) with programatic access key enabled and an access to the EC2 management. We will then get `access_key` and `secret_key`.
-
-![Terraform Automate AWS EC2 Instance - create individual IAM user](https://i.imgur.com/i9Eug8N.png)
 
 #### 1.3. `ssh-keygen` and `ssh` commands
 
