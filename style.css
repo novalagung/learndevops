@@ -1,7 +1,9 @@
 body, .book.font-family-1, .book-summary {
     font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
 }
-
+.book-summary ul.summary li a, .book-summary ul.summary li span {
+    padding: 7px 15px;
+}
 #book-search-input {
     position: relative;
 }
