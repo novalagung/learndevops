@@ -6,21 +6,21 @@ Since we will be using auto-scaling feature, then the app within the instance ne
 
 The application is a simple go app, currently hosted on Github in a private repo. We will clone the app using Github token, we will talk about it in details in some part of this tutorial.
 
-## 1. Prerequisites
+### 1. Prerequisites
 
-### 1.1. Terraform CLI
+#### 1.1. Terraform CLI
 
 Ensure terraform CLI is available. If not, then follow guide on [Terraform Installation](terraform-cli-installation.md).
 
-### 1.2. Individual AWS IAM user
+#### 1.2. Individual AWS IAM user
 
 Prepare a new individual IAM user with programmatic access key enabled and has access to EC2 management. We will use the `access_key` and `secret_key` on this tutorial. If you haven't create the IAM user, then follow guide on [Create Individual IAM User](aws-create-individual-iam-user.md).
 
-### 1.3. `ssh-keygen` and `ssh` commands
+#### 1.3. `ssh-keygen` and `ssh` commands
 
 Ensure both `ssh-keygen` and `ssh` command are available.
 
-## 2. Initialization
+### 2. Initialization
 
 Create a new folder contains a file named `infrastructure.tf`. We will use the file as the infrastructure code. Every setup will be written in HCL language inside the file, including: 
 
@@ -45,11 +45,11 @@ ssh-keygen -t rsa -f ./id_rsa
 
 ![Terraform | AWS EC2 + Load Balancer + Auto Scaling | generate key pair](https://i.imgur.com/ZB16oJB.png)
 
-## 3. Infrastructure Code
+### 3. Infrastructure Code
 
 Now we shall start writing the infrastructure config. Open `infrastructure.tf` in any editor.
 
-### 3.1. Define AWS provider
+#### 3.1. Define AWS provider
 
 Define the provider block with [AWS as chosen cloud provider](https://www.terraform.io/docs/providers/aws/index.html). Also define these properties: `region`, `access_key`, and `secret_key`; with values derived from the created IAM user.
 
@@ -63,7 +63,7 @@ provider "aws" {
 }
 ```
 
-### 3.2. Generate new key pair then upload to AWS
+#### 3.2. Generate new key pair then upload to AWS
 
 Define new [`aws_key_pair` resource](https://www.terraform.io/docs/providers/aws/r/key_pair.html) block with local name: `my_instance_key_pair`. Put the previously generated `id_rsa.pub` public key inside the block to upload it to AWS.
 
@@ -74,7 +74,7 @@ resource "aws_key_pair" "my_instance_key_pair" {
 }
 ```
 
-### 3.3. Book a VPC, and enable internet gateway on it
+#### 3.3. Book a VPC, and enable internet gateway on it
 
 Book a VPC, name it `my_vpc`. Then enable internet gateway on it. Each part of code below is self-explanatory.
 
@@ -100,7 +100,7 @@ resource "aws_route_table" "my_public_route_table" {
 }
 ```
 
-### 3.4. Allocate two different subnets on two different availability zones (within same region)
+#### 3.4. Allocate two different subnets on two different availability zones (within same region)
 
 Application Load Balancer or ALB requires two subnets setup on two availability zones (within same region).
 
@@ -134,7 +134,7 @@ resource "aws_route_table_association" "my_public_route_association_for_southeas
 
 The internet gateway associated with two zones that we just created. In this example, it is required for the application hosted within instances on these zones to be able to connect to the internet.
 
-### 3.5. Define ALB resource block, listener, security group, and target group
+#### 3.5. Define ALB resource block, listener, security group, and target group
 
 The ALB will be created with two subnets attached (subnets from `ap-southeast-1a` and `ap-southeast-1b`).
 
@@ -204,7 +204,7 @@ resource "aws_lb_target_group" "my_alb_target_group" {
 }
 ```
 
-### 3.6. Define launch config (and it's required dependencies) for auto-scaling
+#### 3.6. Define launch config (and it's required dependencies) for auto-scaling
 
 We are not going to simply create an instance then deploy the application into it. Instead, the instance creation and app deployment will be automated using AWS auto-scaling feature.
 
@@ -318,7 +318,7 @@ resource "aws_autoscaling_group" "my_autoscaling_group" {
 }
 ```
 
-### 3.7. Print the ALB public DNS
+#### 3.7. Print the ALB public DNS
 
 Everything is pretty much done, except we need to print the ALB public DNS, so then we can do the testing.
 
@@ -331,7 +331,7 @@ output "alb-url" {
 }
 ```
 
-## 4. App Deployment Script
+### 4. App Deployment Script
 
 We have done with the infrastructure code, next prepare the deployment script.
 
@@ -385,9 +385,9 @@ cd hello-world
 nohup ./binary &
 ```
 
-## 5. Run Terraform
+### 5. Run Terraform
 
-### 5.1. Terraform initialization
+#### 5.1. Terraform initialization
 
 First, run the `terraform init` command. This command will do some setup/initialization, certain dependencies (like AWS provider that we used) will be downloaded.
 
@@ -396,11 +396,11 @@ cd terraform-automate-aws-ec2-instance
 terraform init
 ```
 
-### 5.2. Terraform plan
+#### 5.2. Terraform plan
 
 Next, run `terraform plan`, to see the plan of our infrastructure. This step is optional, however, might be useful for us to see the outcome from the infra file.
 
-### 5.3. Terraform apply
+#### 5.3. Terraform apply
 
 Last, run the `terraform apply` command to execute the infrastructure plan.
 
@@ -413,7 +413,7 @@ The `-auto-approve` flag is optional, it will skip the confirmation prompt durin
 
 After the process is done, public DNS shall appear. Next, we shall test the instance. 
 
-## 6. Test Instance
+### 6. Test Instance
 
 Use the `curl` command to make HTTP request to the ALB public DNS instance.
 
