@@ -13,6 +13,9 @@
     z-index: 1;
     position: absolute;
 }
+#book-search-results .markdown-section img {
+    border: 3px solid #d4d4d4;
+}
 .book-summary {
     background-color: #ffffff;
 }
