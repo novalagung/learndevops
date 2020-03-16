@@ -1,30 +1,16 @@
 # Kubernetes | Minikube Deployment + Service + Horizontal Autoscaler
 
-In this post we are going to learn about how deploy an containerized app into kubernetes cluster and enable the horizontal auto scaling onto it. The application that we are going to deploy is hosted on [Docker Hub](https://hub.docker.com/repository/docker/novalagung/hello-world).
+In this post we are going to learn about how deploy containerized app into kubernetes cluster, enable the horizontal auto scaling on it, and create a service that make the application accessible from outside the cluster.
 
-If you want to deploy your own app, do push it first into Docker Hub. This guide might help you [Docker - Push Image to hub.docker.com](/devops-docker-push-image-to-hub).
+The application that we are going to use on the tutorial is a simple hello world app written in Go. The app is dockerized and the image is available on [Docker Hub](https://hub.docker.com/repository/docker/novalagung/hello-world).
 
-## 1. Docker, Kubernetes, Minikube, and Kubernetes Architecture at Glance
+You can also deploy your own app, just do push it into Docker Hub. This guide might help you [Docker - Push Image to hub.docker.com](/docker-push-image-to-hub.html).
 
-Docker is a set of platform as a service products that uses OS-level virtualization to deliver software in packages called containers.
+## 1. Prerequisites
 
-Kubernetes/k8s is an open-source container-orchestration system for automating application deployment, scaling, and management. It works with a range of container tools, including Docker.
+#### 1.1. Docker engine
 
-Minikube is a tool that makes it easy to run Kubernetes locally. Minikube runs a single-node Kubernetes cluster inside a Virtual Machine (VM) on your laptop for users looking to try out Kubernetes or develop with it day-to-day.
-
-Kubernetes Component
-
-## 2. Prerequisites
-
-#### Ensure docker engine is running
-
-Run the docker engine. If you haven't install it, then do install it first.
-
-For windows user, the Hyper-V feature must be enabled. use command below to enable it via CMD/PowerShell (admin privilege).
-
-```bash
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
-```
+Ensure Docker engine is running. If you haven't install it, then follow this guide [Docker Installation](docker-installation.md).
 
 #### Ensure minikube is running
 

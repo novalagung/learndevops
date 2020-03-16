@@ -4,17 +4,17 @@ In this post we are going to learn about how to push a docker image to [Docker H
 
 ## 1. Prerequisites
 
-#### 1.1. Ensure docker engine is running
+#### 1.1. Docker engine
 
-Run the docker engine. If you haven't installed it, then do it.
+Ensure Docker engine is running. If you haven't install it, then follow this guide [Docker Installation](docker-installation.md).
 
-#### 1.2. Have a docker account
+#### 1.2. Docker Hub account
 
-If you haven't created any docker account, do create one at https://hub.docker.com/signup.
+Prepare a Docker Hub account. If you don't have, follow this guide [Create Docker Hub Account](docker-hub-create-account.md).
 
-#### 1.3. Login to docker hub on the local machine
+#### 1.3. Login to Docker Hub on the local machine
 
-Do log in to docker hub via CLI command below:
+Do log in to Docker Hub via CLI command below:
 
 ```bash
 docker login --username=novalagung --password=<your-password>
@@ -26,11 +26,11 @@ Or use the UI menu. It is available by doing a right click on the docker menu â†
 
 #### 2.1. Create repo at Docker Hub
 
-First of all, we need to book a repo on Docker hub. Later we will push the image to that particular repo.
+First of all, we need to book a repo on Docker Hub. Later we will push the image to that particular repo.
 
 Go to https://hub.docker.com/repository/create, create a new repo (under your account), name it `hello-world` (or anything).
 
-![Docker | Push Image to hub.docker.com | create a repo on docker hub](https://i.imgur.com/uvLjxqv.png)
+![Docker | Push Image to hub.docker.com | create a repo on Docker Hub](https://i.imgur.com/uvLjxqv.png)
 
 #### 2.2. Clone the app then build as docker image
 
@@ -40,7 +40,7 @@ Next, we need to create a simple dockerized hello world app. But to make the thi
 git clone https://30542dd8874ba3745c55203a091c345340c18b7a:x-oauth-basic@github.com/novalagung/hello-world.git
 ```
 
-After the cloning process is finished, build the app as Docker image with a name in this format `<your-docker-username>/<your-repo-name>:<tag-name>`. Adjust the value of `<your-docker-username>` to use your actual Docker hub username.
+After the cloning process is finished, build the app as Docker image with a name in this format `<your-docker-username>/<your-repo-name>:<tag-name>`. Adjust the value of `<your-docker-username>` to use your actual Docker Hub username.
 
 ```bash
 cd hello-world
@@ -53,7 +53,7 @@ As we can see from the command above, the tag `v0` is used on this image.
 
 ![Docker | Push Image to hub.docker.com | build image](https://i.imgur.com/aiduEji.png)
 
-#### 2.3. Push image into docker hub
+#### 2.3. Push image into Docker Hub
 
 Next, use `docker push` command below to push the image that we just built.
 
@@ -62,7 +62,7 @@ Next, use `docker push` command below to push the image that we just built.
 docker push novalagung/hello-world
 ```
 
-![Docker | Push Image to hub.docker.com | push image to docker hub](https://i.imgur.com/TUy6Ffa.png)
+![Docker | Push Image to hub.docker.com | push image to Docker Hub](https://i.imgur.com/TUy6Ffa.png)
 
 Ok, done.
 
@@ -70,14 +70,14 @@ Ok, done.
 
 > This step is optional.
 
-We have pushed the image into Docker hub. To pull it, use the `docker pull` command.
+We have pushed the image into Docker Hub. To pull it, use the `docker pull` command.
 
 ```bash
 # docker pull <username>/<repo-name>[:<tag>]
 docker pull novalagung/hello-world:v0
 ```
 
-![Docker | Push Image to hub.docker.com | pull image from docker hub](https://i.imgur.com/tdRlNr7.png)
+![Docker | Push Image to hub.docker.com | pull image from Docker Hub](https://i.imgur.com/tdRlNr7.png)
 
 ## 4. The `latest` tag
 
@@ -100,4 +100,4 @@ docker build . -t novalagung/hello-world:latest
 docker push novalagung/hello-world:latest
 ```
 
-![Docker | Push Image to hub.docker.com | push latest tag to docker hub](https://i.imgur.com/6y0MEEA.png)
+![Docker | Push Image to hub.docker.com | push latest tag to Docker Hub](https://i.imgur.com/6y0MEEA.png)

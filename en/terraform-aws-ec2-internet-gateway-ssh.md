@@ -6,11 +6,11 @@ In this post, we are going to learn about the usage of terraform to automate the
 
 #### 1.1. Terraform CLI
 
-[Download and install terraform CLI](https://www.terraform.io/downloads.html) from and then append the binary into `$PATH` variable (`%PATH%` for windows).
+Ensure terraform CLI is available. If not, follow this guide [Terraform Installation](terraform-cli-installation.md).
 
 #### 1.2. Individual AWS IAM user
 
-[Create a new individual IAM user](aws-create-individual-iam-user.md) with programmatic access key enabled and access to the EC2 management. We will then get `access_key` and `secret_key`.
+Prepare a new individual IAM user with programmatic access key enabled and has access to EC2 management. We will use the `access_key` and `secret_key` on this tutorial. If you haven't create the user follow this guide [Create Individual IAM User](aws-create-individual-iam-user.md).
 
 #### 1.3. `ssh-keygen` and `ssh` commands
 
