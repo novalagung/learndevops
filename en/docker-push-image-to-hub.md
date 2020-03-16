@@ -6,27 +6,27 @@ In this post we are going to learn about how to push a docker image to [Docker H
 
 #### 1.1. Ensure docker engine is running
 
-Run the docker engine. If you haven't install it, then do install it first.
+Run the docker engine. If you haven't installed it, then do it.
 
 #### 1.2. Have a docker account
 
-If you haven't create any docker account, do create one at https://hub.docker.com/signup.
+If you haven't created any docker account, do create one at https://hub.docker.com/signup.
 
-#### 1.3. Login to docker hub on local machine
+#### 1.3. Login to docker hub on the local machine
 
-Do login to docker hub via cli command below:
+Do log in to docker hub via CLI command below:
 
 ```bash
 docker login --username=novalagung --password=<your-password>
 ```
 
-Or use the UI menu. It is available by doing right click on the docker menu → sign in.
+Or use the UI menu. It is available by doing a right click on the docker menu → sign in.
 
 ## 2. Guide
 
 #### 2.1. Create repo at Docker Hub
 
-First of all, we need to book a repo on docker hub. Later we will push the image to that particular repo.
+First of all, we need to book a repo on Docker hub. Later we will push the image to that particular repo.
 
 Go to https://hub.docker.com/repository/create, create a new repo (under your account), name it `hello-world` (or anything).
 
@@ -34,13 +34,13 @@ Go to https://hub.docker.com/repository/create, create a new repo (under your ac
 
 #### 2.2. Clone the app then build as docker image
 
-Next, we need to create a simple dockerized hello world app. But to make the thing faster, we will use a ready-to-deploy-dockerized hello world app crafted using Go. It's available on github (via github token), just run command below.
+Next, we need to create a simple dockerized hello world app. But to make the thing faster, we will use a ready-to-deploy-dockerized hello world app crafted using Go. It's available on Github (via Github token), just run the command below.
 
 ```bash
 git clone https://30542dd8874ba3745c55203a091c345340c18b7a:x-oauth-basic@github.com/novalagung/hello-world.git
 ```
 
-After the clone process is finished, build the app as docker image with a name in this format `<your-docker-username>/<your-repo-name>:<tag-name>`. Adjust the value of `<your-docker-username>` to use your actual docker hub username.
+After the cloning process is finished, build the app as Docker image with a name in this format `<your-docker-username>/<your-repo-name>:<tag-name>`. Adjust the value of `<your-docker-username>` to use your actual Docker hub username.
 
 ```bash
 cd hello-world
@@ -70,7 +70,7 @@ Ok, done.
 
 > This step is optional.
 
-We have pushed the image into docker hub. To pull it, use the `docker pull` command.
+We have pushed the image into Docker hub. To pull it, use the `docker pull` command.
 
 ```bash
 # docker pull <username>/<repo-name>[:<tag>]
@@ -81,7 +81,7 @@ docker pull novalagung/hello-world:v0
 
 ## 4. The `latest` tag
 
-By default, when we pull certain image from hub without a tag specified, then the `latest` tag of the particular image will be pulled.
+By default, when we pull a certain image from hub without a tag specified, then the `latest` tag of the particular image will be pulled.
 
 Take a look at two commands below, they are equivalent.
 
@@ -92,7 +92,7 @@ docker pull novalagung/hello-world:latest
 
 The funny thing about this what-so-called `latest` tag is, it is actually not referring to the latest tag pushed to the hub, it'll look for a tag with explicit name `latest`.
 
-The previous `v0` tag won't be treated as latest tag. To have a latest tag, then we shall rebuild our project into another image, but this time `latest` is used, and then we need to push it.
+The previous `v0` tag won't be treated as the latest tag. To have a latest tag, we shall rebuild our project into another image then push it to hub, but this time during the build we will do it using `latest` as the tag.
 
 ```bash
 cd hello-world
