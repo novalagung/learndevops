@@ -2,6 +2,8 @@
 
 In this post we are going to learn about how to push a docker image to [Docker Hub](https://hub.docker.com/).
 
+---
+
 ### 1. Prerequisites
 
 #### 1.1. Docker engine
@@ -21,6 +23,8 @@ docker login --username=novalagung --password=<your-password>
 ```
 
 Or use the UI menu. It is available by doing a right click on the docker menu → sign in.
+
+---
 
 ### 2. Guide
 
@@ -66,6 +70,8 @@ docker push novalagung/hello-world
 
 Ok, done.
 
+---
+
 ### 3. Test - Pull the Image from Docker Hub
 
 > This step is optional.
@@ -78,6 +84,8 @@ docker pull novalagung/hello-world:v0
 ```
 
 ![Docker | Push Image to hub.docker.com | pull image from Docker Hub](https://i.imgur.com/tdRlNr7.png)
+
+---
 
 ### 4. The `latest` tag
 

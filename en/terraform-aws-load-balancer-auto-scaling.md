@@ -6,6 +6,8 @@ Since we will be using auto-scaling feature, then the app within the instance ne
 
 The application is a simple go app, currently hosted on Github in a private repo. We will clone the app using Github token, we will talk about it in details in some part of this tutorial.
 
+---
+
 ### 1. Prerequisites
 
 #### 1.1. Terraform CLI
@@ -19,6 +21,8 @@ Prepare a new individual IAM user with programmatic access key enabled and has a
 #### 1.3. `ssh-keygen` and `ssh` commands
 
 Ensure both `ssh-keygen` and `ssh` command are available.
+
+---
 
 ### 2. Initialization
 
@@ -44,6 +48,8 @@ ssh-keygen -t rsa -f ./id_rsa
 ```
 
 ![Terraform | AWS EC2 + Load Balancer + Auto Scaling | generate key pair](https://i.imgur.com/ZB16oJB.png)
+
+---
 
 ### 3. Infrastructure Code
 
@@ -331,6 +337,8 @@ output "alb-url" {
 }
 ```
 
+---
+
 ### 4. App Deployment Script
 
 We have done with the infrastructure code, next prepare the deployment script.
@@ -385,6 +393,8 @@ cd hello-world
 nohup ./binary &
 ```
 
+---
+
 ### 5. Run Terraform
 
 #### 5.1. Terraform initialization
@@ -412,6 +422,8 @@ terraform apply -auto-approve
 The `-auto-approve` flag is optional, it will skip the confirmation prompt during execution.
 
 After the process is done, public DNS shall appear. Next, we shall test the instance. 
+
+---
 
 ### 6. Test Instance
 

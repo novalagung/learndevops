@@ -2,6 +2,8 @@
 
 In this post, we are going to learn about the usage of terraform to automate the setup of AWS EC2 instance with internet gateway and ssh access enabled.
 
+---
+
 ### 1. Prerequisites
 
 #### 1.1. Terraform CLI
@@ -15,6 +17,8 @@ Prepare a new individual IAM user with programmatic access key enabled and has a
 #### 1.3. `ssh-keygen` and `ssh` commands
 
 Ensure both `ssh-keygen` and `ssh` command are available.
+
+---
 
 ### 2. Initialization
 
@@ -42,6 +46,8 @@ ssh-keygen -t rsa -f ./id_rsa
 ```
 
 ![Terraform | AWS EC2 + Internet Gateway + SSH Access | generate key pair](https://i.imgur.com/ZB16oJB.png)
+
+---
 
 ### 3. Infrastructure Code
 
@@ -217,6 +223,8 @@ output "public-ip" {
 
 The infra file is ready. Now we shall perform the terraforming process.
 
+---
+
 ### 4. Run Terraform
 
 #### 4.1. Terraform initialization
@@ -248,6 +256,8 @@ The `-auto-approve` flag is optional, it will skip the confirmation prompt durin
 ![Terraform | AWS EC2 + Internet Gateway + SSH Access | terraform apply](https://i.imgur.com/rK1LX8c.png)
 
 In the infra file, we defined two outputs, DNS and public IP, it shows up after the terraforming process done.
+
+---
 
 ### 5. Test Instance
 

@@ -4,6 +4,8 @@ To install Terraform CLI, navigate to https://www.terraform.io/downloads.html, t
 
 Then after that put the binary somewhere, and do add the binary path into `PATH` environment variable.
 
+---
+
 ### Windows `PATH` Environment
 
 Search on start menu using keyword `Environment Variables` → click `Environment Variables` → search `PATH` → click `Edit` → append the path where `terraform` cli is located.
@@ -13,6 +15,8 @@ Search on start menu using keyword `Environment Variables` → click `Environmen
 Then open CMD/PowerShell, run `terraform -v` command. If a version number is appear, then everything is good.
 
 ![Terraform | CLI Installation | test terraform command](https://i.imgur.com/XOdec43.png)
+
+---
 
 ### Linux/Unix `PATH` Environment
 

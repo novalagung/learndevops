@@ -2,11 +2,15 @@
 
 In this tutorial we will learn how to create an individual IAM user.
 
+---
+
 ### 1. Definitions
 
 IAM or Identity and Access Management is used to securely control individual and group access to your AWS resources. You can create and manage user identities (IAM users) and grant permissions for those IAM users to access your resources.
 
 The IAM user is similar to a AWS account user, the only differences are IAM user's permission towards AWS resources are controlled (by the AWS account user).
+
+---
 
 ### 2. Create new IAM User
 

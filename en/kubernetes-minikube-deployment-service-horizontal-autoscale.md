@@ -6,6 +6,8 @@ The application that we are going to use on the tutorial is a simple hello world
 
 You can also deploy your own app, just do push it into Docker Hub. This guide might help you [Docker - Push Image to hub.docker.com](/docker-push-image-to-hub.html).
 
+---
+
 ### 1. Prerequisites
 
 #### 1.1. Docker engine
@@ -24,6 +26,8 @@ Ensure the `kubectl` command is available. If you haven't installed it, then fol
 
 Install this tool in your local machine https://github.com/rakyll/hey. It's similar to the Apache Benchmark tool. We are going to use this to perform stress test to our app to check whether the auto-scaling capability is working or not.
 
+---
+
 ### 2. Preparation
 
 #### 2.1. For Windows user only, run PowerShell with admin privilege
@@ -37,6 +41,8 @@ We are going to create three Kubernetes objects: the deployment, horizontal auto
 So the three objects mentioned above will be defined in a `.yaml` file. One object usually represented by one config file, however, in this tutorial, we will write all configs in a single file.
 
 Now create a file called `k8s.yaml` (or use another name, it is fine). Open the file using your favorite editor. Next, we shall begin config definition.
+
+---
 
 ### 3. Object Definitions
 
@@ -169,7 +175,7 @@ netstat -tulpn | grep :8081
 
 It's clear from the image above that the app is running on port `8081`.
 
-##### 3.2. Apply changes on the deployment object
+#### 3.2. Apply changes on the deployment object
 
 Other than deployment, there are some other controllers available in k8s. What makes deployment controller special is whenever there is a change happen in the pod config within deployment resource, when we apply it then the pods will be updated by the controller seamlessly.
 
@@ -406,7 +412,7 @@ kubectl describe hpa <hpa-name>
 
 Previously we only have two pods running. After we apply the HPA, the new pod is created, so total there are three pods. This is because in our HPA the `spec.minReplicas` is set to `3`.
 
-##### 3.3.1. Stress test on Horizontal Pod Auto scaler
+#### 3.3.1. Stress test on Horizontal Pod Auto scaler
 
 Ok, next let's do some stress test! Let's see how the HPA will handle very high traffic coming. The below command will trigger a concurrent 50 request to the target URL for 5 minutes. Run it on a new CMD/PowerShell window.
 
