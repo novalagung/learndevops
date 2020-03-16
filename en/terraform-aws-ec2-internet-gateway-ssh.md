@@ -4,15 +4,15 @@ In this post, we are going to learn about the usage of terraform to automate the
 
 ## 1. Prerequisites
 
-#### 1.1. Terraform CLI
+### 1.1. Terraform CLI
 
-Ensure terraform CLI is available. If not, follow this guide [Terraform Installation](terraform-cli-installation.md).
+Ensure terraform CLI is available. If not, then follow guide on [Terraform Installation](terraform-cli-installation.md).
 
-#### 1.2. Individual AWS IAM user
+### 1.2. Individual AWS IAM user
 
-Prepare a new individual IAM user with programmatic access key enabled and has access to EC2 management. We will use the `access_key` and `secret_key` on this tutorial. If you haven't create the user follow this guide [Create Individual IAM User](aws-create-individual-iam-user.md).
+Prepare a new individual IAM user with programmatic access key enabled and has access to EC2 management. We will use the `access_key` and `secret_key` on this tutorial. If you haven't create the IAM user, then follow guide on [Create Individual IAM User](aws-create-individual-iam-user.md).
 
-#### 1.3. `ssh-keygen` and `ssh` commands
+### 1.3. `ssh-keygen` and `ssh` commands
 
 Ensure both `ssh-keygen` and `ssh` command are available.
 
@@ -47,7 +47,7 @@ ssh-keygen -t rsa -f ./id_rsa
 
 Now we shall start writing the infrastructure config. Open `infrastructure.tf` in any editor.
 
-#### 3.1. Define AWS provider
+### 3.1. Define AWS provider
 
 Define the provider block with [AWS as chosen cloud provider](https://www.terraform.io/docs/providers/aws/index.html). Also define these properties: `region`, `access_key`, and `secret_key`; with values derived from the created IAM user.
 
@@ -61,7 +61,7 @@ provider "aws" {
 }
 ```
 
-#### 3.2. Generate new key pair then upload to AWS
+### 3.2. Generate new key pair then upload to AWS
 
 Define new [`aws_key_pair` resource](https://www.terraform.io/docs/providers/aws/r/key_pair.html) block with local name: `my_instance_key_pair`. Put the previously generated `id_rsa.pub` public key inside the block to upload it to AWS.
 
@@ -72,7 +72,7 @@ resource "aws_key_pair" "my_instance_key_pair" {
 }
 ```
 
-#### 3.3. Create a new EC2 instance
+### 3.3. Create a new EC2 instance
 
 Define another resource block, but this one will be the [`aws_instance` resource](https://www.terraform.io/docs/providers/aws/r/instance.html). Name the EC2 instance as `my_instance`, then specify the values of VPC, instance type, key pair, security group, subnet, and public ip within the block.
 
@@ -109,7 +109,7 @@ For both `vpc_security_group_ids` and `subnet_id`, the values are taken from ano
 
 Btw, property `vpc_security_group_ids` accept array of string as the value, so that's why it's wrapped inside `[]`. Even it is only one security group, the value needs to be in array format.
 
-#### 3.4. Allocate a VPC resource with a security group attached to it
+### 3.4. Allocate a VPC resource with a security group attached to it
 
 Allocate [a VPC resource](https://www.terraform.io/docs/providers/aws/r/vpc.html) block, and then define [a security group resource](https://www.terraform.io/docs/providers/aws/r/security_group.html) within the VPC.
 
@@ -160,7 +160,7 @@ Above security group is created for `my_vpc` (see `vpc_id = aws_vpc.my_vpc.id`).
 
 > ingress is equivalent to inbound, and egress for outbound
 
-#### 3.5. Allocate new public subnet to VPC
+### 3.5. Allocate new public subnet to VPC
 
 We have defined a VPC `my_vpc` with CIDR block `10.0.0.0/16` allocated. Now we shall create a [subnet](https://www.terraform.io/docs/providers/aws/r/subnet.html) (for public access) with CIDR block slightly smaller, `10.0.0.0/24`.
 
@@ -174,7 +174,7 @@ resource "aws_subnet" "my_public_subnet" {
 
 If we go back to the definition of `my_instance` block above, this particular subnet is attached there.
 
-#### 3.6. Create an internet gateway and route table association
+### 3.6. Create an internet gateway and route table association
 
 Now create an [internet gateway](https://www.terraform.io/docs/providers/aws/r/internet_gateway.html) for `my_vpc`. Then attach it to a new [route table](https://www.terraform.io/docs/providers/aws/r/route_table.html) for public access.
 
@@ -219,7 +219,7 @@ The infra file is ready. Now we shall perform the terraforming process.
 
 ## 4. Run Terraform
 
-#### 4.1. Terraform initialization
+### 4.1. Terraform initialization
 
 First, run the `terraform init` command. This command will do some setup/initialization, certain dependencies (like AWS provider that we used) will be downloaded.
 
@@ -230,11 +230,11 @@ terraform init
 
 ![Terraform | AWS EC2 + Internet Gateway + SSH Access | terraform init](https://i.imgur.com/6PnpyNc.png)
 
-#### 4.2. Terraform plan
+### 4.2. Terraform plan
 
 Next, run `terraform plan`, to see the plan of our infrastructure. This step is optional, however, might be useful for us to see the outcome from the infra file.
 
-#### 4.3. Terraform apply
+### 4.3. Terraform apply
 
 Last, run the `terraform apply` command to execute the infrastructure plan.
 
