@@ -23,6 +23,7 @@ jobs:
       run: |
         cp style.css en/style.css
         mv style.css id/style.css
+        mv book.json.template book.json
         gitbook install
         gitbook build
         cd _book

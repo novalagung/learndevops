@@ -1,7 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
-* AWS
+* Amazon Web Services (AWS)
     * [? AWS Introduction](aws-introduction.md)
     * [? Create Individual IAM User](aws-create-individual-iam-user.md)
 * Docker
@@ -13,4 +13,4 @@
 * Terraform
     * [? Terraform Introduction](terraform-introduction.md)
     * [AWS EC2 + Internet Gateway + SSH Access](terraform-aws-ec2-internet-gateway-ssh.md)
-    * [? AWS EC2 + Load Balancer + Auto Scaling](terraform-aws-load-balancer-auto-scaling.md)
+    * [AWS EC2 + Load Balancer + Auto Scaling](terraform-aws-load-balancer-auto-scaling.md)

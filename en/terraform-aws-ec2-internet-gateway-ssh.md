@@ -223,12 +223,12 @@ The infra file is ready. Now we shall perform the terraforming process.
 
 First, run the `terraform init` command. This command will do some setup/initialization, certain dependencies (like aws provider that we used) will be downloaded.
 
-    ```bash
-    cd terraform-automate-aws-ec2-instance
-    run
-    ```
+```bash
+cd terraform-automate-aws-ec2-instance
+terraform init
+```
 
-    ![Terraform | AWS EC2 + Internet Gateway + SSH Access | terraform init](https://i.imgur.com/6PnpyNc.png)
+![Terraform | AWS EC2 + Internet Gateway + SSH Access | terraform init](https://i.imgur.com/6PnpyNc.png)
 
 #### 4.2. Terraform plan
 
