@@ -90,14 +90,14 @@ ins.adsbygoogle {
 }
 
 .book-summary {
-    left: -420px;
-    width: 420px;
+    left: -470px;
+    width: 470px;
 }
 .book-summary ul.summary > li > span {
     font-weight: bold;
 }
 @media (min-width: 600px) {
     .book.with-summary .book-body {
-        left: 420px;
+        left: 470px;
     }
 }
