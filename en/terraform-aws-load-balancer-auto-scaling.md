@@ -1,10 +1,10 @@
 # Terraform | AWS EC2 + Load Balancer + Auto Scaling
 
-In this post we are going to learn about the usage of terraform to automate setup of AWS EC2 instance on an auto scaling environment with application load balancer applied.
+In this post, we are going to learn about the usage of terraform to automate the setup of AWS EC2 instance on an auto scaling environment with application load balancer applied.
 
-Since we will be using auto scaling feature, then the app within the instance need to be deployed in automate manner.
+Since we will be using auto-scaling feature, then the app within the instance needs to be deployed in automated manner.
 
-The application is simple go app, currently hosted on github as private repo. We will clone the app using github token, we will talk about it in details in some part of this tutorial.
+The application is a simple go app, currently hosted on Github in a private repo. We will clone the app using Github token, we will talk about it in details in some part of this tutorial.
 
 ## 1. Prerequisites
 
@@ -14,7 +14,7 @@ The application is simple go app, currently hosted on github as private repo. We
 
 #### 1.2. Individual AWS IAM user
 
-[Create new individual IAM user](aws-create-individual-iam-user.md) with programatic access key enabled and an access to the EC2 management. We will then get `access_key` and `secret_key`.
+[Create a new individual IAM user](aws-create-individual-iam-user.md) with programmatic access key enabled and access to the EC2 management. We will then get `access_key` and `secret_key`.
 
 #### 1.3. `ssh-keygen` and `ssh` commands
 
@@ -51,9 +51,9 @@ Now we shall start writing the infrastructure config. Open `infrastructure.tf` i
 
 #### 3.1. Define AWS provider
 
-Define the provider block with [aws as choosen cloud provider](https://www.terraform.io/docs/providers/aws/index.html). Also define these properties: `region`, `access_key`, and `secret_key`; with values derrived from the created IAM user.
+Define the provider block with [AWS as chosen cloud provider](https://www.terraform.io/docs/providers/aws/index.html). Also define these properties: `region`, `access_key`, and `secret_key`; with values derived from the created IAM user.
 
-Write block of code below into `infrastructure.tf`
+Write a block of code below into `infrastructure.tf`
 
 ```bash
 provider "aws" {
@@ -104,7 +104,7 @@ resource "aws_route_table" "my_public_route_table" {
 
 Application Load Balancer or ALB requires two subnets setup on two availability zones (within same region).
 
-In this example the region we used is `ap-southeast-1`, as defined in the provider block above (see 3.1). There are two zones available within this region, `ap-southeast-1a` and `ap-southeast-1b`. The ALB (not classic network load balancer) requires at least to be enabled on two different zones, so we will use those two.
+In this example, the region we used is `ap-southeast-1`, as defined in the provider block above (see 3.1). There are two zones available within this region, `ap-southeast-1a` and `ap-southeast-1b`. The ALB (not classic network load balancer) requires at least to be enabled on two different zones, so we will use those two.
 
 ```bash
 # prepare a subnet for availability zone ap-southeast-1a.
@@ -132,7 +132,7 @@ resource "aws_route_table_association" "my_public_route_association_for_southeas
 }
 ```
 
-The internet gateway associated into two zones that we just created. In this example it is required for the application hosted within instances on this zones to be able to connect to the internet.
+The internet gateway associated with two zones that we just created. In this example, it is required for the application hosted within instances on these zones to be able to connect to the internet.
 
 #### 3.5. Define ALB resource block, listener, security group, and target group
 
@@ -155,7 +155,7 @@ resource "aws_lb" "my_alb" {
 
 The security group for our load balancer has only two rules.
 
-- Allow only incoming tcp/http request on port 80.
+- Allow only incoming TCP/HTTP request on port `80`.
 - Allow every kind of outgoing request.
 
 ```bash
@@ -179,11 +179,11 @@ resource "aws_security_group" "my_alb_security_group" {
 
 Next, we shall prepare the ALB listener. The load balancer will listen for every incoming request to port `80`, and then the particular request will be directed towards port `8080` on the instance.
 
-Port `8080` is choosen here because the application (that will be deployed later) will listen to this port.
+Port `8080` is chosen here because the application (that will be deployed later) will listen to this port.
 
 ```bash
 # create an alb listener for my_alb.
-# forward rule: only accept incoming http request on port 80,
+# forward rule: only accept incoming HTTP request on port 80,
 # then it'll be forwarded to port target:8080.
 resource "aws_lb_listener" "my_alb_listener" {  
     load_balancer_arn = aws_lb.my_alb.arn
@@ -204,20 +204,20 @@ resource "aws_lb_target_group" "my_alb_target_group" {
 }
 ```
 
-#### 3.6. Define launch config (and it's required dependencies) for auto scaling
+#### 3.6. Define launch config (and it's required dependencies) for auto-scaling
 
-We are not going to simply create an instance then deploy the application into it. Instead the instance creation and app deployment will be automated using AWS auto scaling feature.
+We are not going to simply create an instance then deploy the application into it. Instead, the instance creation and app deployment will be automated using AWS auto-scaling feature.
 
-In resource block below, we will setup the launch configuration for auto scaling. This launch config is the one that decide how the instance will be created.
+In the resource block below, we will set up the launch configuration for the auto-scaling. This launch config is the one that decides how the instance will be created.
 
 - The *Amazon Linux 2 AMI t2.micro* is used here.
-- The launched instance will hape a public IP attached, this is better to be set to `false`, however we might need it for testing purpose.
-- The previous allocated key pair will also be used on the instance, to make it accessible trhough ssh access. This part is also for testing purpose.
+- The launched instance will have a public IP attached, this is better to be set to `false`, but in here we might need it for testing purpose.
+- The previous allocated key pair will also be used on the instance, to make it accessible through SSH access. This part is also for testing purpose.
 
-Other than that, there are one point left that is very important, the `user_data`. The user data is a block of bash script that will be executed during instance bootstrap. We will use this to automate deployment of our application. The whole script is stored in a file named `deployment.sh`, we will prepare it later.
+Other than that, there is one point left that is very important, the `user_data`. The user data is a block of bash script that will be executed during instance bootstrap. We will use this to automate the deployment of our application. The whole script is stored in a file named `deployment.sh`, we will prepare it later.
 
 ```bash
-# setup launch configuration for the auto scaling.
+# setup launch configuration for the auto-scaling.
 resource "aws_launch_configuration" "my_launch_configuration" {
 
     # Amazon Linux 2 AMI (HVM), SSD Volume Type (ami-0f02b24005e4aec36).
@@ -228,24 +228,24 @@ resource "aws_launch_configuration" "my_launch_configuration" {
     security_groups = [aws_security_group.my_launch_config_security_group.id]
 
     # set to false on prod stage.
-    # otherwise true, because ssh access might needed to the instance.
+    # otherwise true, because ssh access might be needed to the instance.
     associate_public_ip_address = true
     lifecycle {
-        # ensure new instance is created before the other one is destroyed.
+        # ensure the new instance is only created before the other one is destroyed.
         create_before_destroy = true
     }
 
     # execute bash scripts inside deployment.sh on instance's bootstrap.
     # what the bash scripts going to do in summary:
-    # fetch a hello world app from eaciit repo, then deploy it in the instance.
+    # fetch a hello world app from Github repo, then deploy it in the instance.
     user_data = file("deployment.sh")
 }
 ```
 
-Below is the launch config security group. In this block we define secruity group specifically for the the instances that will be created by the auto scale launch config. Three rules defined here:
+Below is the launch config security group. In this block, we define the security group specifically for the instances that will be created by the auto scale launch config. Three rules defined here:
 
-- Allow incoming `tcp/ssh` access on port `22`.
-- Allow `tcp/http` access on port `8080`.
+- Allow incoming `TCP/SSH` access on port `22`.
+- Allow `TCP/HTTP` access on port `8080`.
 - Allow every kind of outgoing requests.
 
 ```bash
@@ -285,8 +285,8 @@ resource "aws_autoscaling_attachment" "my_aws_autoscaling_attachment" {
 
 Next, we shall prepare the auto scaling group config. This resource is used to determine when or on what condition the scaling process run.
 
-- As per below config, the auto scaling will have minimum 2 instances alive, and 5 max.
-- The `ELB` health check in enabled.
+- As per below config, the auto-scaling will have minimum of 2 instances alive, and 5 max.
+- The `ELB` health check is enabled.
 - The previous two subnets on `ap-southeast-1a` and `ap-southeast-1b` are applied.
 
 ```bash
@@ -312,7 +312,7 @@ resource "aws_autoscaling_group" "my_autoscaling_group" {
         delete = "15m" # timeout duration for instances
     }
     lifecycle {
-        # ensure new instance is created before the other one is destroyed.
+        # ensure the new instance is only created before the other one is destroyed.
         create_before_destroy = true
     }
 }
@@ -323,7 +323,7 @@ resource "aws_autoscaling_group" "my_autoscaling_group" {
 Everything is pretty much done, except we need to print the ALB public DNS, so then we can do the testing.
 
 ```bash
-# print load balancer's dns, test it using curl.
+# print load balancer's DNS, test it using curl.
 #
 # curl my-alb-625362998.ap-southeast-1.elb.amazonaws.com
 output "alb-url" {
@@ -335,13 +335,13 @@ output "alb-url" {
 
 We have done with the infrastructure code, next prepare the deployment script.
 
-Create a file named `deployment.sh` in the same directory where infra code is placed. It will contains bash script for automate app deployment. This file will be used by auto scaling launcher to automate app setup during instance bootstrap.
+Create a file named `deployment.sh` in the same directory where infra code is placed. It will contain bash scripts for automating app deployment. This file will be used by auto-scaling launcher to automate app setup during instance bootstrap.
 
-The application is written in Go, and the AMI *Amazon Linux 2 AMI t2.micro* that we choosed does not have any go tools ready.
+The application is written in Go, and the AMI *Amazon Linux 2 AMI t2.micro* that used here does not have any Go tools ready, that's why we need to set it up.
 
 > **Deploying app** means that the app is ready (has been built into binary), so what we need is simply just run the binary.
 
-> However to make our learning process better, in this example we are going to fetch the app source code and perform the build and deploy processes within the instance.
+> However to make our learning process better, in this example, we are going to fetch the app source code and perform the build and deploy processes within the instance.
 
 Ok, here we go, the bash script.
 
@@ -389,7 +389,7 @@ nohup ./binary &
 
 #### 5.1. Terraform initialization
 
-First, run the `terraform init` command. This command will do some setup/initialization, certain dependencies (like aws provider that we used) will be downloaded.
+First, run the `terraform init` command. This command will do some setup/initialization, certain dependencies (like AWS provider that we used) will be downloaded.
 
 ```bash
 cd terraform-automate-aws-ec2-instance
@@ -398,7 +398,7 @@ terraform init
 
 #### 5.2. Terraform plan
 
-Next, run `terraform plan`, to see the plan of our infrastructure. This step is optional, however might be useful for us to see the outcome from the infra file.
+Next, run `terraform plan`, to see the plan of our infrastructure. This step is optional, however, might be useful for us to see the outcome from the infra file.
 
 #### 5.3. Terraform apply
 
@@ -415,7 +415,7 @@ After the process is done, public DNS shall appear. Next, we shall test the inst
 
 ## 6. Test Instance
 
-Use the `curl` command to make http request to the ALB public DNS instance.
+Use the `curl` command to make HTTP request to the ALB public DNS instance.
 
 ```bash
 curl -X GET my-alb-613171058.ap-southeast-1.elb.amazonaws.com
@@ -423,8 +423,8 @@ curl -X GET my-alb-613171058.ap-southeast-1.elb.amazonaws.com
 
 ![Terraform | AWS EC2 + Load Balancer + Auto Scaling | curl to load balancer](https://i.imgur.com/5jonEG2.png)
 
-We can see from image above, the http response is different one another from multiple `curl` commands. The load balancer manage the traffic, sometimes we will got the instance A, sometimes B, etc.
+We can see from the image above, the HTTP response is different from one another across those multiple `curl` commands. The load balancer manages the traffic, sometimes we will get the instance A, sometimes B, etc.
 
-In the AWS console the instances that up and running is visible.
+In the AWS console, the instances that up and running are visible.
 
 ![Terraform | AWS EC2 + Load Balancer + Auto Scaling | aws console](https://i.imgur.com/iETYwfw.png)
