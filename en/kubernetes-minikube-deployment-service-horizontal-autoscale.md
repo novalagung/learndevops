@@ -1,4 +1,4 @@
-# Kubernetes | Minikube + Service + Horizontal Autoscaler
+# Kubernetes | Minikube Deployment + Service + Horizontal Autoscaler
 
 In this post we are going to learn about how deploy an containerized app into kubernetes cluster and enable the horizontal auto scaling onto it. The application that we are going to deploy is hosted on [Docker Hub](https://hub.docker.com/repository/docker/novalagung/hello-world).
 
