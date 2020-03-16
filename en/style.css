@@ -107,3 +107,7 @@ ins.adsbygoogle {
         left: 470px;
     }
 }
+.markdown-section hr {
+    height: 1px;
+    background-color: #efefef;
+}
