@@ -26,6 +26,7 @@ jobs:
         mv book.json.template book.json
         gitbook install
         gitbook build
+        go run adjustment.go
         cd _book
         rm -rf LICENSE
         rm -rf book*

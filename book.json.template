@@ -4,7 +4,6 @@
         "html-minifier",
         "disqus",
         "meta",
-        "sitemap",
         "scripts"
     ],
     "pluginsConfig": {
@@ -25,9 +24,6 @@
                 "name": "twitter:image",
                 "content": "https://devops.novalagung.com/images/cover_fb_share.jpg"
             }]
-        },
-        "sitemap": {
-            "hostname": "https://devops.novalagung.com/"
         },
         "scripts": {
             "files": []
