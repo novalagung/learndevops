@@ -50,7 +50,7 @@ As we can see, the web version of the book is running up.
 
 We are going to use Github Action plugin [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages) to make the process of pushing resources to the `gh-pages` branch easier. To make this scenario happen, first, generate SSH deploy key using the command below (run it in your local machine).
 
-```
+```bash
 ssh-keygen -t rsa -b 4096 -C "$(git config user.email)" -f gh-pages -N ""
 # You will get 2 files:
 #   gh-pages.pub (public key)
