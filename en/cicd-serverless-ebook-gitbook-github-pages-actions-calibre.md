@@ -265,3 +265,4 @@ Lastly, before we end this tutorial, let's enable `SSL/HTTPS` into our page. Nav
 
 ![Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - enforce https to Github pages](https://i.imgur.com/r5ca0Qw.png)
 
+Have a go! https://softwareengineering.novalagung.com
