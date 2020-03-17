@@ -137,7 +137,12 @@ Navigate to browser, open your Github repo, click `Actions`, watch a workflow pr
 
 ![Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - Github workflow](https://i.imgur.com/SZfwqZs.png)
 
-After the workflow is complete, then try to open in the browser `https://<github-username>.github.io/<repo-name>`. In this example, it is `https://novalagung.github.io/softwareengineering/`.
+After the workflow is complete, then try to open in the browser the following URL.
+
+```bash
+# https://<github-username>.github.io/<repo-name>
+https://novalagung.github.io/softwareengineering/
+```
 
 ![Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - open web version of the book](https://i.imgur.com/HzCygaX.png)
 
