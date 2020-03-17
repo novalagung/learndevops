@@ -176,7 +176,9 @@ jobs:
     - name: 'Installing gitbook cli'
       run: npm install -g gitbook-cli
     - name: 'Installing calibre'
-      run: sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+      run: |
+        sudo -v
+        wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
     - name: 'Preparing for ebooks generations'
       run: |
         gitbook install
@@ -215,3 +217,9 @@ https://github.com/novalagung/softwareengineering/raw/ebooks/softwareengineering
 https://github.com/novalagung/softwareengineering/raw/ebooks/softwareengineeringtutorial.epub
 https://github.com/novalagung/softwareengineering/raw/ebooks/softwareengineeringtutorial.mobi
 ```
+
+FYI! Since the ebook files are accessible through github direct link, this mean the visibility of the repo need to be public (not private). If you want the repo to be in private but keep the files accessible, then do push the files into `gh-pages` branch.
+
+#### 2.6. Add custom domain
+
+
