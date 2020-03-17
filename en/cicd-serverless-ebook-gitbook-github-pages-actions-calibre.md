@@ -2,7 +2,7 @@
 
 In this tutorial we are going to create an ebook instance using Github, then publish it to the Github pages in an automated manner (on every push to upstream) managed by Github Actions, and it will not deploy only the web version, but the ebook files as wall (in `.pdf`, `.epub`, and `.mobi` format).
 
-> The very example of this tutorial is ... this website 😊 https://devops.novalagung.com
+> The very example of this tutorial is ... this website 😊 https://devops.novalagung.com/en/
 
 So, for every push happen to the upstream, Github Actions (CI/CD) trigger certain processes like compiling and generating the ebook, and then the result will be pushed to the `gh-pages` branch, so then it will publicly accessible.
 
