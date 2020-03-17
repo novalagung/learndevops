@@ -9,7 +9,7 @@
 * [Push Image to hub.docker.com](docker-push-image-to-hub.md)
 
 * Kubernetes
-* [Deploy App into Kubernetes Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler](kubernetes-minikube-deployment-service-horizontal-autoscale.md)
+* [Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler](kubernetes-minikube-deployment-service-horizontal-autoscale.md)
 
 * Terraform
 * [Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled](terraform-aws-ec2-internet-gateway-ssh.md)
