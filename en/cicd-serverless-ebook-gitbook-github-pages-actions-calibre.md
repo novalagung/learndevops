@@ -228,13 +228,43 @@ Now we are going to add a custom domain to our Github Page. To do that, do navig
 
 FYI, In this exaxmple we pick subdomain `softwareengineering.novalagung.com`.
 
-Then in your gitbook project, add new file called `CNAME`, fill it with the subdomain URL. After that push the update to the upstream.
+Then in your gitbook project, add new file called `CNAME`, fill it with the subdomain URL.
+
+
+After that push the update to the upstream.
 
 ```bash
 echo 'softwareengineering.novalagung.com' > CNAME
+```
 
+And also, this `CNAME` file need to be copied into the `_book` folder that later will be pushed into `gh-pages` branch. So do put a little modification in the workflow file. In the `Generating distributable files` block, add the copy statemet.
+
+```yaml
+jobs:
+  job_deploy_website:
+    # ...
+    - name: 'Generating distributable files'
+      run: |
+        gitbook install
+        gitbook build
+        cp ./CNAME _book/CNAME
+```
+
+Now push the update into upstream.
+
+```bash
 git add .
 git commit -m "update"
 git push origin master
 ```
+
+Watch the workflow progress in the Github Actions menu, after it is finished test the custom domain.
+
+![Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - custom domain](https://i.imgur.com/9GBMruL.png)
+
+#### 2.6. Add custom domain
+
+Lastly, before we end this tutorial, let's enable `SSL/HTTPS` into our page. Do navigate into **Settings** menu of the repo, then scroll down a little bit until **GitHub Pages** section appear. Do check the **Enforce HTTPS** option. After that, wait for few minutes, then try the custom domain again.
+
+![Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - enforce https to github pages](https://i.imgur.com/r5ca0Qw.png)
 
