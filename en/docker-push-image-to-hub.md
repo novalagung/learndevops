@@ -1,4 +1,4 @@
-# Docker | Push Image to hub.docker.com
+# Docker - Push Image to hub.docker.com
 
 In this post we are going to learn about how to push a docker image to [Docker Hub](https://hub.docker.com/).
 

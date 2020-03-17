@@ -1,4 +1,4 @@
-# Terraform | AWS EC2 + Internet Gateway + SSH Access
+# Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled
 
 In this post, we are going to learn about the usage of terraform to automate the setup of AWS EC2 instance with internet gateway and ssh access enabled.
 
@@ -17,7 +17,7 @@ Prepare a new individual IAM user with programmatic access key enabled and has a
 #### 1.3. `ssh-keygen` and `ssh` commands
 
 Ensure both `ssh-keygen` and `ssh` command are available.
-
+fksdfftwerwre
 ---
 
 ### 2. Initialization

@@ -1,4 +1,4 @@
-# Terraform | AWS EC2 + Load Balancer + Auto Scaling
+# Terraform - Automate setup of AWS EC2 with Load Balancer and Auto Scaling enabled
 
 In this post, we are going to learn about the usage of terraform to automate the setup of AWS EC2 instance on an auto scaling environment with application load balancer applied.
 

@@ -1,4 +1,4 @@
-# Kubernetes | Minikube Deployment + Service + Horizontal Autoscaler
+# Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler
 
 In this post, we are going to learn about how to deploy a containerized app into the Kubernetes cluster, enable the horizontal autoscaling on it, and create a service that makes the application accessible from outside the cluster.
 
