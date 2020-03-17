@@ -16,4 +16,4 @@
 * [Terraform - Automate setup of AWS EC2 with Load Balancer and Auto Scaling enabled](terraform-aws-load-balancer-auto-scaling.md)
 
 * CI/CD
-* [Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre](cicd-serverless-ebook-gitbook-github-pages-actions-calibre.md)
+* [Serverless Ebook using Gitbook CLI, Github Pages, Github Actions, and Calibre](cicd-serverless-ebook-gitbook-github-pages-actions-calibre.md)
