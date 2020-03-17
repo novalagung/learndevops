@@ -66,7 +66,7 @@ Do upload these two files into repo's project keys and secret menu respectively.
 
 ![Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - prepare github deploy key](https://i.imgur.com/t8RVwN7.png)
 
-#### 2.3. Create Github workflow CI/CD file.
+#### 2.3. Create Github workflow CI/CD file for generating the web version of ebook
 
 We are going to make this project automatically deploy the web version of the ebook on every push, including the first push.
 
@@ -144,3 +144,74 @@ After the workflow is complete, then try to open in the browser `https://<github
 If you are still not sure about the URL, open `Settings` menu of your Github repo, then scroll down little bit until `Github Pages` section appear. The Github Pages URL will appear there.
 
 ![Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - github pages url](https://i.imgur.com/eD5BmPv.jpg)
+
+#### 2.5. Modify the workflow file to be able to enable generate the file version
+
+Open the previous `deploy.yml` file, add new job called `job_deploy_ebooks` below.
+
+```yaml
+# file softwareengineering/.github/workflow/deploy.yml
+
+name: 'deploy website and ebooks'
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  ebook_name: 'softwareengineeringtutorial'
+
+jobs:
+  job_deploy_website:
+    # ...
+  job_deploy_ebooks:
+    name: 'deploy ebooks'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+    - name: 'Installing gitbook cli'
+      run: npm install -g gitbook-cli
+    - name: 'Installing calibre'
+      run: sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+    - name: 'Preparing for ebooks generations'
+      run: |
+        gitbook install
+        mkdir _book
+    - name: 'Generating ebook in pdf'
+      run: gitbook pdf ./ ./_book/${{ env.ebook_name }}.pdf
+    - name: 'Generating ebook in epub'
+      run: gitbook epub ./ ./_book/${{ env.ebook_name }}.epub
+    - name: 'Generating ebook in mobi'
+      run: gitbook mobi ./ ./_book/${{ env.ebook_name }}.mobi
+    - uses: peaceiris/actions-gh-pages@v2.5.0
+      env:
+        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        PUBLISH_BRANCH: ebooks
+        PUBLISH_DIR: ./_book
+```
+
+The `job_deploy_website` that we have created responsible for generating the web base version of the ebook. This newly created `job_deploy_ebooks` created for different purpose, to generate the file version (pdf, epub, mobi). The generated file will be pushed to branch named `ebooks`.
+
+The ebook file generated handle by a library called `calibre`.
+
+Ok, now let's update the repo with recent changes.
+
+```bash
+git add .
+git commit -m "update"
+git push origin master
+```
+
+![Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - workflow to generate ebook files](https://i.imgur.com/iXd7bnr.png)
+
+After the process complete, the ebooks will be available for download in these following URLs. Please adjust it to follow your github profile and repo name.
+
+```bash
+https://github.com/novalagung/softwareengineering/raw/ebooks/softwareengineeringtutorial.pdf
+https://github.com/novalagung/softwareengineering/raw/ebooks/softwareengineeringtutorial.epub
+https://github.com/novalagung/softwareengineering/raw/ebooks/softwareengineeringtutorial.mobi
+```
