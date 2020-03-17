@@ -28,7 +28,7 @@ Ensure you have Git client installed in your local machine.
 
 #### 2.1. Create a Github repo
 
-First, create a new repo in your Github account, it can be a private one or public, doesn't matter. In this tutorial, we pick `softwareengineering` as the repo name.
+First, create a new repo in your Github account, it can be a private one or public, doesn't matter. In this example, I am going to pick `softwareengineering` as the repo name.
 
 ![Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - create Github repo](https://i.imgur.com/diIHwxE.png)
 
