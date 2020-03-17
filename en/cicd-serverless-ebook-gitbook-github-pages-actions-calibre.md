@@ -4,7 +4,7 @@ In this tutorial we are going to create an ebook instance using Github, then pub
 
 > The very example of this tutorial is ... this website 😊 https://devops.novalagung.com/en/
 
-So, for every push happen to the upstream, Github Actions (CI/CD) trigger certain processes like compiling and generating the ebook, and then the result will be pushed to the `gh-pages` branch, so then it will publicly accessible.
+For every incoming push to the upstream, Github Actions (CI/CD) will trigger certain processes (like compiling and generating the ebook), then the result will be pushed to the `gh-pages` branch, make it publicly accessible.
 
 ---
 
@@ -14,13 +14,13 @@ So, for every push happen to the upstream, Github Actions (CI/CD) trigger certai
 
 Install gitbook CLI (if you haven't). Do follow the guide on https://github.com/GitbookIO/gitbook-cli.
 
-#### 1.2. Github Account
+#### 1.2. Github account
 
 Ensure you have a Github account.
 
-#### 1.3. Git bash
+#### 1.3. Git client
 
-Ensure you have Git bash client installed in your local machine.
+Ensure you have Git client installed in your local machine.
 
 ---
 
