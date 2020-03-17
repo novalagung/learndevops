@@ -222,4 +222,19 @@ FYI! Since the ebook files are accessible through github direct link, this mean 
 
 #### 2.6. Add custom domain
 
+Now we are going to add a custom domain to our Github Page. To do that, do navigate to your domain control panel, then add new CNAME record that point to your Github page domain `<github-username>.github.io`.
+
+![Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - custom domain github pages](https://i.imgur.com/a1vF2Xk.png)
+
+FYI, In this exaxmple we pick subdomain `softwareengineering.novalagung.com`.
+
+Then in your gitbook project, add new file called `CNAME`, fill it with the subdomain URL. After that push the update to the upstream.
+
+```bash
+echo 'softwareengineering.novalagung.com' > CNAME
+
+git add .
+git commit -m "update"
+git push origin master
+```
 
