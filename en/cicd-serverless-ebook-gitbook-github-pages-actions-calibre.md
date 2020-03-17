@@ -73,7 +73,7 @@ We are going to make Github automatically deploy the web version of the ebook on
 Create a new workflow file named `deploy.yml`, place it in `<yourproject>/.github/workflows`, then fill it with the configuration below:
 
 ```yaml
-# file softwareengineering/.github/workflow/deploy.yml
+# file ./softwareengineering/.github/workflow/deploy.yml
 
 name: 'deploy website and ebooks'
 
@@ -150,7 +150,7 @@ If you are still not sure about the URL, open **Settings** menu of your Github r
 Open the previous `deploy.yml` file, add a new job called `job_deploy_ebooks` below.
 
 ```yaml
-# file softwareengineering/.github/workflow/deploy.yml
+# file ./softwareengineering/.github/workflow/deploy.yml
 
 name: 'deploy website and ebooks'
 
