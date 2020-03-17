@@ -7,6 +7,14 @@ body, .book.font-family-1, .book-summary {
     white-space: normal;
     line-height: 1.4em;
 }
+.book-summary ul.summary > li > span {
+    font-weight: normal;
+    font-style: italic;
+    font-size: 13px;
+    border-top: 1px solid #ededed;
+    margin-top: 3px;
+    color: #8c8c8c;
+}
 #book-search-input {
     position: relative;
 }
