@@ -3,6 +3,9 @@ body, .book.font-family-1, .book-summary {
 }
 .book-summary ul.summary li a, .book-summary ul.summary li span {
     padding: 7px 15px;
+    text-overflow: initial;
+    white-space: normal;
+    line-height: 1.4em;
 }
 #book-search-input {
     position: relative;
