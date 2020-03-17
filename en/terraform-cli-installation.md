@@ -1,16 +1,16 @@
 # Terraform | CLI Installation
 
-Terraform CLI is a tool used to do all terraform operation, including initializing an infrastructure, transforming HCL into a plan, and applying the plan.
+Terraform CLI is a tool used to do all terraform operations, including initializing an infrastructure, transforming HCL into a plan, and applying the plan.
 
 ### 1. Download Installer
 
-To install Terraform CLI, navigate to https://www.terraform.io/downloads.html, then download the installer. Pick the one that match your Operating System.
+To install Terraform CLI, navigate to https://www.terraform.io/downloads.html, then download the installer. Pick the one that matches your Operating System.
 
 Then after that put the binary somewhere locally, and do add the binary path into `PATH` environment variable.
 
 #### 1.1. Windows `PATH` Environment
 
-Search on start menu using keyword `Environment Variables` → click `Environment Variables` → search `PATH` → click `Edit` → append the path where `terraform` cli is located.
+Search on start menu using keyword `Environment Variables` → click `Environment Variables` → search `PATH` → click `Edit` → append the path where `terraform` CLI is located.
 
 ![Terraform | CLI Installation | path environment variables](https://i.imgur.com/xU3fbTe.jpg)
 
