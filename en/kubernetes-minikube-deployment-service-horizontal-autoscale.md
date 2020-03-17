@@ -4,7 +4,7 @@ In this post, we are going to learn about how to deploy a containerized app into
 
 The application that we are going to use on the tutorial is a simple hello world app written in Go. The app is dockerized and the image is available on [Docker Hub](https://hub.docker.com/repository/docker/novalagung/hello-world).
 
-You can also deploy your own app, just do push it into Docker Hub. This guide might help you [Docker - Push Image to hub.docker.com](/docker-push-image-to-hub.html).
+You can also deploy your app, just do push it into Docker Hub. This guide might help you [Docker - Push Image to hub.docker.com](/docker-push-image-to-hub.html).
 
 ---
 
@@ -24,7 +24,7 @@ Ensure the `kubectl` command is available. If you haven't installed it, then fol
 
 #### 1.4. The `hey` HTTP load generator
 
-Install this tool in your local machine https://github.com/rakyll/hey. It's similar to the Apache Benchmark tool. We are going to use this to perform stress test to our app to check whether the auto-scaling capability is working or not.
+Install this tool in your local machine https://github.com/rakyll/hey. It's similar to the Apache Benchmark tool. We are going to use this to perform the stress test to our app to check whether the auto-scaling capability is working or not.
 
 ---
 
@@ -32,7 +32,7 @@ Install this tool in your local machine https://github.com/rakyll/hey. It's simi
 
 #### 2.1. For Windows user only, run PowerShell with admin privilege
 
-CMD won't be helpful here. Run the PowerShell as administrator.
+CMD won't be helpful here. Run the PowerShell as an administrator.
 
 #### 2.2. Create the Kubernetes objects configuration file (in `.yaml` format)
 
@@ -40,7 +40,7 @@ We are going to create three Kubernetes objects: the deployment, horizontal auto
 
 So the three objects mentioned above will be defined in a `.yaml` file. One object usually represented by one config file, however, in this tutorial, we will write all configs in a single file.
 
-Now create a file called `k8s.yaml` (or use another name, it is fine). Open the file using your favorite editor. Next, we shall begin config definition.
+Now create a file called `k8s.yaml` (or use another name, it is fine). Open the file using your favorite editor. Next, we shall begin the config definition.
 
 ---
 
@@ -48,7 +48,7 @@ Now create a file called `k8s.yaml` (or use another name, it is fine). Open the 
 
 #### 3.1. Deployment Object
 
-Deployment is a controller that used to manage both pod and replica sets. In this section, we are going to create the object.
+Deployment is a controller used to manage both pod and replica sets. In this section, we are going to create the object.
 
 On the `k8s.yaml`, write the following config below. Each part of the script has some remark that explains what it does.
 
@@ -131,7 +131,7 @@ In summary, the above deployment config will do these things:
 - The pod spec (within deployment object) defined with only one container.
 - The container is `hello-world` and the image will be pulled from Docker Hub.
 - During the container build, port and instance ID specified. The port specifically used by the webserver within the container.
-- The web server listens to the port `8081` and it is exposed. Meaning we will be able to access the webserver from outside the particular port but within the cluster.
+- The web server listens to the port `8081` and it is exposed. Meaning we will be able to access the web server from outside the particular port but within the cluster.
 
 Now, apply the config using the command below.
 
@@ -241,13 +241,13 @@ netstat -tulpn | grep :8080
 
 See, the changes that we made on the pod are applied in a controlled way. And the web server within the newly created pod is listening to port `8080`. This is nice!
 
-> Tips! Use the command below to see the error log on certain pod. Probably useful is something wrong going on, like the webserver not starting, etc.
+> Tips! Use the command below to see the error log on certain pods. Probably useful is something wrong going on, like the webserver not starting, etc.
 
 > `kubectl get pods`<br />`kubectl describe pod <pod-name>`<br />`kubectl logs <pod-name>`
 
 #### 3.2. Service Object
 
-In this section, we are going to create a new service. This service shall enable incoming access from outside of cluster into the pod.
+In this section, we are going to create a new service. This service shall enable incoming access from outside of the cluster into the pod.
 
 Let's append below config into the `k8s.yaml` file.
 
@@ -302,9 +302,9 @@ spec:
       targetPort: 8080
 ```
 
-The `LoadBalancer` is choosen as the type of the service. Load balancer service will accept request from `<publicIP>:<nodePort>` and direct it to port `80` in the service. And then the request on the port `80` will be directed to the `<pod>:<targetPort>` in round-robin style (since it's load balancer after all).
+The `LoadBalancer` is chosen as the type of the service. Load balancer service will accept requests from `<publicIP>:<nodePort>` and direct it to port `80` in the service. And then the request on the port `80` will be directed to the `<pod>:<targetPort>` in round-robin style (since it's load balancer after all).
 
-One important note here, since our cluster is within the minikube environment, so the public IP here refers to the public IP of minikube. To get the minikube IP, use command below:
+One important note here, since our cluster is within the Minikube environment, so the public IP here refers to the public IP of Minikube. To get the Minikube IP, use command below:
 
 ```bash
 # show minikube public IP
@@ -332,9 +332,9 @@ curl <minikubeIP>:32199
   <img src="https://i.imgur.com/IoEpMFH.jpg" alt="Kubernetes | Minikube Deployment + Service + Horizontal Autoscaler | create service object">
 </p>
 
-As we can see from the image above, we did dispatch multiple HTTP request to minikube IP on node port. The result from the `curl` is different one another, this is because the service will direct incoming request into available pods in round-robin style (like what load balancer usually do).
+As we can see from the image above, we did dispatch multiple HTTP requests to Minikube IP on node port. The result from the `curl` is different from one another, this is because the service will direct incoming request into available pods in round-robin style (like what load balancer usually do).
 
-> Tips! Rather than find the minikube IP using `minikube ip` and then concat it with node port from config, use command below to easily get the URL of certain service.
+> Tips! Rather than find the Minikube IP using `minikube ip` and then concat it with node port from config, use command below to easily get the URL of certain service.
 
 > `minikube service <service-name> --url`<br />`minikube service my-service --url`
 
@@ -438,7 +438,7 @@ kubectl get pods
 
 After a minute passed, suddenly a total of 6 pods created. This is happening because the CPU utilization is high enough, greater than the threshold that we defined in the config.
 
-HPA is not only able to magically scale the pod during high traffic but on low traffict, the scaling process will happen as well. Do stop the stress test and wait for a few minutes, and check the HPA and pods again, you will see the number of pods reduced to `spec.minReplicas` again.
+HPA is not only able to magically scale the pod during high traffic but on low traffic, the scaling process will happen as well. Do stop the stress test and wait for a few minutes, and check the HPA and pods again, you will see the number of pods reduced to `spec.minReplicas` again.
 
 Ok, that's it.
 

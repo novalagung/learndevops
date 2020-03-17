@@ -1,6 +1,6 @@
 # Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled
 
-In this post, we are going to learn about the usage of terraform to automate the setup of AWS EC2 instance with internet gateway and ssh access enabled.
+In this post, we are going to learn about the usage of Terraform to automate the setup of AWS EC2 instance with internet gateway and ssh access enabled.
 
 ---
 
@@ -12,7 +12,7 @@ Ensure terraform CLI is available. If not, then follow guide on [Terraform Insta
 
 #### 1.2. Individual AWS IAM user
 
-Prepare a new individual IAM user with programmatic access key enabled and has access to EC2 management. We will use the `access_key` and `secret_key` on this tutorial. If you haven't create the IAM user, then follow guide on [Create Individual IAM User](aws-create-individual-iam-user.md).
+Prepare a new individual IAM user with programmatic access key enabled and have access to EC2 management. We will use the `access_key` and `secret_key` on this tutorial. If you haven't created the IAM user, then follow the guide on [Create Individual IAM User](aws-create-individual-iam-user.md).
 
 #### 1.3. `ssh-keygen` and `ssh` commands
 
@@ -38,7 +38,7 @@ cd terraform-automate-aws-ec2-instance
 touch infrastructure.tf
 ```
 
-Next, create a new key pair using `ssh-keygen` command below. This will generate the `id_rsa.pub` public key, and `id_rsa` private key. Later we will upload the public key into aws and use the private key to perform `ssh` access into the newly created EC2 instance.
+Next, create a new key pair using `ssh-keygen` command below. This will generate the `id_rsa.pub` public key and `id_rsa` private key. Later we will upload the public key into AWS and use the private key to perform `ssh` access into the newly created EC2 instance.
 
 ```bash
 cd terraform-automate-aws-ec2-instance
@@ -80,7 +80,7 @@ resource "aws_key_pair" "my_instance_key_pair" {
 
 #### 3.3. Create a new EC2 instance
 
-Define another resource block, but this one will be the [`aws_instance` resource](https://www.terraform.io/docs/providers/aws/r/instance.html). Name the EC2 instance as `my_instance`, then specify the values of VPC, instance type, key pair, security group, subnet, and public ip within the block.
+Define another resource block, but this one will be the [`aws_instance` resource](https://www.terraform.io/docs/providers/aws/r/instance.html). Name the EC2 instance as `my_instance`, then specify the values of VPC, instance type, key pair, security group, subnet, and public IP within the block.
 
 Each part of the code below is self-explanatory.
 
@@ -113,7 +113,7 @@ The `key_name` property filled with a value coming from the `my_instance_key_pai
 
 For both `vpc_security_group_ids` and `subnet_id`, the values are taken from another resource block, similar to the `key_name`. However, for these two properties, we haven't defined the resource block yet.
 
-Btw, property `vpc_security_group_ids` accept array of string as the value, so that's why it's wrapped inside `[]`. Even it is only one security group, the value needs to be in array format.
+Btw, property `vpc_security_group_ids` accept an array of string as the value, so that's why it's wrapped inside `[]`. Even it is only one security group, the value needs to be in an array format.
 
 #### 3.4. Allocate a VPC resource with a security group attached to it
 
@@ -158,9 +158,9 @@ resource "aws_security_group" "my_vpc_security_group" {
 }
 ```
 
-Above security group is created for `my_vpc` (see `vpc_id = aws_vpc.my_vpc.id`). This particular VPC have three inbound/outbound rules:
+Above security group is created for `my_vpc` (see `vpc_id = aws_vpc.my_vpc.id`). This particular VPC has three inbound/outbound rules:
 
-- Allow ssh access from anywhere. Later we need to remotelly connect to the instance to see whether it's properly set up or not.
+- Allow ssh access from anywhere. Later we need to remotely connect to the instance to see whether it's properly set up or not.
 - Allow incoming access through port `80`. This might be required, so we can perform any tools/dependency installations, etc.
 - Allow all kinds of outgoing accesses from anywhere. By doing this we will be able to perform remote access, download, etc to anywhere from the instance.
 
@@ -255,13 +255,13 @@ The `-auto-approve` flag is optional, it will skip the confirmation prompt durin
 
 ![Terraform | AWS EC2 + Internet Gateway + SSH Access | terraform apply](https://i.imgur.com/rK1LX8c.png)
 
-In the infra file, we defined two outputs, DNS and public IP, it shows up after the terraforming process done.
+In the infra file, we defined two outputs, DNS and public IP, it shows up after the terraforming process is done.
 
 ---
 
 ### 5. Test Instance
 
-Now we shall test the instance. Use the `ssh` command to remotely connect to the particular instance. Either DNS or public IP can be used, just pick one.
+Now we shall test the instance. Use the `ssh` command to remotely connect to a particular instance. Either DNS or public IP can be used, just pick one.
 
 ```bash
 ssh -i id_rsa ec2-user@ec2-18-140-245-218.ap-southeast-1.compute.amazonaws.com
@@ -269,4 +269,4 @@ ssh -i id_rsa ec2-user@ec2-18-140-245-218.ap-southeast-1.compute.amazonaws.com
 
 ![Terraform | AWS EC2 + Internet Gateway + SSH Access | ssh to ec2 instance](https://i.imgur.com/uL1TulT.png)
 
-We can see from the image above that we are able to connect to ec2 instance via SSH, and the instance is connected to the internet.
+We can see from the image above that we can connect to ec2 instance via SSH, and the instance is connected to the internet.

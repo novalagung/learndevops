@@ -1,8 +1,8 @@
 # Terraform - Automate setup of AWS EC2 with Load Balancer and Auto Scaling enabled
 
-In this post, we are going to learn about the usage of terraform to automate the setup of AWS EC2 instance on an auto scaling environment with application load balancer applied.
+In this post, we are going to learn about the usage of Terraform to automate the setup of AWS EC2 instance in an auto-scaling environment with application load balancer applied.
 
-Since we will be using auto-scaling feature, then the app within the instance needs to be deployed in automated manner.
+Since we will be using the auto-scaling feature, then the app within the instance needs to be deployed in an automated manner.
 
 The application is a simple go app, currently hosted on Github in a private repo. We will clone the app using Github token, we will talk about it in details in some part of this tutorial.
 
@@ -16,7 +16,7 @@ Ensure terraform CLI is available. If not, then follow guide on [Terraform Insta
 
 #### 1.2. Individual AWS IAM user
 
-Prepare a new individual IAM user with programmatic access key enabled and has access to EC2 management. We will use the `access_key` and `secret_key` on this tutorial. If you haven't create the IAM user, then follow guide on [Create Individual IAM User](aws-create-individual-iam-user.md).
+Prepare a new individual IAM user with programmatic access key enabled and have access to EC2 management. We will use the `access_key` and `secret_key` on this tutorial. If you haven't created the IAM user, then follow a guide on [Create Individual IAM User](aws-create-individual-iam-user.md).
 
 #### 1.3. `ssh-keygen` and `ssh` commands
 
@@ -40,7 +40,7 @@ cd terraform-automate-aws-ec2-instance
 touch infrastructure.tf
 ```
 
-Next, create new key pair using `ssh-keygen` command below. This will generate the `id_rsa.pub` public key, and `id_rsa` private key. Later we will upload the public key into aws and use the private key to perform `ssh` access into the newly created EC2 instance.
+Next, create a new key pair using `ssh-keygen` command below. This will generate the `id_rsa.pub` public key and `id_rsa` private key. Later we will upload the public key into AWS and use the private key to perform `ssh` access into the newly created EC2 instance.
 
 ```bash
 cd terraform-automate-aws-ec2-instance
@@ -82,7 +82,7 @@ resource "aws_key_pair" "my_instance_key_pair" {
 
 #### 3.3. Book a VPC, and enable internet gateway on it
 
-Book a VPC, name it `my_vpc`. Then enable internet gateway on it. Each part of code below is self-explanatory.
+Book a VPC, name it `my_vpc`. Then enable internet gateway on it. Each part of the code below is self-explanatory.
 
 ```bash
 # allocate a vpc named my_vpc.
@@ -106,9 +106,9 @@ resource "aws_route_table" "my_public_route_table" {
 }
 ```
 
-#### 3.4. Allocate two different subnets on two different availability zones (within same region)
+#### 3.4. Allocate two different subnets on two different availability zones (within the same region)
 
-Application Load Balancer or ALB requires two subnets setup on two availability zones (within same region).
+Application Load Balancer or ALB requires two subnets setup on two availability zones (within the same region).
 
 In this example, the region we used is `ap-southeast-1`, as defined in the provider block above (see 3.1). There are two zones available within this region, `ap-southeast-1a` and `ap-southeast-1b`. The ALB (not classic network load balancer) requires at least to be enabled on two different zones, so we will use those two.
 
@@ -217,8 +217,8 @@ We are not going to simply create an instance then deploy the application into i
 In the resource block below, we will set up the launch configuration for the auto-scaling. This launch config is the one that decides how the instance will be created.
 
 - The *Amazon Linux 2 AMI t2.micro* is used here.
-- The launched instance will have a public IP attached, this is better to be set to `false`, but in here we might need it for testing purpose.
-- The previous allocated key pair will also be used on the instance, to make it accessible through SSH access. This part is also for testing purpose.
+- The launched instance will have a public IP attached, this is better to be set to `false`, but in here we might need it for testing purposes.
+- The previously allocated key pair will also be used on the instance, to make it accessible through SSH access. This part is also for testing purposes.
 
 Other than that, there is one point left that is very important, the `user_data`. The user data is a block of bash script that will be executed during instance bootstrap. We will use this to automate the deployment of our application. The whole script is stored in a file named `deployment.sh`, we will prepare it later.
 
@@ -279,7 +279,7 @@ resource "aws_security_group" "my_launch_config_security_group" {
 }
 ```
 
-Ok, the auto scale launch config is ready, now we shall attach it into our ALB.
+Ok, the autoscale launch config is ready, now we shall attach it into our ALB.
 
 ```bash
 # create an autoscaling then attach it into my_alb_target_group.
@@ -289,9 +289,9 @@ resource "aws_autoscaling_attachment" "my_aws_autoscaling_attachment" {
 }
 ```
 
-Next, we shall prepare the auto scaling group config. This resource is used to determine when or on what condition the scaling process run.
+Next, we shall prepare the auto-scaling group config. This resource is used to determine when or on what condition the scaling process run.
 
-- As per below config, the auto-scaling will have minimum of 2 instances alive, and 5 max.
+- As per the below config, the auto-scaling will have a minimum of 2 instances alive, and 5 max.
 - The `ELB` health check is enabled.
 - The previous two subnets on `ap-southeast-1a` and `ap-southeast-1b` are applied.
 
@@ -343,7 +343,7 @@ output "alb-url" {
 
 We have done with the infrastructure code, next prepare the deployment script.
 
-Create a file named `deployment.sh` in the same directory where infra code is placed. It will contain bash scripts for automating app deployment. This file will be used by auto-scaling launcher to automate app setup during instance bootstrap.
+Create a file named `deployment.sh` in the same directory where the infra code is placed. It will contain bash scripts for automating app deployment. This file will be used by auto-scaling launcher to automate app setup during instance bootstrap.
 
 The application is written in Go, and the AMI *Amazon Linux 2 AMI t2.micro* that used here does not have any Go tools ready, that's why we need to set it up.
 
@@ -427,7 +427,7 @@ After the process is done, public DNS shall appear. Next, we shall test the inst
 
 ### 6. Test Instance
 
-Use the `curl` command to make HTTP request to the ALB public DNS instance.
+Use the `curl` command to make an HTTP request to the ALB public DNS instance.
 
 ```bash
 curl -X GET my-alb-613171058.ap-southeast-1.elb.amazonaws.com
@@ -435,7 +435,7 @@ curl -X GET my-alb-613171058.ap-southeast-1.elb.amazonaws.com
 
 ![Terraform | AWS EC2 + Load Balancer + Auto Scaling | curl to load balancer](https://i.imgur.com/5jonEG2.png)
 
-We can see from the image above, the HTTP response is different from one another across those multiple `curl` commands. The load balancer manages the traffic, sometimes we will get the instance A, sometimes B, etc.
+We can see from the image above, the HTTP response is different from one another across those multiple `curl` commands. The load balancer manages the traffic, sometimes we will get the instance A, B, etc.
 
 In the AWS console, the instances that up and running are visible.
 

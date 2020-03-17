@@ -237,7 +237,7 @@ Next, in the Gitbook project, create a new file called `CNAME` then fill it with
 echo 'softwareengineering.novalagung.com' > CNAME
 ```
 
-Almost forget, also, this `CNAME` file needs to be copied into the `_book` directory since that folder is the one that going to be pushed into `gh-pages` branch. So now let's put a little addition in the workflow file.
+Almost forget, also, this `CNAME` file needs to be copied into the `_book` directory since that folder is the one that going to be pushed to the `gh-pages` branch. So now let's put a little addition in the workflow file.
 
 In the `Generating distributable files` block, add the copy statement.
 
