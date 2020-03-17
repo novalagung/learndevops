@@ -8,7 +8,7 @@ body, .book.font-family-1, .book-summary {
     line-height: 1.4em;
 }
 .book-summary ul.summary > li > span {
-    font-weight: normal;
+    font-weight: normal !important;
     font-style: italic;
     font-size: 13px;
     border-top: 1px solid #ededed;
