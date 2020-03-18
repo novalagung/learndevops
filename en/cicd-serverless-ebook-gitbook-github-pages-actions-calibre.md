@@ -270,7 +270,7 @@ Watch the workflow progress in the repo **Actions** menu. After it is finished, 
 
 ![Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - custom domain](https://i.imgur.com/9GBMruL.png)
 
-#### 2.8. Add custom domain
+#### 2.8. Enable `SSL/HTTPS` to our Github Pages
 
 Lastly, before we end this tutorial, let's enable `SSL/HTTPS` into our page. No need to generate a SSL certificate file and etc, since Github will handle the setup. We just need to navigate to the **Settings** menu on the the repo, then scroll down a little bit until **GitHub Pages** section appears. Do check the **Enforce HTTPS** option. After that, wait for a few minutes, then try the custom domain again.
 
