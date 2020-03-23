@@ -1,10 +1,10 @@
 # Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler
 
-In this post, we are going to learn about how to deploy a containerized app into the Kubernetes cluster, enable the horizontal autoscaling on it, and create a service that makes the application accessible from outside the cluster.
+In this post, we are going to learn about how to deploy a containerized app into the Kubernetes (minikube) cluster, enable the horizontal autoscaling on it, and create a service that makes the application accessible from outside the cluster.
 
 The application that we are going to use on the tutorial is a simple hello world app written in Go. The app is dockerized and the image is available on [Docker Hub](https://hub.docker.com/repository/docker/novalagung/hello-world).
 
-You can also deploy your app, just do push it into Docker Hub. This guide might help you [Docker - Push Image to hub.docker.com](/docker-push-image-to-hub.html).
+You can also deploy your app, just do push it into Docker Hub. This guide might help you [Push Image to hub.docker.com](/docker-push-image-to-hub.html).
 
 ---
 
@@ -12,17 +12,17 @@ You can also deploy your app, just do push it into Docker Hub. This guide might 
 
 #### 1.1. Docker engine
 
-Ensure the Docker engine is running. If you haven't installed it, then follow the guide on [Docker Installation](docker-installation.md).
+Ensure the Docker engine is running. If you haven't installed it, then do install it first.
 
 #### 1.2. Minikube
 
-Ensure the Minikube is running. If you haven't installed it, then follow the guide on [Minikube Installation](kubernetes-minikube-installation.md).
+Ensure the Minikube is running. Run `minikube start` command on PowerShell (opened with an administrator privilege). If you haven't installed it, then do install it first.
 
-#### 1.3. Kubernetes CLI tools
+#### 1.3. Kubernetes CLI tool
 
-Ensure the `kubectl` command is available. If you haven't installed it, then follow the guide on [Kubectl Installation](kubernetes-kubectl-installation.md).
+Ensure the `kubectl` command is available. If you haven't installed it, then do install it first.
 
-#### 1.4. The `hey` HTTP load generator
+#### 1.4. The `hey` tool (an HTTP load generator)
 
 Install this tool in your local machine https://github.com/rakyll/hey. It's similar to the Apache Benchmark tool. We are going to use this to perform the stress test to our app to check whether the auto-scaling capability is working or not.
 
@@ -36,7 +36,7 @@ CMD won't be helpful here. Run the PowerShell as an administrator.
 
 #### 2.2. Create the Kubernetes objects configuration file (in `.yaml` format)
 
-We are going to create three Kubernetes objects: the deployment, horizontal auto scaler, and service. But to make things easier, we will do the creation by using the config file.
+We are going to create three Kubernetes objects: the deployment, horizontal pod auto scaler, and service. But to make things easier, we will do the creation by using the config file.
 
 So the three objects mentioned above will be defined in a `.yaml` file. One object usually represented by one config file, however, in this tutorial, we will write all configs in a single file.
 
@@ -75,10 +75,6 @@ spec:
       app: my-app
 
   # template describes the pods that will be created.
-  #
-  # pods are the smallest, most basic deployable objects in Kubernetes. 
-  # A Pod represents a single instance of a running process in your cluster.
-  # pods contain one or more containers, such as Docker containers.
   template:
 
     # put a label on the pods as `my-app`.
@@ -90,7 +86,6 @@ spec:
     spec:
 
       # list of containers belonging to the `my-app` pod.
-      # a single pod might contain multiple containers.
       containers:
 
           # allocate a container, name it as `hello-world`.
@@ -113,7 +108,7 @@ spec:
 
           # this pod only have one container (`hello-world`),
           # and what this container does is start a webserver that listens to port `8081`.
-          # the port need to be exported,
+          # the port need to be exposed,
           # to make it accessible between the pods within the cluster.
           ports:
             - containerPort: 8081
@@ -332,9 +327,9 @@ curl <minikubeIP>:32199
   <img src="https://i.imgur.com/IoEpMFH.jpg" alt="Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler - create service object">
 </p>
 
-As we can see from the image above, we did dispatch multiple HTTP requests to Minikube IP on node port. The result from the `curl` is different from one another, this is because the service will direct incoming request into available pods in round-robin style (like what load balancer usually do).
+As we can see from the image above, we did dispatch multiple HTTP requests to the service. The result from the `curl` is different from one another, this is because the service will direct incoming request into available pods in round-robin style (like what load balancer usually do).
 
-> Tips! Rather than find the Minikube IP using `minikube ip` and then concat it with node port from config, use command below to easily get the URL of certain service.
+> Tips! Rather than find the Service URL using `minikube ip` and then concat it with node port from config, use command below:
 
 > `minikube service <service-name> --url`<br />`minikube service my-service --url`
 
@@ -414,7 +409,7 @@ Previously we only have two pods running. After we apply the HPA, the new pod is
 
 #### 3.3.1. Stress test on Horizontal Pod Auto scaler
 
-Ok, next let's do some stress test! Let's see how the HPA will handle very high traffic coming. The below command will trigger a concurrent 50 request to the target URL for 5 minutes. Run it on a new CMD/PowerShell window.
+Ok, next let's do some stress test! Let's see how the HPA will handle very high traffic coming. The below command will trigger a concurrent 50 request to the service URL for 5 minutes. Run it on a new CMD/PowerShell window.
 
 ```bash
 # show service URL

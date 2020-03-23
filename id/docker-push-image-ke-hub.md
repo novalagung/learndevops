@@ -4,11 +4,11 @@ Pada post kali ini, kita akan belajar tentang cara *push* image Docker ke [Docke
 
 ---
 
-### 1. Persiapan
+### 1. Kebutuhan
 
 #### 1.1. Docker engine
 
-Pastikan Docker engine adalah *running*. Jika di lokal belum ter-*install* Docker engine, maka *install* terlebih dahulu. Bisa ikuti panduan berikut
+Pastikan Docker engine adalah *running*. Jika di lokal belum ter-*install* Docker engine, maka *install* terlebih dahulu.
 
 #### 1.2. Akun Docker Hub
 
