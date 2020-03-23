@@ -1,4 +1,4 @@
-# Kubernetes - Deploy Aplikasi ke Kluster Minikube menggunakan Deployment controller, Service, dan Horizontal Autoscaler
+# Kubernetes - Deploy Aplikasi ke Kluster Minikube menggunakan Deployment controller, Service, dan Horizontal Pod Autoscaler
 
 Pada tutorial kali ini, kita akan belajar cara men-*deploy* aplikasi *containerized* ke kluster kubernetes (minikube), meng-*enable* kapabilitas autoscaling, dan menyiapkan *service* untuk membuat aplikasi tersebut menjadi dapat diakses dari luar kluster.
 
