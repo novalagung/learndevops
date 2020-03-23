@@ -45,7 +45,7 @@ cd terraform-automate-aws-ec2-instance
 ssh-keygen -t rsa -f ./id_rsa
 ```
 
-![Terraform | AWS EC2 + Internet Gateway + SSH Access | generate key pair](https://i.imgur.com/ZB16oJB.png)
+![Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled - generate key pair](https://i.imgur.com/ZB16oJB.png)
 
 ---
 
@@ -236,7 +236,7 @@ cd terraform-automate-aws-ec2-instance
 terraform init
 ```
 
-![Terraform | AWS EC2 + Internet Gateway + SSH Access | terraform init](https://i.imgur.com/6PnpyNc.png)
+![Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled - terraform init](https://i.imgur.com/6PnpyNc.png)
 
 #### 4.2. Terraform plan
 
@@ -253,7 +253,7 @@ terraform apply -auto-approve
 
 The `-auto-approve` flag is optional, it will skip the confirmation prompt during execution.
 
-![Terraform | AWS EC2 + Internet Gateway + SSH Access | terraform apply](https://i.imgur.com/rK1LX8c.png)
+![Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled - terraform apply](https://i.imgur.com/rK1LX8c.png)
 
 In the infra file, we defined two outputs, DNS and public IP, it shows up after the terraforming process is done.
 
@@ -267,6 +267,6 @@ Now we shall test the instance. Use the `ssh` command to remotely connect to a p
 ssh -i id_rsa ec2-user@ec2-18-140-245-218.ap-southeast-1.compute.amazonaws.com
 ```
 
-![Terraform | AWS EC2 + Internet Gateway + SSH Access | ssh to ec2 instance](https://i.imgur.com/uL1TulT.png)
+![Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled - ssh to ec2 instance](https://i.imgur.com/uL1TulT.png)
 
 We can see from the image above that we can connect to ec2 instance via SSH, and the instance is connected to the internet.

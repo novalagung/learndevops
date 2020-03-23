@@ -1,6 +1,6 @@
 # Docker - Push Image to hub.docker.com
 
-In this post, we are going to learn about how to push a docker image to [Docker Hub](https://hub.docker.com/).
+In this post, we are going to learn about how to push a Docker image to [Docker Hub](https://hub.docker.com/).
 
 ---
 
@@ -8,7 +8,7 @@ In this post, we are going to learn about how to push a docker image to [Docker 
 
 #### 1.1. Docker engine
 
-Ensure the Docker engine is running. If you haven't installed it, then follow the guide on [Docker Installation](docker-installation.md).
+Ensure the Docker engine is running. If you haven't installed it, then install it first.
 
 #### 1.2. Docker Hub account
 
@@ -34,9 +34,9 @@ First of all, we need to book a repo on Docker Hub. Later we will push the image
 
 Go to https://hub.docker.com/repository/create, create a new repo (under your account), name it `hello-world` (or anything).
 
-![Docker | Push Image to hub.docker.com | create a repo on Docker Hub](https://i.imgur.com/uvLjxqv.png)
+![Docker - Push Image to hub.docker.com - create a repo on Docker Hub](https://i.imgur.com/uvLjxqv.png)
 
-#### 2.2. Clone the app then build as Docker image
+#### 2.2. Clone the example app then build as Docker image
 
 Next, we need to create a simple dockerized hello world app. But to make the thing faster, we will use a ready-to-deploy-dockerized hello world app crafted using Go. It's available on Github (via Github token), just run the command below.
 
@@ -55,7 +55,7 @@ docker build . -t novalagung/hello-world:v0
 
 As we can see from the command above, the tag `v0` is used on this image.
 
-![Docker | Push Image to hub.docker.com | build image](https://i.imgur.com/aiduEji.png)
+![Docker - Push Image to hub.docker.com - build image](https://i.imgur.com/aiduEji.png)
 
 #### 2.3. Push image into Docker Hub
 
@@ -66,7 +66,7 @@ Next, use `docker push` command below to push the image that we just built.
 docker push novalagung/hello-world
 ```
 
-![Docker | Push Image to hub.docker.com | push image to Docker Hub](https://i.imgur.com/TUy6Ffa.png)
+![Docker - Push Image to hub.docker.com - push image to Docker Hub](https://i.imgur.com/TUy6Ffa.png)
 
 Ok, done.
 
@@ -83,13 +83,13 @@ We have pushed the image into Docker Hub. To pull it, use the `docker pull` comm
 docker pull novalagung/hello-world:v0
 ```
 
-![Docker | Push Image to hub.docker.com | pull image from Docker Hub](https://i.imgur.com/tdRlNr7.png)
+![Docker - Push Image to hub.docker.com - pull image from Docker Hub](https://i.imgur.com/tdRlNr7.png)
 
 ---
 
 ### 4. The `latest` tag
 
-By default, when we pull a certain image from the hub without a tag specified, then the `latest` tag of the particular image will be pulled.
+By default, when we pull a certain image from the Hub without a tag specified, then the `latest` tag of the particular image will be pulled.
 
 Take a look at two commands below, they are equivalent.
 
@@ -98,9 +98,9 @@ docker pull novalagung/hello-world
 docker pull novalagung/hello-world:latest
 ```
 
-The funny thing about this what-so-called `latest` tag is, it is actually not referring to the latest tag pushed to the hub, it'll look for a tag with explicit name `latest`.
+The funny thing about this what-so-called `latest` tag is, it is actually not referring to the latest tag pushed to the Hub, it'll look for a tag with explicit name `latest`.
 
-The previous `v0` tag won't be treated as the latest tag. To have the latest tag, we shall rebuild our project into another image then push it to the hub, but this time during the build we will do it using `latest` as the tag.
+The previous `v0` tag won't be treated as the latest tag. To have the latest tag, we shall rebuild our project into another image then push it to the Hub, but this time during the build we will do it using `latest` as the tag.
 
 ```bash
 cd hello-world
@@ -108,4 +108,4 @@ docker build . -t novalagung/hello-world:latest
 docker push novalagung/hello-world:latest
 ```
 
-![Docker | Push Image to hub.docker.com | push latest tag to Docker Hub](https://i.imgur.com/6y0MEEA.png)
+![Docker - Push Image to hub.docker.com - push latest tag to Docker Hub](https://i.imgur.com/6y0MEEA.png)

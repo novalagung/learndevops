@@ -147,7 +147,7 @@ kubectl get pods
 ```
 
 <p style="text-align: center;">
-  <img src="https://i.imgur.com/VXlFDch.png" alt="Kubernetes | Minikube Deployment + Service + Horizontal Autoscaler | apply deployment object">
+  <img src="https://i.imgur.com/VXlFDch.png" alt="Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler - apply deployment object">
 </p>
 
 #### 3.1. Testing one of the pod
@@ -170,7 +170,7 @@ netstat -tulpn | grep :8081
 ```
 
 <p style="text-align: center;">
-  <img src="https://i.imgur.com/vdZaLf2.png" alt="Kubernetes | Minikube Deployment + Service + Horizontal Autoscaler | connect to pod">
+  <img src="https://i.imgur.com/vdZaLf2.png" alt="Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler - connect to pod">
 </p>
 
 It's clear from the image above that the app is running on port `8081`.
@@ -236,7 +236,7 @@ netstat -tulpn | grep :8080
 ```
 
 <p style="text-align: center;">
-  <img src="https://i.imgur.com/DZWCTSk.png" alt="Kubernetes | Minikube Deployment + Service + Horizontal Autoscaler | apply changes on deployment object">
+  <img src="https://i.imgur.com/DZWCTSk.png" alt="Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler - apply changes on deployment object">
 </p>
 
 See, the changes that we made on the pod are applied in a controlled way. And the web server within the newly created pod is listening to port `8080`. This is nice!
@@ -329,7 +329,7 @@ curl <minikubeIP>:32199
 ```
 
 <p style="text-align: center;">
-  <img src="https://i.imgur.com/IoEpMFH.jpg" alt="Kubernetes | Minikube Deployment + Service + Horizontal Autoscaler | create service object">
+  <img src="https://i.imgur.com/IoEpMFH.jpg" alt="Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler - create service object">
 </p>
 
 As we can see from the image above, we did dispatch multiple HTTP requests to Minikube IP on node port. The result from the `curl` is different from one another, this is because the service will direct incoming request into available pods in round-robin style (like what load balancer usually do).
@@ -407,7 +407,7 @@ kubectl describe hpa <hpa-name>
 ```
 
 <p style="text-align: center;">
-  <img src="https://i.imgur.com/R63y8dL.png" alt="Kubernetes | Minikube Deployment + Service + Horizontal Autoscaler | horizontal pod auto scaler object">
+  <img src="https://i.imgur.com/R63y8dL.png" alt="Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler - horizontal pod auto scaler object">
 </p>
 
 Previously we only have two pods running. After we apply the HPA, the new pod is created, so total there are three pods. This is because in our HPA the `spec.minReplicas` is set to `3`.
@@ -433,7 +433,7 @@ kubectl get pods
 ```
 
 <p style="text-align: center;">
-  <img src="https://i.imgur.com/0lHYlxc.png" alt="Kubernetes | Minikube Deployment + Service + Horizontal Autoscaler | horizontal pod auto scaler object">
+  <img src="https://i.imgur.com/0lHYlxc.png" alt="Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler - horizontal pod auto scaler object">
 </p>
 
 After a minute passed, suddenly a total of 6 pods created. This is happening because the CPU utilization is high enough, greater than the threshold that we defined in the config.

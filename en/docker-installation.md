@@ -1,3 +1,0 @@
-# Docker | Installation
-
-In progress.

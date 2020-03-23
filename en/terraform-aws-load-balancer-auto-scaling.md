@@ -47,7 +47,7 @@ cd terraform-automate-aws-ec2-instance
 ssh-keygen -t rsa -f ./id_rsa
 ```
 
-![Terraform | AWS EC2 + Load Balancer + Auto Scaling | generate key pair](https://i.imgur.com/ZB16oJB.png)
+![Terraform - Automate setup of AWS EC2 with Load Balancer and Auto Scaling enabled - generate key pair](https://i.imgur.com/ZB16oJB.png)
 
 ---
 
@@ -433,10 +433,10 @@ Use the `curl` command to make an HTTP request to the ALB public DNS instance.
 curl -X GET my-alb-613171058.ap-southeast-1.elb.amazonaws.com
 ```
 
-![Terraform | AWS EC2 + Load Balancer + Auto Scaling | curl to load balancer](https://i.imgur.com/5jonEG2.png)
+![Terraform - Automate setup of AWS EC2 with Load Balancer and Auto Scaling enabled - curl to load balancer](https://i.imgur.com/5jonEG2.png)
 
 We can see from the image above, the HTTP response is different from one another across those multiple `curl` commands. The load balancer manages the traffic, sometimes we will get the instance A, B, etc.
 
 In the AWS console, the instances that up and running are visible.
 
-![Terraform | AWS EC2 + Load Balancer + Auto Scaling | aws console](https://i.imgur.com/iETYwfw.png)
+![Terraform - Automate setup of AWS EC2 with Load Balancer and Auto Scaling enabled - aws console](https://i.imgur.com/iETYwfw.png)

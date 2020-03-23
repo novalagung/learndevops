@@ -1,3 +1,0 @@
-# Terraform Introduction
-
-In progress.
