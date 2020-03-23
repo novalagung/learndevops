@@ -148,7 +148,7 @@ kubectl get pods
   <img src="https://i.imgur.com/VXlFDch.png" alt="Kubernetes - Deploy Aplikasi ke Kluster Minikube menggunakan Deployment controller, Service, dan Horizontal Autoscaler - run objek deployment">
 </p>
 
-#### 3.1. Test salah stu pod
+#### 3.1. Test salah satu pod
 
 Pada gambar di atas bisa dilihat, deployment berjalan sesuai harapan. Ada dua buah pod yang *running*.
 
@@ -177,7 +177,7 @@ Bisa dilihat pada image di atas, port tersebut digunakan oleh aplikasi/webserver
 
 Selain objek deployment, ada juga jenis objek kontroler lainnya yang tersedia di k8s.
 
-Yang membuat objek deployment berbeda dari yang lain adalah, setiap ada perubahan baru pada pod yang diterapkan, maka perubahan tersebut akan langsung diterapkan secara *seamless*.
+Salah satu kelebihan dari objek deployment dibanding objek kontroler lainnya adalah, setiap perubahan konfigurasi pod yang diterapkan, maka perubahan tersebut akan diterapkan secara *seamless*.
 
 Ok, sekarang mari kita buktikan bahwa statement di atas adalah valid, yaitu dengan cara mengubah beberapa konfigurasi berikut lalu kemudian menerapkannya.
 
