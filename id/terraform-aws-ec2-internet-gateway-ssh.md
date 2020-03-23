@@ -82,7 +82,7 @@ resource "aws_key_pair" "my_instance_key_pair" {
 
 Definisikan blok kode lagi, yaitu [resource `aws_instance`](https://www.terraform.io/docs/providers/aws/r/instance.html), namai dengan `my_instance`, lalu tulis spesifikasi VPC, instance type, key pair, security group, subnet, dan public IP dalam blok kode resource ini.
 
-Each part of the code below is self-explanatory.
+Setiap bagian kode berikut adalah *self-explanatory*.
 
 ```bash
 # buat instance EC2 baru
