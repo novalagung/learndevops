@@ -1,4 +1,4 @@
-# Terraform - Otomatisasi setup AWS EC2 dengan akses Internet Gateway dan SSH
+# Terraform - Otomatisasi setup AWS EC2 dan juga akses Internet Gateway dan SSH
 
 Pada post ini, kita akan belajar tentang implementasi terraform untuk mengotomatisasi setup AWS EC2 dengan akses internet dan SSH.
 
