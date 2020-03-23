@@ -12,7 +12,7 @@ Pastikan Docker engine adalah *running*. Jika di lokal belum ter-*install* Docke
 
 #### 1.2. Akun Docker Hub
 
-Siapkan akun Docker Hub. Jika belum punya, maka buat terlebih dahulu. Bisa ikuti petunjuk [Membuat Akun Docker Hub](docker-hub-membuat-akun.md).
+Siapkan akun Docker Hub. Jika belum punya, maka buat terlebih dahulu. Bisa ikuti petunjuk [Membuat Akun Docker Hub](docker-hub-membuat-akun.html).
 
 #### 1.3. Login ke Docker Hub di lokal
 
@@ -100,7 +100,7 @@ docker pull novalagung/hello-world:latest
 
 Yang menarik dan penting untuk diketahui dari tag `latest` ini, bahwa tag ini tidak mengarah ke tag yang terakhir di push, melainkan mengarah ke tag yang namanya secara eksplisit adalah `latest`.
 
-Tag sebelumnya yang sudah kita push, `v0`, tidak adakan dianggap sebagai tag `latest`. Untuk membuat tag latest, maka kita perlu *rebuild* ulang aplikasi yang sama sebagai tag `v0`, lalu push ke Docker Hub.
+Tag sebelumnya yang sudah kita push, `v0`, tidak adakan dianggap sebagai tag `latest`. Untuk membuat tag latest, maka kita perlu *rebuild* ulang aplikasi yang sama sebagai tag `latest`, lalu push ke Docker Hub.
 
 ```bash
 cd hello-world

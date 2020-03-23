@@ -1,4 +1,4 @@
-# AWS | Membuat User IAM
+# AWS - Membuat User IAM
 
 Pada tutorial ini, kita akan belajar cara membuat user IAM.
 
