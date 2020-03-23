@@ -12,7 +12,7 @@ The application is a simple go app, currently hosted on Github in a private repo
 
 #### 1.1. Terraform CLI
 
-Ensure terraform CLI is available. If not, then follow guide on [Terraform Installation](terraform-cli-installation.md).
+Ensure terraform CLI is available. If not, then do install it first.
 
 #### 1.2. Individual AWS IAM user
 
@@ -24,9 +24,9 @@ Ensure both `ssh-keygen` and `ssh` command are available.
 
 ---
 
-### 2. Initialization
+### 2. Preparation
 
-Create a new folder contains a file named `infrastructure.tf`. We will use the file as the infrastructure code. Every setup will be written in HCL language inside the file, including: 
+Create a new folder contains a file named `infrastructure.tf`. We will use the file as the infrastructure code. Every resource setup will be written in HCL language inside the file, including: 
 
 - Uploading key pair (for ssh access to the instance)
 - Creating EC2 instance
@@ -40,7 +40,7 @@ cd terraform-automate-aws-ec2-instance
 touch infrastructure.tf
 ```
 
-Next, create a new key pair using `ssh-keygen` command below. This will generate the `id_rsa.pub` public key and `id_rsa` private key. Later we will upload the public key into AWS and use the private key to perform `ssh` access into the newly created EC2 instance.
+Next, create a public-key cryptography using `ssh-keygen` command below. This will generate the `id_rsa.pub` public key and `id_rsa` private key. Later we will upload the public key into AWS and use the private key to perform `ssh` access into the newly created EC2 instance.
 
 ```bash
 cd terraform-automate-aws-ec2-instance

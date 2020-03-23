@@ -8,7 +8,7 @@ In this post, we are going to learn about the usage of Terraform to automate the
 
 #### 1.1. Terraform CLI
 
-Ensure terraform CLI is available. If not, then follow guide on [Terraform Installation](terraform-cli-installation.md).
+Ensure terraform CLI is available. If not, then do install it first.
 
 #### 1.2. Individual AWS IAM user
 
@@ -17,12 +17,12 @@ Prepare a new individual IAM user with programmatic access key enabled and have 
 #### 1.3. `ssh-keygen` and `ssh` commands
 
 Ensure both `ssh-keygen` and `ssh` command are available.
-fksdfftwerwre
+
 ---
 
-### 2. Initialization
+### 2. Preparation
 
-Create a new folder contains a file named `infrastructure.tf`. We will use the file as the infrastructure code. Every setup will be written in HCL language inside the file, including: 
+Create a new folder contains a file named `infrastructure.tf`. We will use the file as the infrastructure code. Every resource setup will be written in HCL language inside the file, including: 
 
 - Uploading key pair (for ssh access to the instance)
 - Creating EC2 instance
@@ -38,7 +38,7 @@ cd terraform-automate-aws-ec2-instance
 touch infrastructure.tf
 ```
 
-Next, create a new key pair using `ssh-keygen` command below. This will generate the `id_rsa.pub` public key and `id_rsa` private key. Later we will upload the public key into AWS and use the private key to perform `ssh` access into the newly created EC2 instance.
+Next, create a new public-key cryptography using `ssh-keygen` command below. This will generate the `id_rsa.pub` public key and `id_rsa` private key. Later we will upload the public key into AWS and use the private key to perform `ssh` access into the newly created EC2 instance.
 
 ```bash
 cd terraform-automate-aws-ec2-instance
@@ -203,7 +203,7 @@ resource "aws_route_table" "my_public_route_table" {
 [Associate the public route table](https://www.terraform.io/docs/providers/aws/r/route_table_association.html) above into `my_public_subnet`, so then we will get an internet access on `my_instance` instance.
 
 ```bash
-# create a route table association to connect my_public_subnet with route_table_id.
+# create a route table association to connect my_public_subnet with my_public_route_table.
 resource "aws_route_table_association" "my_public_route_table_association" {
   subnet_id = aws_subnet.my_public_subnet.id
   route_table_id = aws_route_table.my_public_route_table.id
