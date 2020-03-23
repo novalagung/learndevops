@@ -117,7 +117,7 @@ O iya, property `vpc_security_group_ids` hanya menerima value berupa valid array
 
 #### 3.4. Alokasikan satu resource VPC dengan satu security group di dalamnya
 
-Alokasikan satu buah [blok kode resource VPC](https://www.terraform.io/docs/providers/aws/r/vpc.html), dan definisikan juga [blok kode resource security](https://www.terraform.io/docs/providers/aws/r/security_group.html)group-nya.
+Alokasikan satu buah [blok kode resource VPC](https://www.terraform.io/docs/providers/aws/r/vpc.html), dan definisikan juga [blok kode resource security group](https://www.terraform.io/docs/providers/aws/r/security_group.html)-nya.
 
 ```bash
 # alokasikan VPC bernama my_vpc.
