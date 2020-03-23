@@ -1,3 +1,3 @@
-# Docker | Membuat Akun Docker Hub
+# Docker - Membuat Akun Docker Hub
 
 In progress.
