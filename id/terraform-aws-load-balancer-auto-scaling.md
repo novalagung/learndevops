@@ -1,39 +1,39 @@
-# Terraform - Automate setup of AWS EC2 with Application Load Balancer and Auto Scaling enabled
+# Terraform - Otomatisasi setup EC2, Application Load Balancer, dan Auto Scaling
 
-In this post, we are going to learn about the usage of Terraform to automate the setup of AWS EC2 instance in an auto-scaling environment with an Application Load Balancer applied.
+Pada tutorial kali ini, kita akan belajar implementasi Terraform untuk mengotomatisasi setup EC2 instance pada environment Auto Scaling dengan Application Load Balancer sebagai gateway aksesnya. Kita akan deploy sebuah aplikasi web sederhana pada setiap instance yang up.
 
-Since we will be using the auto-scaling feature, then the app within the instance needs to be deployed in an automated manner.
+Karena kita akan menggunakan fitur auto-scaling, maka proses deploy aplikasi harus dilakukan secara otomatis (tidak bisa deploy secara manual).
 
-The application is a simple go app, currently hosted on Github in a private repo. We will clone the app using Github token, we will talk about it in details in some part of this tutorial.
+Aplikasi web yang kita akan pakai adalah aplikasi hello world sederhana yang siap pakai. Aplikasi tersebut ada di Github, nantinya kita akan clone.
 
 ---
 
-### 1. Prerequisites
+### 1. Kebutuhan
 
 #### 1.1. Terraform CLI
 
-Ensure terraform CLI is available. If not, then do install it first.
+Pastikan Terraform CLI tool tersedia. Jika belum, maka install terlebih dahulu.
 
-#### 1.2. Individual AWS IAM user
+#### 1.2. User IAM AWS
 
-Prepare a new individual IAM user with programmatic access key enabled and have access to EC2 management. We will use the `access_key` and `secret_key` on this tutorial. If you haven't created the IAM user, then follow a guide on [Create Individual IAM User](aws-create-individual-iam-user.md).
+Siapkan satu buah user IAM baru dengan *programmatic access key* aktif dan akses penuh ke EC2 management. Kita akan gunakan `access_key` dan `secret_key`-nya pada tutorial ini. Bisa ikuti guide berikut untuk cara buat user IAM baru: [Membuat User IAM](aws-membuat-user-iam.md).
 
-#### 1.3. `ssh-keygen` and `ssh` commands
+#### 1.3. Command `ssh-keygen` dan `ssh`
 
-Ensure both `ssh-keygen` and `ssh` command are available.
+Pastikan CLI tools `ssh-keygen` dan `ssh` tersedia.
 
 ---
 
-### 2. Preparation
+### 2. Persiapan
 
-Create a new folder contains a file named `infrastructure.tf`. We will use the file as the infrastructure code. Every resource setup will be written in HCL language inside the file, including: 
+Buat folder baru (dengan nama bebas), isinya satu buah file bernama `infrastructure.tf`. Kita akan gunakan file ini untuk pendefinisian kode infrastruktur. Semua kode setup resource akan dituliskan dalam bahasa HCL dalam file tersebut, meliputi:
 
-- Uploading key pair (for ssh access to the instance).
-- Subnetting on two different availability zones (within the same region).
-- Defining Application Load Balancer, it's listener, security group, and target group.
-- Defining Auto-scaling and it's launch config.
+- Upload key pair (untuk keperluan SSH akses dari lokal ke EC2 instance).
+- Subnetting pada dua availability zones berbeda (tapi masih dalam satu region).
+- Setup Application Load Balancer, listener-nya, security group, dan juga target group.
+- Setup Auto-scaling dan launch config-nya.
 
-Ok, let's back to the tutorial. Now create the infrastructure file.
+Ok, mari kita mulai tutorialnya. Pertma siapkan folder dan file yang sudah disinggung di atas.
 
 ```bash
 mkdir terraform-automate-aws-ec2-instance
@@ -41,26 +41,26 @@ cd terraform-automate-aws-ec2-instance
 touch infrastructure.tf
 ```
 
-Next, create a public-key cryptography using `ssh-keygen` command below. This will generate the `id_rsa.pub` public key and `id_rsa` private key. Later we will upload the public key into AWS and use the private key to perform `ssh` access into the newly created EC2 instance.
+Selanjutnya, buat public-key cryptography menggunakan CLI tool `ssh-keygen`. Dengan ini akan di-generate sebuah file public key `id_rsa.pub` dan private key `id_rsa`. Nantinya kita akan upload key public key-nya ke AWS dan menggunakan private key-nya untuk mengakses EC2 instance via `ssh`.
 
 ```bash
 cd terraform-automate-aws-ec2-instance
 ssh-keygen -t rsa -f ./id_rsa
 ```
 
-![Terraform - Automate setup of AWS EC2 with Load Balancer and Auto Scaling enabled - generate key pair](https://i.imgur.com/ZB16oJB.png)
+![Terraform - Otomatisasi setup EC2, Application Load Balancer, dan Auto Scaling - generate key pair](https://i.imgur.com/ZB16oJB.png)
 
 ---
 
-### 3. Infrastructure Code
+### 3. Kode Infrastruktur
 
-Now we shall start writing the infrastructure config. Open `infrastructure.tf` in any editor.
+Sekarang, mari kita mulai penulisan kode infrastruktur. Silakan buka file `infrastructure.tf` menggunakan editor apa saja bebas.
 
-#### 3.1. Define AWS provider
+#### 3.1. Set AWS sebagai provider
 
-Define the provider block with [AWS as chosen cloud provider](https://www.terraform.io/docs/providers/aws/index.html). Also define these properties: `region`, `access_key`, and `secret_key`; with values derived from the created IAM user.
+Definisikan blok kode provider, disini kita akan gunakan [AWS sebagai cloud provider](https://www.terraform.io/docs/providers/aws/index.html). Dalam blok kode provider, tulis informasi akses AWS seperti `region`, `access_key`, dan `secret_key`. Untuk keys nilainya kita isi menggunakan keys dari user IAM yang sudah dibuat (jadi silakan sesuaikan value-nya).
 
-Write a block of code below into `infrastructure.tf`
+Ok, berikut adalah blok kode provider, silakan tulis pada file `infrastructure.tf`.
 
 ```bash
 provider "aws" {
@@ -70,9 +70,9 @@ provider "aws" {
 }
 ```
 
-#### 3.2. Generate new key pair then upload to AWS
+#### 3.2. Generate key pair baru, lalu upload ke AWS
 
-Define new [`aws_key_pair` resource](https://www.terraform.io/docs/providers/aws/r/key_pair.html) block with local name: `my_instance_key_pair`. Put the previously generated `id_rsa.pub` public key inside the block to upload it to AWS.
+Definisikan blok kode [resource `aws_key_pair`](https://www.terraform.io/docs/providers/aws/r/key_pair.html), namai blok tersebut dengan `my_instance_key_pair`, lalu tambahkan file public key yang sebelumnya sudah di-generate `id_rsa.pub` ke dalam blok kode ini.
 
 ```bash
 resource "aws_key_pair" "my_instance_key_pair" {
@@ -434,10 +434,10 @@ Use the `curl` command to make an HTTP request to the ALB public DNS instance.
 curl -X GET my-alb-613171058.ap-southeast-1.elb.amazonaws.com
 ```
 
-![Terraform - Automate setup of AWS EC2 with Load Balancer and Auto Scaling enabled - curl to load balancer](https://i.imgur.com/5jonEG2.png)
+![Terraform - Otomatisasi setup EC2, Application Load Balancer, dan Auto Scaling - curl to load balancer](https://i.imgur.com/5jonEG2.png)
 
 We can see from the image above, the HTTP response is different from one another across those multiple `curl` commands. The load balancer manages the traffic, sometimes we will get the instance A, B, etc.
 
 In the AWS console, the instances that up and running are visible.
 
-![Terraform - Automate setup of AWS EC2 with Load Balancer and Auto Scaling enabled - aws console](https://i.imgur.com/iETYwfw.png)
+![Terraform - Otomatisasi setup EC2, Application Load Balancer, dan Auto Scaling - aws console](https://i.imgur.com/iETYwfw.png)

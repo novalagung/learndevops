@@ -24,11 +24,11 @@ Ensure both `ssh-keygen` and `ssh` command are available.
 
 Create a new folder contains a file named `infrastructure.tf`. We will use the file as the infrastructure code. Every resource setup will be written in HCL language inside the file, including: 
 
-- Uploading key pair (for ssh access to the instance)
-- Creating EC2 instance
-- Adding security group to VPC (where the instance will be created)
-- Creating a public subnet
-- Creating an internet gateway and associate it to the subnet
+- Uploading key pair (for ssh access to the instance).
+- Creating EC2 instance.
+- Adding security group to VPC (where the instance will be created).
+- Creating a public subnet.
+- Creating an internet gateway and associate it to the subnet.
 
 Ok, let's back to the tutorial. Now create the infrastructure file.
 

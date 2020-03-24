@@ -1,4 +1,4 @@
-# Terraform - Otomatisasi setup AWS EC2 dan juga akses Internet Gateway dan SSH
+# Terraform - Otomatisasi setup AWS EC2, Internet Gateway, dan SSH
 
 Pada post ini, kita akan belajar tentang implementasi terraform untuk mengotomatisasi setup AWS EC2 dan juga akses Internet Gateway dan SSH.
 
@@ -24,11 +24,11 @@ Pastikan CLI tools `ssh-keygen` dan `ssh` tersedia.
 
 Buat folder baru (dengan nama bebas), isinya satu buah file bernama `infrastructure.tf`. Kita akan gunakan file ini untuk pendefinisian kode infrastruktur. Semua kode setup resource akan dituliskan dalam bahasa HCL dalam file tersebut, meliputi:
 
-- Upload key pair (untuk keperluan SSH akses dari lokal ke EC2 instance)
-- Pembuatan EC2 instance
-- Pembuatan dan asosiasi security group ke VPC (dimana EC2 instance akan di-setup)
-- Pembuatan public subnet
-- Pembuatan internet gateway
+- Upload key pair (untuk keperluan SSH akses dari lokal ke EC2 instance).
+- Pembuatan EC2 instance.
+- Pembuatan dan asosiasi security group ke VPC (dimana EC2 instance akan di-setup).
+- Pembuatan public subnet.
+- Pembuatan internet gateway.
 
 Ok, mari kita mulai tutorialnya. Pertma siapkan folder dan file yang sudah disinggung di atas.
 

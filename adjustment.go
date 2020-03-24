@@ -12,13 +12,36 @@ import (
 )
 
 func main() {
+	doAdjustment("en", "en-US")
+	doAdjustment("id", "id")
+}
+
+type sitemapURL struct {
+	Text       string `xml:",chardata"`
+	Loc        string `xml:"loc"`
+	Changefreq string `xml:"changefreq"`
+	Priority   string `xml:"priority"`
+}
+
+type sitemap struct {
+	XMLName xml.Name     `xml:"urlset"`
+	Text    string       `xml:",chardata"`
+	Xmlns   string       `xml:"xmlns,attr"`
+	News    string       `xml:"news,attr"`
+	Xhtml   string       `xml:"xhtml,attr"`
+	Mobile  string       `xml:"mobile,attr"`
+	Image   string       `xml:"image,attr"`
+	URL     []sitemapURL `xml:"url"`
+}
+
+func doAdjustment(lang, metaLang string) error {
 	bookName := "Devops Tutorial"
 	adClient := "ca-pub-1417781814120840"
 
 	regex := regexp.MustCompile(`<title>(.*?)<\/title>`)
 
 	basePath, _ := os.Getwd()
-	bookPath := filepath.Join(basePath, "_book")
+	bookPath := filepath.Join(basePath, "_book", lang)
 
 	err := filepath.Walk(bookPath, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
@@ -50,39 +73,28 @@ func main() {
 			isLandingPage = true
 			newTitle = bookName
 		} else {
-			if titleParts := strings.Split(newTitle, "."); len(titleParts) > 2 {
-				actualTitle := strings.TrimSpace(titleParts[2])
-
-				if strings.Contains(actualTitle, "Go") || strings.Contains(actualTitle, "Golang") {
-					// do nothing
-				} else {
-					titleParts[2] = fmt.Sprintf(" Golang %s", actualTitle)
-				}
-
-				newTitle = strings.Join(titleParts, ".")
-			}
-
 			newTitle = strings.Replace(newTitle, "· GitBook", fmt.Sprintf("- %s", bookName), -1)
 		}
 		htmlString = strings.Replace(htmlString, oldTitle, newTitle, -1)
 
 		// ==== adjust meta for SEO purpose
 		metaToFind := `<meta content=""name="description">`
-		metaReplacement := metaToFind
+		metaReplacement := ""
 		if isLandingPage {
 			metaReplacement = `<meta content="Devops Tutorial" name="description">`
 		}
-		htmlString = strings.Replace(htmlString, metaToFind, fmt.Sprintf(`%s<script data-ad-client="%s" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({ google_ad_client: "%s", enable_page_level_ads: true }); </script>`, metaReplacement, adClient, adClient), -1)
+		metaReplacement = metaReplacement + `<meta http-equiv="content-language" content="` + metaLang + `"/><script data-ad-client="` + adClient + `" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({ google_ad_client: "` + adClient + `", enable_page_level_ads: true }); </script>`
+		htmlString = strings.Replace(htmlString, metaToFind, metaReplacement, -1)
 
 		// ==== inject github stars button
-		buttons := `<div style="position: fixed; top: 10px; right: 30px; padding: 10px; background-color: rgba(255, 255, 255, 0.7);">
-			<a class="github-button" href="https://github.com/novalagung" data-size="large" aria-label="Follow @novalagung on GitHub">Follow @novalagung</a>
-			<script async defer src="https://buttons.github.io/buttons.js"></script>
-		</div>`
-		htmlString = strings.Replace(htmlString, `</body>`, fmt.Sprintf("%s</body>", buttons), -1)
+		buttonToFind := `</body>`
+		buttonReplacement := `<div style="position: fixed; top: 10px; right: 30px; padding: 10px; background-color: rgba(255, 255, 255, 0.7);"><a class="github-button" href="https://github.com/novalagung" data-size="large" aria-label="Follow @novalagung on GitHub">Follow @novalagung</a><script async defer src="https://buttons.github.io/buttons.js"></script></div></body>`
+		htmlString = strings.Replace(htmlString, buttonToFind, buttonReplacement, -1)
 
-		buttonScript := `<script async defer src="https://buttons.github.io/buttons.js"></script>`
-		htmlString = strings.Replace(htmlString, `</head>`, fmt.Sprintf("%s</head>", buttonScript), -1)
+		// ==== inject github stars js script
+		buttonScriptToFind := `</head>`
+		buttonScriptReplacement := `<script async defer src="https://buttons.github.io/buttons.js"></script></head>`
+		htmlString = strings.Replace(htmlString, buttonScriptToFind, buttonScriptReplacement, -1)
 
 		// ==== update file
 		err = ioutil.WriteFile(path, []byte(htmlString), info.Mode())
@@ -98,35 +110,9 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	// sitemap adjustment
-	adjustSitemap("en")
-	adjustSitemap("id")
-}
-
-type sitemapURL struct {
-	Text       string `xml:",chardata"`
-	Loc        string `xml:"loc"`
-	Changefreq string `xml:"changefreq"`
-	Priority   string `xml:"priority"`
-}
-
-type sitemap struct {
-	XMLName xml.Name     `xml:"urlset"`
-	Text    string       `xml:",chardata"`
-	Xmlns   string       `xml:"xmlns,attr"`
-	News    string       `xml:"news,attr"`
-	Xhtml   string       `xml:"xhtml,attr"`
-	Mobile  string       `xml:"mobile,attr"`
-	Image   string       `xml:"image,attr"`
-	URL     []sitemapURL `xml:"url"`
-}
-
-func adjustSitemap(lang string) error {
-	basePath, _ := os.Getwd()
-	bookPath := filepath.Join(basePath, "_book", lang)
+	// ==== sitemap adjustment
 	files := make([]string, 0)
-
-	err := filepath.Walk(bookPath, func(path string, info os.FileInfo, err error) error {
+	err = filepath.Walk(bookPath, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}

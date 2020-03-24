@@ -12,4 +12,5 @@
 * [Kubernetes - Deploy Aplikasi ke Kluster Minikube menggunakan Deployment controller, Service, dan Horizontal Pod Autoscaler](kubernetes-minikube-deployment-service-horizontal-autoscale.md)
 
 * Terraform
-* [Terraform - Otomatisasi setup AWS EC2 dan juga akses Internet Gateway dan SSH](terraform-aws-ec2-internet-gateway-ssh.md)
+* [Terraform - Otomatisasi setup AWS EC2, Internet Gateway, dan SSH](terraform-aws-ec2-internet-gateway-ssh.md)
+* [Terraform - Otomatisasi setup EC2, Application Load Balancer, dan Auto Scaling](terraform-aws-load-balancer-auto-scaling.md)

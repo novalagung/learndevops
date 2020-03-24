@@ -13,7 +13,7 @@
 
 * Terraform
 * [Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled](terraform-aws-ec2-internet-gateway-ssh.md)
-* [Terraform - Automate setup of AWS EC2 with Load Balancer and Auto Scaling enabled](terraform-aws-load-balancer-auto-scaling.md)
+* [Terraform - Automate setup of AWS EC2 with Application Load Balancer and Auto Scaling enabled](terraform-aws-load-balancer-auto-scaling.md)
 
 * CI/CD
 * [Serverless Ebook using Gitbook CLI, Github Pages, Github Actions CI/CD, and Calibre](cicd-serverless-ebook-gitbook-github-pages-actions-calibre.md)
