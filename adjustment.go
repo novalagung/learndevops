@@ -12,8 +12,8 @@ import (
 )
 
 func main() {
-	doAdjustment("en", "en-US")
-	doAdjustment("id", "id")
+	doAdjustment("en-US")
+	doAdjustment("id")
 }
 
 type sitemapURL struct {
@@ -34,7 +34,9 @@ type sitemap struct {
 	URL     []sitemapURL `xml:"url"`
 }
 
-func doAdjustment(lang, metaLang string) error {
+func doAdjustment(isoLang string) error {
+	lang := strings.Split(isoLang, "-")[0]
+
 	bookName := "Devops Tutorial"
 	adClient := "ca-pub-1417781814120840"
 
@@ -43,6 +45,7 @@ func doAdjustment(lang, metaLang string) error {
 	basePath, _ := os.Getwd()
 	bookPath := filepath.Join(basePath, "_book", lang)
 
+	files := make([]string, 0)
 	err := filepath.Walk(bookPath, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
@@ -53,6 +56,8 @@ func doAdjustment(lang, metaLang string) error {
 		if filepath.Ext(info.Name()) != ".html" {
 			return nil
 		}
+
+		files = append(files, filepath.Base(info.Name()))
 
 		buf, err := ioutil.ReadFile(path)
 		if err != nil {
@@ -82,7 +87,7 @@ func doAdjustment(lang, metaLang string) error {
 		if isLandingPage {
 			metaReplacement = `<meta content="Devops Tutorial" name="description">`
 		}
-		metaReplacement = metaReplacement + `<meta http-equiv="content-language" content="` + metaLang + `"/><script data-ad-client="` + adClient + `" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({ google_ad_client: "` + adClient + `", enable_page_level_ads: true }); </script>`
+		metaReplacement = metaReplacement + `<meta http-equiv="content-language" content="` + isoLang + `"/><script data-ad-client="` + adClient + `" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({ google_ad_client: "` + adClient + `", enable_page_level_ads: true }); </script>`
 		htmlString = strings.Replace(htmlString, metaToFind, metaReplacement, -1)
 
 		// ==== inject github stars button
@@ -110,26 +115,6 @@ func doAdjustment(lang, metaLang string) error {
 	}
 
 	// ==== sitemap adjustment
-	files := make([]string, 0)
-	err = filepath.Walk(bookPath, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return err
-		}
-		if info.IsDir() {
-			return nil
-		}
-		if filepath.Ext(info.Name()) != ".html" {
-			return nil
-		}
-
-		files = append(files, filepath.Base(info.Name()))
-
-		return nil
-	})
-	if err != nil {
-		return err
-	}
-
 	x := sitemap{
 		Xmlns:  "http://www.sitemaps.org/schemas/sitemap/0.9",
 		News:   "http://www.google.com/schemas/sitemap-news/0.9",
