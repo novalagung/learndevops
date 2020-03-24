@@ -67,10 +67,9 @@ func doAdjustment(lang, metaLang string) error {
 		oldTitle := regex.FindString(htmlString)
 		oldTitle = strings.Replace(oldTitle, "<title>", "", -1)
 		oldTitle = strings.Replace(oldTitle, "</title>", "", -1)
-		isLandingPage := false
+		isLandingPage := oldTitle == "Introduction · GitBook"
 		newTitle := oldTitle
-		if newTitle == "Introduction · GitBook" {
-			isLandingPage = true
+		if isLandingPage {
 			newTitle = bookName
 		} else {
 			newTitle = strings.Replace(newTitle, "· GitBook", fmt.Sprintf("- %s", bookName), -1)
@@ -141,7 +140,7 @@ func doAdjustment(lang, metaLang string) error {
 	}
 	for _, each := range files {
 		x.URL = append(x.URL, sitemapURL{
-			Loc:        fmt.Sprintf("https://devops.novalagung.com/en/%s", each),
+			Loc:        `https://devops.novalagung.com/` + lang + `/` + each,
 			Changefreq: "daily",
 			Priority:   "0.5",
 		})
