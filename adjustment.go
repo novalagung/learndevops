@@ -85,7 +85,7 @@ func doAdjustment(isoLang string) error {
 		metaToFind := `<meta content=""name="description">`
 		metaReplacement := ""
 		if isLandingPage {
-			metaReplacement = `<meta content="Devops Tutorial" name="description">`
+			metaReplacement = `<meta content="` + bookName + `" name="description">`
 		}
 		metaReplacement = metaReplacement + `<meta http-equiv="content-language" content="` + isoLang + `"/><script data-ad-client="` + adClient + `" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({ google_ad_client: "` + adClient + `", enable_page_level_ads: true }); </script>`
 		htmlString = strings.Replace(htmlString, metaToFind, metaReplacement, -1)
