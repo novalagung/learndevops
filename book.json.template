@@ -2,9 +2,7 @@
     "plugins": [
         "ga",
         "html-minifier",
-        "disqus",
-        "meta",
-        "scripts"
+        "disqus"
     ],
     "pluginsConfig": {
         "ga": {
@@ -12,21 +10,6 @@
         },
         "disqus": {
             "shortName": "devops-novalagung-com"
-        },
-        "meta": {
-            "data": [{
-                "name": "google-site-verification",
-                "content": "UZnxS2Dk3fm2_Elms3a__56Q_oQ3sQ1h0SVXXlHSmbE"
-            }, {
-                "name": "og:image",
-                "content": "https://devops.novalagung.com/images/cover_fb_share.jpg"
-            }, {
-                "name": "twitter:image",
-                "content": "https://devops.novalagung.com/images/cover_fb_share.jpg"
-            }]
-        },
-        "scripts": {
-            "files": []
         }
     },
     "styles": {
