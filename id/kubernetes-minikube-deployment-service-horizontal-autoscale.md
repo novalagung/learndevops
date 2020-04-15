@@ -247,7 +247,7 @@ Bisa dilihat, perubahan yang kita lakukan pada pod diaplikasikan secara alusss o
 
 #### 3.2. Objek Service
 
-Pada bagian ini, kita akan buat service baru. Service berikut akan menjembatani akses yang masuk dari luar kluster kubernetes, agar bisa sampai ke tujuan yaitu ke kontainer dalam pod.
+Pada bagian ini, kita akan buat service baru. Service berikut akan menjembatani akses antar pod, baik dalam cluster maupun dari luar cluster. Pada contoh berikut service akan kita gunakan agar akses dari luar kluster bisa masuk ke container dalam pod tujuan.
 
 Ok, sekarang tambahakn konfigurasi berikut ke file `k8s.yaml`.
 
@@ -307,6 +307,8 @@ spec:
 ```
 
 `LoadBalancer` dipilih sebagai tipe service ini. Load balancer nantinya akan menerima request dari luar kluster (pada `<publicIP>:<nodePort>`), untuk diarahkan ke port `80` milik service dalam kluster, lalu di-teruskan ke pod (ke `<pod>:<targetPort>`) menggunakan algoritma umum load balancer (round-robin).
+
+> Sebenarnya dalam contoh ini kita tidak harus menggunakan tipe `LoadBalancer`, tipe `NodePort` juga bisa dipergunakan.
 
 Satu point penting yang perlu dicatat disini, karena kluster kita adalah Minikube, maka public IP disini adalah public IP dari Minikube. Untuk menampilkan IP Minikube, bisa gunakan command berikut:
 
