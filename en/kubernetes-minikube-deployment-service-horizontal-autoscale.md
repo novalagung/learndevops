@@ -242,7 +242,9 @@ See, the changes that we made on the pod are applied in a controlled way. And th
 
 #### 3.2. Service Object
 
-In this section, we are going to create a new service. This service shall enable incoming access from outside of the cluster into the pod.
+In this section, we are going to create a new service. This service shall enable access between pod within the cluster, and also enable access for incoming request from external into the cluster pod.
+
+> The `NodePort` service type can be used in our situation as well, not just `LoadBalancer` type
 
 Let's append below config into the `k8s.yaml` file.
 
