@@ -247,7 +247,9 @@ Bisa dilihat, perubahan yang kita lakukan pada pod diaplikasikan secara alusss o
 
 #### 3.2. Objek Service
 
-Pada bagian ini, kita akan buat service baru. Service berikut akan menjembatani akses antar pod, baik dalam cluster maupun dari luar cluster. Pada contoh berikut service akan kita gunakan agar akses dari luar kluster bisa masuk ke container dalam pod tujuan.
+Service digunakan untuk menjembatani akses antar pod, baik dalam cluster maupun dari luar cluster.
+
+Pada bagian ini kita akan buat service baru, untuk meng-enable akses dari luar kluster ke dalam kluster, ke pod tujuan.
 
 Ok, sekarang tambahakn konfigurasi berikut ke file `k8s.yaml`.
 
