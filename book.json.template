@@ -1,7 +1,6 @@
 {
     "plugins": [
         "ga",
-        "html-minifier",
         "disqus"
     ],
     "pluginsConfig": {
@@ -11,9 +10,6 @@
         "disqus": {
             "shortName": "devops-novalagung-com"
         }
-    },
-    "styles": {
-        "website": "style.css"
     },
     "lunr": {
         "maxIndexSize": 1000000000
