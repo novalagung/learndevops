@@ -4,16 +4,16 @@ In this post, we are going to learn how to setup Oracle XE Database Server on Ce
 
 ---
 
-### A. Table of Contents
+### Table of Contents
 
  - [Setup Oracle XE Database Server on CentOS 6 (Oracle Linux)](#a-setup-oracle-xe-database-server-on-centos-6-oracle-linux)
  - [Setup Oracle XE Database Server using Docker](#b-setup-oracle-xe-database-server-using-docker)
 
 ---
 
-### B. Setup Oracle XE Database Server on CentOS 6 (Oracle Linux)
+### A. Setup Oracle XE Database Server on CentOS 6 (Oracle Linux)
 
-#### B.1. Convert CentOS 6 into Oracle Linux
+#### A.1. Convert CentOS 6 into Oracle Linux
 
 The easiest way to install Oracle Database Server is through **Oracle Linux** distribution.
 
@@ -88,7 +88,7 @@ sudo yum distro-sync
 
 Just that, your Oracle Linux is ready.
 
-#### B.2. Setup Oracle XE Database Server on Oracle Linux
+#### A.2. Setup Oracle XE Database Server on Oracle Linux
 
 You can get Oracle linux from [Oracle Linux download page](https://www.oracle.com/linux/), or by [converting CentOS into Oracle Linux](/convert-linux-centos-into-oracle-linux.md).
 
@@ -166,7 +166,7 @@ NLSRTL Version 11.2.0.2.0 - Production
 
 ---
 
-### C. Setup Oracle XE Database Server using Docker
+### B. Setup Oracle XE Database Server using Docker
 
 > This tutorial can be implemented in both Windows, Linux, or MacOS operating systems.
 

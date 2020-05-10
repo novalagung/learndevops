@@ -4,14 +4,14 @@ In this post, we are going to learn how to setup Oracle instant client on Linux,
 
 ---
 
-### A. Table of Contents
+###  Table of Contents
 
  - [Setup Oracle Instant Client on Linux (Ubuntu 16.04)](#a-setup-oracle-instant-client-on-linux-ubuntu-1604)
  - [Setup Oracle Instant Client on Windows 10](#b-setup-oracle-instant-client-on-windows-10)
 
 ---
 
-### B. Setup Oracle Instant Client on Linux (Ubuntu 16.04)
+### A. Setup Oracle Instant Client on Linux (Ubuntu 16.04)
 
 First of all, download these three files from https://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html.
 
@@ -101,7 +101,7 @@ NLSRTL Version 11.2.0.2.0 - Production
 
 ---
 
-### C. Setup Oracle Instant Client on Windows 10
+### B. Setup Oracle Instant Client on Windows 10
 
 First of all, download these three files from https://www.oracle.com/technetwork/topics/winx64soft-089540.html.
 
