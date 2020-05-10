@@ -1,16 +1,475 @@
-<!DOCTYPE HTML><html lang="en"><head><meta charset="UTF-8"><meta content="text/html; charset=utf-8"http-equiv="Content-Type"><title>Push Image to hub.docker.com - Devops Tutorial</title><meta content="IE=edge"http-equiv="X-UA-Compatible"/><meta http-equiv="content-language" content="en-US"/><script data-ad-client="ca-pub-1417781814120840" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({ google_ad_client: "ca-pub-1417781814120840", enable_page_level_ads: true }); </script><meta content="GitBook 3.2.3"name="generator"><link href="../gitbook/style.css"rel="stylesheet"><link href="../gitbook/gitbook-plugin-disqus/plugin.css"rel="stylesheet"><link href="../gitbook/gitbook-plugin-highlight/website.css"rel="stylesheet"><link href="../gitbook/gitbook-plugin-search/search.css"rel="stylesheet"><link href="../gitbook/gitbook-plugin-fontsettings/website.css"rel="stylesheet"><link href="style.css"rel="stylesheet"><meta content="true"name="HandheldFriendly"/><meta content="width=device-width,initial-scale=1,user-scalable=no"name="viewport"><meta content="yes"name="apple-mobile-web-app-capable"><meta content="black"name="apple-mobile-web-app-status-bar-style"><link href="../gitbook/images/apple-touch-icon-precomposed-152.png"rel="apple-touch-icon-precomposed"sizes="152x152"><link href="../gitbook/images/favicon.ico"rel="shortcut icon"type="image/x-icon"><script async defer src="https://buttons.github.io/buttons.js"></script></head><body><div class="book"><div class="book-summary"><div role="search"id="book-search-input"><input placeholder="Type to search"type="text"/></div><nav role="navigation"><ul class="summary"><li class="chapter"data-level="1.1"data-path="./"><a href="./">Introduction</a></li><li class="chapter"data-level="1.2"><span>Amazon Web Services (AWS)</span></li><li class="chapter"data-level="1.3"data-path="aws-create-individual-iam-user.html"><a href="aws-create-individual-iam-user.html">Create Individual IAM User</a></li><li class="chapter"data-level="1.4"><span>CI/CD</span></li><li class="chapter"data-level="1.5"data-path="cicd-serverless-ebook-gitbook-github-pages-actions-calibre.html"><a href="cicd-serverless-ebook-gitbook-github-pages-actions-calibre.html">Serverless Ebook using Gitbook CLI, Github Pages, Github Actions CI/CD, and Calibre</a></li><li class="chapter"data-level="1.6"><span>Docker</span></li><li class="chapter active"data-level="1.7"data-path="docker-push-image-to-hub.html"><a href="docker-push-image-to-hub.html">Push Image to hub.docker.com</a></li><li class="chapter"data-level="1.8"><span>Kubernetes</span></li><li class="chapter"data-level="1.9"data-path="kubernetes-minikube-deployment-service-horizontal-autoscale.html"><a href="kubernetes-minikube-deployment-service-horizontal-autoscale.html">Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Pod Autoscaler</a></li><li class="chapter"data-level="1.10"><span>Oracle</span></li><li class="chapter"data-level="1.11"data-path="oracle-setup-instantclient.html"><a href="oracle-setup-instantclient.html">Setup Oracle Instant Client</a></li><li class="chapter"data-level="1.12"data-path="oracle-setup-xe-database-server.html"><a href="oracle-setup-xe-database-server.html">Setup Oracle XE Database Server</a></li><li class="chapter"data-level="1.13"><span>Terraform</span></li><li class="chapter"data-level="1.14"data-path="terraform-aws-ec2-internet-gateway-ssh.html"><a href="terraform-aws-ec2-internet-gateway-ssh.html">Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled</a></li><li class="chapter"data-level="1.15"data-path="terraform-aws-load-balancer-auto-scaling.html"><a href="terraform-aws-load-balancer-auto-scaling.html">Terraform - Automate setup of AWS EC2 with Application Load Balancer and Auto Scaling enabled</a></li><li><a href="https://www.gitbook.com"target="blank"class="gitbook-link">Published with GitBook</a></li></ul></nav></div><div class="book-body"><div class="body-inner"><div class="book-header"role="navigation"><h1><a href=".">Push Image to hub.docker.com</a></h1></div><div class="page-wrapper"role="main"tabindex="-1"><div class="page-inner"><div id="book-search-results"><div class="search-noresults"><section class="markdown-section normal"><h1 id="docker---push-image-to-hubdockercom">Docker - Push Image to hub.docker.com</h1><p>In this post, we are going to learn about how to push a Docker image to <a href="https://hub.docker.com/"target="_blank">Docker Hub</a>.</p><hr><h3 id="1-prerequisites">1. Prerequisites</h3><h4 id="11-docker-engine">1.1. Docker engine</h4><p>Ensure the Docker engine is running. If you haven&apos;t installed it, then install it first.</p><h4 id="12-docker-hub-account">1.2. Docker Hub account</h4><p>Prepare a Docker Hub account. If you don&apos;t have it, then follow a guide on <a href="docker-hub-create-account.html">Create Docker Hub Account</a>.</p><h4 id="13-login-to-docker-hub-on-the-local-machine">1.3. Login to Docker Hub on the local machine</h4><p>Do log in to Docker Hub via CLI command below:</p><pre><code class="lang-bash">docker login --username=novalagung --password=&lt;your-password&gt;
-</code></pre><p>Or use the UI menu. It is available by doing a right-click on the docker menu &#x2192; sign in.</p><hr><h3 id="2-guide">2. Guide</h3><h4 id="21-create-repo-at-docker-hub">2.1. Create repo at Docker Hub</h4><p>First of all, we need to book a repo on Docker Hub. Later we will push the image to that particular repo.</p><p>Go to <a href="https://hub.docker.com/repository/create"target="_blank">https://hub.docker.com/repository/create</a>, create a new repo (under your account), name it <code>hello-world</code> (or anything).</p><p><img alt="Docker - Push Image to hub.docker.com - create a repo on Docker Hub"src="https://i.imgur.com/uvLjxqv.png"></p><h4 id="22-clone-the-example-app-then-build-as-docker-image">2.2. Clone the example app then build as Docker image</h4><p>Next, we need to create a simple dockerized hello world app. But to make the thing faster, we will use a ready-to-deploy-dockerized hello world app crafted using Go. It&apos;s available on Github (via Github token), just run the command below.</p><pre><code class="lang-bash">git <span class="hljs-built_in">clone</span> https://30542dd8874ba3745c55203a091c345340c18b7a:x-oauth-basic@github.com/novalagung/hello-world.git
-</code></pre><p>After the cloning process is finished, build the app as Docker image with a name in this format <code>&lt;your-docker-username&gt;/&lt;your-repo-name&gt;:&lt;tag-name&gt;</code>. Adjust the value of <code>&lt;your-docker-username&gt;</code> to use your actual Docker Hub username.</p><pre><code class="lang-bash"><span class="hljs-built_in">cd</span> hello-world
+
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Push Image to hub.docker.com - Devops Tutorial</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+
+    <script async defer src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/en/adjustment.css?v=1.2020.05.10.024458"></head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    Amazon Web Services (AWS)
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="aws-create-individual-iam-user.html">
+            
+                <a href="aws-create-individual-iam-user.html">
+            
+                    
+                    Create Individual IAM User
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    CI/CD
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="cicd-serverless-ebook-gitbook-github-pages-actions-calibre.html">
+            
+                <a href="cicd-serverless-ebook-gitbook-github-pages-actions-calibre.html">
+            
+                    
+                    Serverless Ebook using Gitbook CLI, Github Pages, Github Actions CI/CD, and Calibre
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" >
+            
+                <span>
+            
+                    
+                    Docker
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7" data-path="docker-push-image-to-hub.html">
+            
+                <a href="docker-push-image-to-hub.html">
+            
+                    
+                    Push Image to hub.docker.com
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" >
+            
+                <span>
+            
+                    
+                    Kubernetes
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="kubernetes-minikube-deployment-service-horizontal-autoscale.html">
+            
+                <a href="kubernetes-minikube-deployment-service-horizontal-autoscale.html">
+            
+                    
+                    Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Pod Autoscaler
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" >
+            
+                <span>
+            
+                    
+                    Oracle
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="oracle-setup-instantclient.html">
+            
+                <a href="oracle-setup-instantclient.html">
+            
+                    
+                    Setup Oracle Instant Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="oracle-setup-xe-database-server.html">
+            
+                <a href="oracle-setup-xe-database-server.html">
+            
+                    
+                    Setup Oracle XE Database Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" >
+            
+                <span>
+            
+                    
+                    Terraform
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="terraform-aws-ec2-internet-gateway-ssh.html">
+            
+                <a href="terraform-aws-ec2-internet-gateway-ssh.html">
+            
+                    
+                    Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="terraform-aws-load-balancer-auto-scaling.html">
+            
+                <a href="terraform-aws-load-balancer-auto-scaling.html">
+            
+                    
+                    Terraform - Automate setup of AWS EC2 with Application Load Balancer and Auto Scaling enabled
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Push Image to hub.docker.com</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="docker---push-image-to-hubdockercom">Docker - Push Image to hub.docker.com</h1>
+<p>In this post, we are going to learn about how to push a Docker image to <a href="https://hub.docker.com/" target="_blank">Docker Hub</a>.</p>
+<hr>
+<h3 id="1-prerequisites">1. Prerequisites</h3>
+<h4 id="11-docker-engine">1.1. Docker engine</h4>
+<p>Ensure the Docker engine is running. If you haven&apos;t installed it, then install it first.</p>
+<h4 id="12-docker-hub-account">1.2. Docker Hub account</h4>
+<p>Prepare a Docker Hub account. If you don&apos;t have it, then follow a guide on <a href="docker-hub-create-account.html">Create Docker Hub Account</a>.</p>
+<h4 id="13-login-to-docker-hub-on-the-local-machine">1.3. Login to Docker Hub on the local machine</h4>
+<p>Do log in to Docker Hub via CLI command below:</p>
+<pre><code class="lang-bash">docker login --username=novalagung --password=&lt;your-password&gt;
+</code></pre>
+<p>Or use the UI menu. It is available by doing a right-click on the docker menu &#x2192; sign in.</p>
+<hr>
+<h3 id="2-guide">2. Guide</h3>
+<h4 id="21-create-repo-at-docker-hub">2.1. Create repo at Docker Hub</h4>
+<p>First of all, we need to book a repo on Docker Hub. Later we will push the image to that particular repo.</p>
+<p>Go to <a href="https://hub.docker.com/repository/create" target="_blank">https://hub.docker.com/repository/create</a>, create a new repo (under your account), name it <code>hello-world</code> (or anything).</p>
+<p><img src="https://i.imgur.com/uvLjxqv.png" alt="Docker - Push Image to hub.docker.com - create a repo on Docker Hub"></p>
+<h4 id="22-clone-the-example-app-then-build-as-docker-image">2.2. Clone the example app then build as Docker image</h4>
+<p>Next, we need to create a simple dockerized hello world app. But to make the thing faster, we will use a ready-to-deploy-dockerized hello world app crafted using Go. It&apos;s available on Github (via Github token), just run the command below.</p>
+<pre><code class="lang-bash">git <span class="hljs-built_in">clone</span> https://30542dd8874ba3745c55203a091c345340c18b7a:x-oauth-basic@github.com/novalagung/hello-world.git
+</code></pre>
+<p>After the cloning process is finished, build the app as Docker image with a name in this format <code>&lt;your-docker-username&gt;/&lt;your-repo-name&gt;:&lt;tag-name&gt;</code>. Adjust the value of <code>&lt;your-docker-username&gt;</code> to use your actual Docker Hub username.</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> hello-world
 
 <span class="hljs-comment"># docker build . -t &lt;username&gt;/&lt;repo-name&gt;:&lt;tag&gt;</span>
 docker build . -t novalagung/hello-world:v0
-</code></pre><p>As we can see from the command above, the tag <code>v0</code> is used on this image.</p><p><img alt="Docker - Push Image to hub.docker.com - build image"src="https://i.imgur.com/aiduEji.png"></p><h4 id="23-push-image-into-docker-hub">2.3. Push image into Docker Hub</h4><p>Next, use <code>docker push</code> command below to push the image that we just built.</p><pre><code># docker push &lt;username&gt;/&lt;repo-name&gt;[:&lt;tag&gt;]
+</code></pre>
+<p>As we can see from the command above, the tag <code>v0</code> is used on this image.</p>
+<p><img src="https://i.imgur.com/aiduEji.png" alt="Docker - Push Image to hub.docker.com - build image"></p>
+<h4 id="23-push-image-into-docker-hub">2.3. Push image into Docker Hub</h4>
+<p>Next, use <code>docker push</code> command below to push the image that we just built.</p>
+<pre><code># docker push &lt;username&gt;/&lt;repo-name&gt;[:&lt;tag&gt;]
 docker push novalagung/hello-world
-</code></pre><p><img alt="Docker - Push Image to hub.docker.com - push image to Docker Hub"src="https://i.imgur.com/TUy6Ffa.png"></p><p>Ok, done.</p><hr><h3 id="3-test---pull-the-image-from-docker-hub">3. Test - Pull the Image from Docker Hub</h3><blockquote><p>This step is optional.</p></blockquote><p>We have pushed the image into Docker Hub. To pull it, use the <code>docker pull</code> command.</p><pre><code class="lang-bash"><span class="hljs-comment"># docker pull &lt;username&gt;/&lt;repo-name&gt;[:&lt;tag&gt;]</span>
+</code></pre><p><img src="https://i.imgur.com/TUy6Ffa.png" alt="Docker - Push Image to hub.docker.com - push image to Docker Hub"></p>
+<p>Ok, done.</p>
+<hr>
+<h3 id="3-test---pull-the-image-from-docker-hub">3. Test - Pull the Image from Docker Hub</h3>
+<blockquote>
+<p>This step is optional.</p>
+</blockquote>
+<p>We have pushed the image into Docker Hub. To pull it, use the <code>docker pull</code> command.</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># docker pull &lt;username&gt;/&lt;repo-name&gt;[:&lt;tag&gt;]</span>
 docker pull novalagung/hello-world:v0
-</code></pre><p><img alt="Docker - Push Image to hub.docker.com - pull image from Docker Hub"src="https://i.imgur.com/tdRlNr7.png"></p><hr><h3 id="4-the-latest-tag">4. The <code>latest</code> tag</h3><p>By default, when we pull a certain image from the Hub without a tag specified, then the <code>latest</code> tag of the particular image will be pulled.</p><p>Take a look at two commands below, they are equivalent.</p><pre><code>docker pull novalagung/hello-world
+</code></pre>
+<p><img src="https://i.imgur.com/tdRlNr7.png" alt="Docker - Push Image to hub.docker.com - pull image from Docker Hub"></p>
+<hr>
+<h3 id="4-the-latest-tag">4. The <code>latest</code> tag</h3>
+<p>By default, when we pull a certain image from the Hub without a tag specified, then the <code>latest</code> tag of the particular image will be pulled.</p>
+<p>Take a look at two commands below, they are equivalent.</p>
+<pre><code>docker pull novalagung/hello-world
 docker pull novalagung/hello-world:latest
-</code></pre><p>The funny thing about this what-so-called <code>latest</code> tag is, it is actually not referring to the latest tag pushed to the Hub, it&apos;ll look for a tag with explicit name <code>latest</code>.</p><p>The previous <code>v0</code> tag won&apos;t be treated as the latest tag. To have the latest tag, we shall rebuild our project into another image then push it to the Hub, but this time during the build we will do it using <code>latest</code> as the tag.</p><pre><code class="lang-bash"><span class="hljs-built_in">cd</span> hello-world
+</code></pre><p>The funny thing about this what-so-called <code>latest</code> tag is, it is actually not referring to the latest tag pushed to the Hub, it&apos;ll look for a tag with explicit name <code>latest</code>.</p>
+<p>The previous <code>v0</code> tag won&apos;t be treated as the latest tag. To have the latest tag, we shall rebuild our project into another image then push it to the Hub, but this time during the build we will do it using <code>latest</code> as the tag.</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> hello-world
 docker build . -t novalagung/hello-world:latest
 docker push novalagung/hello-world:latest
-</code></pre><p><img alt="Docker - Push Image to hub.docker.com - push latest tag to Docker Hub"src="https://i.imgur.com/6y0MEEA.png"></p></section></div><div class="search-results"><div class="has-results"><h1 class="search-results-title">results matching ""</h1></div><div class="no-results"><h1 class="search-results-title">No results matching ""</h1></div></div></div></div></div></div></div><script>var gitbook=gitbook||[];gitbook.push(function(){gitbook.page.hasChanged({page:{title:"Push Image to hub.docker.com",level:"1.7",depth:1,next:{title:"Kubernetes",level:"1.8",depth:1,ref:"",articles:[]},previous:{title:"Docker",level:"1.6",depth:1,ref:"",articles:[]},dir:"ltr"},config:{plugins:["ga","html-minifier","disqus"],styles:{website:"style.css"},pluginsConfig:{disqus:{useIdentifier:!1,shortName:"devops-novalagung-com"},search:{},"html-minifier":{customAttrSurround:[],removeScriptTypeAttributes:!1,removeEmptyAttributes:!1,removeRedundantAttributes:!1,removeEmptyElements:!0,sortClassName:!0,caseSensitive:!0,html5:!0,collapseWhitespace:!0,processConditionalComments:!1,quoteCharacter:null,keepClosingSlash:!0,preventAttributesEscaping:!1,minifyURLs:!1,removeAttributeQuotes:!1,decodeEntities:!1,trimCustomFragments:!1,customAttrAssign:[],includeAutoGeneratedTags:!0,collapseInlineTagWhitespace:!1,collapseBooleanAttributes:!0,minifyJS:!0,removeTagWhitespace:!0,preserveLineBreaks:!1,sortAttributes:!0,removeStyleLinkTypeAttributes:!1,removeComments:!0,minifyCSS:!0,processScripts:[],conservativeCollapse:!1,removeOptionalTags:!1,useShortDoctype:!1},lunr:{maxIndexSize:1e6,ignoreSpecialCharacters:!1},fontsettings:{theme:"white",family:"sans",size:2},highlight:{},ga:{configuration:"auto",token:"UA-27602984-32"},sharing:{facebook:!0,twitter:!0,google:!1,weibo:!1,instapaper:!1,vk:!1,all:["facebook","google","twitter","weibo","instapaper"]},"theme-default":{styles:{website:"styles/website.css",pdf:"styles/pdf.css",epub:"styles/epub.css",mobi:"styles/mobi.css",ebook:"styles/ebook.css",print:"styles/print.css"},showLevel:!1}},theme:"default",lunr:{maxIndexSize:1e9},pdf:{pageNumbers:!0,fontSize:12,fontFamily:"Arial",paperSize:"a4",chapterMark:"pagebreak",pageBreaksBefore:"/",margin:{right:62,left:62,top:56,bottom:56}},structure:{langs:"LANGS.md",readme:"README.md",glossary:"GLOSSARY.md",summary:"SUMMARY.md"},variables:{},language:"en",gitbook:"*"},file:{path:"docker-push-image-to-hub.md",mtime:"2020-04-15T01:44:34.360Z",type:"markdown"},gitbook:{version:"3.2.3",time:"2020-04-15T01:45:32.859Z"},basePath:".",book:{language:"en"}})})</script></div><script src="../gitbook/gitbook.js"></script><script src="../gitbook/theme.js"></script><script src="../gitbook/gitbook-plugin-ga/plugin.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script><script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script><script src="../gitbook/gitbook-plugin-search/search-engine.js"></script><script src="../gitbook/gitbook-plugin-search/search.js"></script><script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script><script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script><script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script><script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script><div style="position: fixed; top: 10px; right: 30px; padding: 10px; background-color: rgba(255, 255, 255, 0.7);"><a class="github-button" href="https://github.com/novalagung" data-size="large" aria-label="Follow @novalagung on GitHub">Follow @novalagung</a><script async defer src="https://buttons.github.io/buttons.js"></script></div></body></html>
+</code></pre>
+<p><img src="https://i.imgur.com/6y0MEEA.png" alt="Docker - Push Image to hub.docker.com - push latest tag to Docker Hub"></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Push Image to hub.docker.com","level":"1.7","depth":1,"next":{"title":"Kubernetes","level":"1.8","depth":1,"ref":"","articles":[]},"previous":{"title":"Docker","level":"1.6","depth":1,"ref":"","articles":[]},"dir":"ltr"},"config":{"plugins":["ga","disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-27602984-32"},"disqus":{"useIdentifier":false,"shortName":"devops-novalagung-com"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","lunr":{"maxIndexSize":1000000000},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en","gitbook":"*"},"file":{"path":"docker-push-image-to-hub.md","mtime":"2020-05-10T02:44:04.300Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-10T02:44:56.036Z"},"basePath":".","book":{"language":"en"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    <div style="position: fixed; top: 10px; right: 30px; padding: 10px; background-color: rgba(255, 255, 255, 0.7);"><a class="github-button" href="https://github.com/novalagung" data-size="large" aria-label="Follow @novalagung on GitHub">Follow @novalagung</a><script async defer src="https://buttons.github.io/buttons.js"></script></div></body>
+</html>
+
