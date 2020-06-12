@@ -44,6 +44,7 @@ func doAdjustment(isoLang string) error {
 
 	bookName := "Devops Tutorial"
 	adClient := "ca-pub-1417781814120840"
+	googleSiteVerification := "UZnxS2Dk3fm2_Elms3a__56Q_oQ3sQ1h0SVXXlHSmbE"
 
 	regex := regexp.MustCompile(`<title>(.*?)<\/title>`)
 
@@ -92,8 +93,15 @@ func doAdjustment(isoLang string) error {
 		if isLandingPage {
 			metaReplacement = `<meta content="` + bookName + `" name="description">`
 		}
-		metaReplacement = metaReplacement + `<meta http-equiv="content-language" content="` + isoLang + `"/><script data-ad-client="` + adClient + `" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({ google_ad_client: "` + adClient + `", enable_page_level_ads: true }); </script>`
+		metaReplacement = metaReplacement + `
+			<meta http-equiv="content-language" content="` + isoLang + `"/>
+			<meta name="google-site-verification" content="` + googleSiteVerification + `" />`
 		htmlString = strings.Replace(htmlString, metaToFind, metaReplacement, -1)
+
+		// ==== google ads
+		googleAdsToFind := `</head>`
+		googleAdsReplacement := `<script data-ad-client="` + adClient + `" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>` + googleAdsToFind
+		htmlString = strings.Replace(htmlString, googleAdsToFind, googleAdsReplacement, -1)
 
 		// ==== inject github stars button
 		buttonToFind := `</body>`
@@ -160,6 +168,23 @@ func doAdjustment(isoLang string) error {
 
 	siteMapPath := fmt.Sprintf("%s/sitemap.xml", bookPath)
 	err = ioutil.WriteFile(siteMapPath, buf, 0644)
+	if err != nil {
+		return err
+	}
+
+	// ==== root index file adjustment (for google search verification)
+	indexHTMLPath := filepath.Join(basePath, "_book", "index.html")
+	indexHTMLBuf, err := ioutil.ReadFile(indexHTMLPath)
+	if err != nil {
+		return err
+	}
+	indexHTMLString := string(indexHTMLBuf)
+
+	metaToFind := `</head>`
+	metaReplacement := `<meta name="google-site-verification" content="` + googleSiteVerification + `" />` + metaToFind
+	indexHTMLString = strings.Replace(indexHTMLString, metaToFind, metaReplacement, -1)
+
+	err = ioutil.WriteFile(indexHTMLPath, []byte(indexHTMLString), os.ModePerm)
 	if err != nil {
 		return err
 	}
