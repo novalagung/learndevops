@@ -145,7 +145,7 @@ func doAdjustment() error {
 	}
 	for _, each := range files {
 		x.URL = append(x.URL, sitemapURL{
-			Loc:        `https://devops.novalagung.com/` + `/` + each,
+			Loc:        `https://devops.novalagung.com/` + each,
 			Changefreq: "daily",
 			Priority:   "0.5",
 		})

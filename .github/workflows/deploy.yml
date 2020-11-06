@@ -21,8 +21,7 @@ jobs:
       run: npm install -g gitbook-cli
     - name: 'Generating distributable files'
       run: |
-        cp adjustment.css en/adjustment.css
-        mv adjustment.css id/adjustment.css
+        cp adjustment.css adjustment.css
         mv book.json.template book.json
         gitbook install
         gitbook build
