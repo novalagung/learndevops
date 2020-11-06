@@ -117,7 +117,7 @@ func doAdjustment() error {
 
 		// ==== inject adjustment css
 		adjustmentCSSToFind := `</head>`
-		adjustmentCSSReplacement := `<link rel="stylesheet" href="/` + `/adjustment.css?v=` + getVersion() + `">` + adjustmentCSSToFind
+		adjustmentCSSReplacement := `<link rel="stylesheet" href="/adjustment.css?v=` + getVersion() + `">` + adjustmentCSSToFind
 		htmlString = strings.Replace(htmlString, adjustmentCSSToFind, adjustmentCSSReplacement, -1)
 
 		// ==== update file
