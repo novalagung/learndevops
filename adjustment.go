@@ -17,8 +17,7 @@ const (
 )
 
 func main() {
-	doAdjustment("en-US")
-	doAdjustment("id")
+	doAdjustment()
 }
 
 type sitemapURL struct {
@@ -39,9 +38,7 @@ type sitemap struct {
 	URL     []sitemapURL `xml:"url"`
 }
 
-func doAdjustment(isoLang string) error {
-	lang := strings.Split(isoLang, "-")[0]
-
+func doAdjustment() error {
 	bookName := "Devops Tutorial"
 	adClient := "ca-pub-1417781814120840"
 	googleSiteVerification := "UZnxS2Dk3fm2_Elms3a__56Q_oQ3sQ1h0SVXXlHSmbE"
@@ -49,7 +46,7 @@ func doAdjustment(isoLang string) error {
 	regex := regexp.MustCompile(`<title>(.*?)<\/title>`)
 
 	basePath, _ := os.Getwd()
-	bookPath := filepath.Join(basePath, "_book", lang)
+	bookPath := filepath.Join(basePath, "_book")
 
 	files := make([]string, 0)
 	err := filepath.Walk(bookPath, func(path string, info os.FileInfo, err error) error {
@@ -94,7 +91,7 @@ func doAdjustment(isoLang string) error {
 			metaReplacement = `<meta content="` + bookName + `" name="description">`
 		}
 		metaReplacement = metaReplacement + `
-			<meta http-equiv="content-language" content="` + isoLang + `"/>
+			<meta http-equiv="content-language" content="en-US"/>
 			<meta name="google-site-verification" content="` + googleSiteVerification + `" />`
 		htmlString = strings.Replace(htmlString, metaToFind, metaReplacement, -1)
 
@@ -120,15 +117,8 @@ func doAdjustment(isoLang string) error {
 
 		// ==== inject adjustment css
 		adjustmentCSSToFind := `</head>`
-		adjustmentCSSReplacement := `<link rel="stylesheet" href="/` + lang + `/adjustment.css?v=` + getVersion() + `">` + adjustmentCSSToFind
+		adjustmentCSSReplacement := `<link rel="stylesheet" href="/` + `/adjustment.css?v=` + getVersion() + `">` + adjustmentCSSToFind
 		htmlString = strings.Replace(htmlString, adjustmentCSSToFind, adjustmentCSSReplacement, -1)
-
-		if isoLang == "id" {
-			// ===== inject info banner if exists
-			infoBannerToFind := `</body>`
-			infoBannerReplacement := `<div class="banner-container" onclick="this.style.display = 'none';"><div><a target="_blank" href="https://www.udemy.com/course/praktis-belajar-docker-dan-kubernetes-untuk-pemula/"><img src="https://dasarpemrogramangolang.novalagung.com/images/banner.png?v=` + getVersion() + `"></a></div></div><script>var bannerCounter = parseInt(localStorage.getItem("banner-counter")); if (isNaN(bannerCounter)) { bannerCounter = 0; } var bannerEl = document.querySelector('.banner-container'); if (bannerCounter % 5 === 0 && bannerEl) { bannerEl.style.display = 'block'; } localStorage.setItem("banner-counter", String(bannerCounter + 1));</script>` + infoBannerToFind
-			htmlString = strings.Replace(htmlString, infoBannerToFind, infoBannerReplacement, -1)
-		}
 
 		// ==== update file
 		err = ioutil.WriteFile(path, []byte(htmlString), info.Mode())
@@ -155,7 +145,7 @@ func doAdjustment(isoLang string) error {
 	}
 	for _, each := range files {
 		x.URL = append(x.URL, sitemapURL{
-			Loc:        `https://devops.novalagung.com/` + lang + `/` + each,
+			Loc:        `https://devops.novalagung.com/` + `/` + each,
 			Changefreq: "daily",
 			Priority:   "0.5",
 		})
