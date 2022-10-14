@@ -1,8 +1,11 @@
 # Summary
 
-
 * [Introduction](README.md)
 * [Read PDF version](https://github.com/novalagung/learndevops/blob/ebooks/learndevops.pdf)
+
+* Other Links
+* [E-book: Dasar Pemrograman Rust (december release)]()
+* [E-book: Learn DevOps](https://learndevops.novalagung.com/)
 
 * Amazon Web Services (AWS)
 * [Create Individual IAM User](aws-create-individual-iam-user.md)
