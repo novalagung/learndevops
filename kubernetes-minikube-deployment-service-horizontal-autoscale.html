@@ -1,0 +1,788 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Pod Autoscaler - Learn DevOps</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+
+    <script async defer src="https://buttons.github.io/buttons.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJMMV9WFV8"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-ZJMMV9WFV8');
+		</script><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1247398778924723');fbq('track','PageView');</script><noscript><imgheight="1"width="1"style="display:none"src="https://www.facebook.com/tr?id=1247398778924723&ev=PageView&noscript=1"/></noscript><link rel="stylesheet" href="/adjustment.css?v=1.2022.10.14.074819"></head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    Amazon Web Services (AWS)
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="aws-create-individual-iam-user.html">
+            
+                <a href="aws-create-individual-iam-user.html">
+            
+                    
+                    Create Individual IAM User
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    CI/CD
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="cicd-serverless-ebook-gitbook-github-pages-actions-calibre.html">
+            
+                <a href="cicd-serverless-ebook-gitbook-github-pages-actions-calibre.html">
+            
+                    
+                    Serverless Ebook using Gitbook CLI, Github Pages, Github Actions CI/CD, and Calibre
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" >
+            
+                <span>
+            
+                    
+                    Docker
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="docker-push-image-to-hub.html">
+            
+                <a href="docker-push-image-to-hub.html">
+            
+                    
+                    Push Image to hub.docker.com
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" >
+            
+                <span>
+            
+                    
+                    Kubernetes
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.9" data-path="kubernetes-minikube-deployment-service-horizontal-autoscale.html">
+            
+                <a href="kubernetes-minikube-deployment-service-horizontal-autoscale.html">
+            
+                    
+                    Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Pod Autoscaler
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" >
+            
+                <span>
+            
+                    
+                    Oracle
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="oracle-setup-instantclient.html">
+            
+                <a href="oracle-setup-instantclient.html">
+            
+                    
+                    Setup Oracle Instant Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="oracle-setup-xe-database-server.html">
+            
+                <a href="oracle-setup-xe-database-server.html">
+            
+                    
+                    Setup Oracle XE Database Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" >
+            
+                <span>
+            
+                    
+                    Terraform
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="terraform-aws-ec2-internet-gateway-ssh.html">
+            
+                <a href="terraform-aws-ec2-internet-gateway-ssh.html">
+            
+                    
+                    Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="terraform-aws-load-balancer-auto-scaling.html">
+            
+                <a href="terraform-aws-load-balancer-auto-scaling.html">
+            
+                    
+                    Terraform - Automate setup of AWS EC2 with Application Load Balancer and Auto Scaling enabled
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Pod Autoscaler</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="kubernetes---deploy-app-into-minikube-cluster-using-deployment-controller-service-and-horizontal-pod-autoscaler">Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Pod Autoscaler</h1>
+<p>In this post, we are going to learn about how to deploy a containerized app into the Kubernetes (minikube) cluster, enable the horizontal autoscaling on it, and create a service that makes the application accessible from outside the cluster.</p>
+<p>The application that we are going to use on the tutorial is a simple hello world app written in Go. The app is dockerized and the image is available on <a href="https://hub.docker.com/repository/docker/novalagung/hello-world" target="_blank">Docker Hub</a>.</p>
+<p>You can also deploy your app, just do push it into Docker Hub. This guide might help you <a href="docker-push-image-to-hub.html">Push Image to hub.docker.com</a>.</p>
+<hr>
+<h3 id="1-prerequisites">1. Prerequisites</h3>
+<h4 id="11-docker-engine">1.1. Docker engine</h4>
+<p>Ensure the Docker engine is running. If you haven&apos;t installed it, then do install it first.</p>
+<h4 id="12-minikube">1.2. Minikube</h4>
+<p>Ensure the Minikube is running. Run <code>minikube start</code> command on PowerShell (opened with an administrator privilege). If you haven&apos;t installed it, then do install it first.</p>
+<h4 id="13-kubernetes-cli-tool">1.3. Kubernetes CLI tool</h4>
+<p>Ensure the <code>kubectl</code> command is available. If you haven&apos;t installed it, then do install it first.</p>
+<h4 id="14-the-hey-tool-an-http-load-generator">1.4. The <code>hey</code> tool (an HTTP load generator)</h4>
+<p>Install this tool in your local machine <a href="https://github.com/rakyll/hey" target="_blank">https://github.com/rakyll/hey</a>. It&apos;s similar to the Apache Benchmark tool. We are going to use this to perform the stress test to our app to check whether the auto-scaling capability is working or not.</p>
+<hr>
+<h3 id="2-preparation">2. Preparation</h3>
+<h4 id="21-for-windows-user-only-run-powershell-with-admin-privilege">2.1. For Windows user only, run PowerShell with admin privilege</h4>
+<p>CMD won&apos;t be helpful here. Run the PowerShell as an administrator.</p>
+<h4 id="22-create-the-kubernetes-objects-configuration-file-in-yaml-format">2.2. Create the Kubernetes objects configuration file (in <code>.yaml</code> format)</h4>
+<p>We are going to create three Kubernetes objects: the deployment, horizontal pod auto scaler, and service. But to make things easier, we will do the creation by using the config file.</p>
+<p>So the three objects mentioned above will be defined in a <code>.yaml</code> file. One object usually represented by one config file, however, in this tutorial, we will write all configs in a single file.</p>
+<p>Now create a file called <code>k8s.yaml</code> (or use another name, it is fine). Open the file using your favorite editor. Next, we shall begin the config definition.</p>
+<hr>
+<h3 id="3-object-definitions">3. Object Definitions</h3>
+<h4 id="31-deployment-object">3.1. Deployment Object</h4>
+<p>Deployment is a controller used to manage both pod and replica sets. In this section, we are going to create the object.</p>
+<p>On the <code>k8s.yaml</code>, write the following config below. Each part of the script has some remark that explains what it does.</p>
+<pre><code class="lang-yaml"><span class="hljs-meta">---</span>
+<span class="hljs-comment"># there is a lot of APIs available in Kubernetes (try `kubectl api-versions` to see all of it).</span>
+<span class="hljs-comment"># for this block of deployment code, we will use `apps/v1`.</span>
+<span class="hljs-attr">apiVersion:</span> apps/v1
+
+<span class="hljs-comment"># book this block of YAML for Deployment.</span>
+<span class="hljs-attr">kind:</span> Deployment
+
+<span class="hljs-comment"># name it `my-app-deployment`.</span>
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> my-app-deployment
+
+<span class="hljs-comment"># specification of the desired behavior of the Deployment.</span>
+<span class="hljs-attr">spec:</span>
+
+  <span class="hljs-comment"># selector.matchLabels basically used to determine which pods are managed by the deployment.</span>
+  <span class="hljs-comment"># this deployment will manage all pods that have labels matching the selector.</span>
+<span class="hljs-attr">  selector:</span>
+<span class="hljs-attr">    matchLabels:</span>
+<span class="hljs-attr">      app:</span> my-app
+
+  <span class="hljs-comment"># template describes the pods that will be created.</span>
+<span class="hljs-attr">  template:</span>
+
+    <span class="hljs-comment"># put a label on the pods as `my-app`.</span>
+<span class="hljs-attr">    metadata:</span>
+<span class="hljs-attr">      labels:</span>
+<span class="hljs-attr">        app:</span> my-app
+
+    <span class="hljs-comment"># specification of the desired behavior of the `my-app` pod.</span>
+<span class="hljs-attr">    spec:</span>
+
+      <span class="hljs-comment"># list of containers belonging to the `my-app` pod.</span>
+<span class="hljs-attr">      containers:</span>
+
+          <span class="hljs-comment"># allocate a container, name it as `hello-world`.</span>
+<span class="hljs-attr">        - name:</span> hello-world
+
+          <span class="hljs-comment"># the container image is on docker hub repo `novalagung/hello-world`.</span>
+          <span class="hljs-comment"># if the particular image is not available locally, then it&apos;ll be pulled first.</span>
+<span class="hljs-attr">          image:</span> novalagung/hello-world
+
+          <span class="hljs-comment"># set the env vars during container build process.</span>
+          <span class="hljs-comment"># for more details take a look at</span>
+          <span class="hljs-comment"># https://hub.docker.com/repository/docker/novalagung/hello-world.</span>
+<span class="hljs-attr">          env:</span>
+<span class="hljs-attr">            - name:</span> PORT
+<span class="hljs-attr">              value:</span> <span class="hljs-string">&quot;8081&quot;</span>
+<span class="hljs-attr">            - name:</span> INSTANCE_ID
+<span class="hljs-attr">              valueFrom:</span>
+<span class="hljs-attr">                fieldRef:</span>
+<span class="hljs-attr">                  fieldPath:</span> metadata.name
+
+          <span class="hljs-comment"># this pod only have one container (`hello-world`),</span>
+          <span class="hljs-comment"># and what this container does is start a webserver that listens to port `8081`.</span>
+          <span class="hljs-comment"># the port need to be exposed,</span>
+          <span class="hljs-comment"># to make it accessible between the pods within the cluster.</span>
+<span class="hljs-attr">          ports:</span>
+<span class="hljs-attr">            - containerPort:</span> <span class="hljs-number">8081</span>
+
+          <span class="hljs-comment"># compute resources required by this container `hello-world`.</span>
+<span class="hljs-attr">          resources:</span>
+<span class="hljs-attr">            limits:</span>
+<span class="hljs-attr">              cpu:</span> <span class="hljs-number">250</span>m
+<span class="hljs-attr">              memory:</span> <span class="hljs-number">32</span>Mi
+</code></pre>
+<p>In summary, the above deployment config will do these things:</p>
+<ul>
+<li>Create a deployment object called <code>my-app-deployment</code>.</li>
+<li>The pod spec (within deployment object) defined with only one container.</li>
+<li>The container is <code>hello-world</code> and the image will be pulled from Docker Hub.</li>
+<li>During the container build, port and instance ID specified. The port specifically used by the webserver within the container.</li>
+<li>The web server listens to the port <code>8081</code> and it is exposed. Meaning we will be able to access the web server from outside the particular port but within the cluster.</li>
+</ul>
+<p>Now, apply the config using the command below.</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># apply the config</span>
+kubectl apply <span class="hljs-_">-f</span> k8s.yaml
+
+<span class="hljs-comment"># show all deployments</span>
+kubectl get deployments
+
+<span class="hljs-comment"># show all pods</span>
+kubectl get pods
+</code></pre>
+<p style="text-align: center;">
+  <img src="https://i.imgur.com/VXlFDch.png" alt="Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler - apply deployment object">
+</p>
+
+<h4 id="31-testing-one-of-the-pod">3.1. Testing one of the pod</h4>
+<p>As we can see from the image above, the deployment is working and two pods are currently running.</p>
+<blockquote>
+<p>Two pods automatically created. This is because we don&apos;t specify the <code>spec.replicas</code> value. If we specify some value like <code>4</code>, then there will be 4 pods running. The default replicas value is <code>2</code>.</p>
+</blockquote>
+<p>Let&apos;s do some testing here. We will try to connect into one of the pods and then check whether the app is listening to port <code>8081</code> or not.</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># show all pods</span>
+kubectl get pods
+
+<span class="hljs-comment"># connect to specific pod</span>
+kubectl <span class="hljs-built_in">exec</span> -it &lt;pod-name&gt; -- /bin/sh
+
+<span class="hljs-comment"># check for app that listen to port 8081</span>
+netstat -tulpn | grep :8081
+</code></pre>
+<p style="text-align: center;">
+  <img src="https://i.imgur.com/vdZaLf2.png" alt="Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler - connect to pod">
+</p>
+
+<p>It&apos;s clear from the image above that the app is running on port <code>8081</code>.</p>
+<h4 id="32-apply-changes-on-the-deployment-object">3.2. Apply changes on the deployment object</h4>
+<p>Other than deployment, there are some other controllers available in k8s. What makes deployment controller special is whenever there is a change happen in the pod config within deployment resource, when we apply it then the pods will be updated by the controller seamlessly.</p>
+<p>Ok, now let&apos;s prove the above statement by doing some changes on the deployment config. Do the following changes:</p>
+<ul>
+<li>Change <code>containers.env.value</code> of <code>PORT</code> env to <code>8080</code>. Previously it is <code>8081</code>.</li>
+<li>Change <code>containers.ports.containerPort</code> to <code>8080</code>. Previously it is <code>8081</code>.</li>
+</ul>
+<p>Below is how the config will look like after the changes.</p>
+<pre><code class="lang-bash">---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+spec:
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: hello-world
+          image: novalagung/hello-world
+          env:
+            - name: PORT
+              value: <span class="hljs-string">&quot;8080&quot;</span> <span class="hljs-comment"># &lt;--- change from 8081 to 8080</span>
+            - name: INSTANCE_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          ports:
+            - containerPort: 8080 <span class="hljs-comment"># &lt;--- change from 8081 to 8080</span>
+          resources:
+            limits:
+              cpu: 250m
+              memory: 32Mi
+</code></pre>
+<p>Next, re-apply this config.</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># apply the config</span>
+kubectl apply <span class="hljs-_">-f</span> k8s.yaml
+
+<span class="hljs-comment"># show all pods</span>
+kubectl get pods
+
+<span class="hljs-comment"># connect to specific pod</span>
+kubectl <span class="hljs-built_in">exec</span> -it &lt;pod-name&gt; -- /bin/sh
+
+<span class="hljs-comment"># check for the app that listens to port 8080</span>
+netstat -tulpn | grep :8080
+</code></pre>
+<p style="text-align: center;">
+  <img src="https://i.imgur.com/DZWCTSk.png" alt="Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler - apply changes on deployment object">
+</p>
+
+<p>See, the changes that we made on the pod are applied in a controlled way. And the web server within the newly created pod is listening to port <code>8080</code>. This is nice!</p>
+<blockquote>
+<p>Tips! Use the command below to see the error log on certain pods. Probably useful is something wrong going on, like the webserver not starting, etc.</p>
+<p><code>kubectl get pods</code><br><code>kubectl describe pod &lt;pod-name&gt;</code><br><code>kubectl logs &lt;pod-name&gt;</code></p>
+</blockquote>
+<h4 id="32-service-object">3.2. Service Object</h4>
+<p>In this section, we are going to create a new service. This service shall enable access between pod within the cluster, and also enable access for incoming request from external into the cluster pod.</p>
+<blockquote>
+<p>The <code>NodePort</code> service type can be used in our situation as well, not just <code>LoadBalancer</code> type</p>
+</blockquote>
+<p>Let&apos;s append below config into the <code>k8s.yaml</code> file.</p>
+<pre><code class="lang-bash">---
+<span class="hljs-comment"># pick API version `v1` for service.</span>
+apiVersion: v1
+
+<span class="hljs-comment"># book this block of YAML for Service.</span>
+kind: Service
+
+<span class="hljs-comment"># name it `my-service`.</span>
+metadata:
+  name: my-service
+
+<span class="hljs-comment"># spec of the desired behavior of service.</span>
+spec:
+
+  <span class="hljs-comment"># pick LoadBalancer as the type of the service.</span>
+  <span class="hljs-comment"># a LoadBalancer service is the standard way to expose a service to the internet.</span>
+  <span class="hljs-comment"># this will spin up a Network Load Balancer that will give you a single IP address</span>
+  <span class="hljs-comment"># that will forward all traffic to your service.</span>
+  <span class="hljs-comment">#</span>
+  <span class="hljs-comment"># on cloud provider this will generate an external IP for public access.</span>
+  <span class="hljs-comment"># in local usage (e.g. minikube), the service will be accessible through minikube exposed IP.</span>
+  <span class="hljs-built_in">type</span>: LoadBalancer
+
+  <span class="hljs-comment"># route service traffic to pods with label keys and values matching this selector.</span>
+  selector:
+    app: my-app
+
+  <span class="hljs-comment"># the list of ports that are exposed by this service.</span>
+  ports:
+
+      <span class="hljs-comment"># expose the service to outside of cluster, make it publicily accessible</span>
+      <span class="hljs-comment"># via external IP or via cluster public IP (e.g minikube IP) using nodePort below.</span>
+      <span class="hljs-comment">#</span>
+      <span class="hljs-comment"># to get the exposed URL (with IP): `minikube service my-service --url`.</span>
+      <span class="hljs-comment">#   =&gt; http://&lt;cluster-public-ip&gt;:&lt;nodePort&gt;</span>
+    - nodePort: 32199
+
+      <span class="hljs-comment"># the incoming external request into nodePort will be directed towards port 80 of</span>
+      <span class="hljs-comment"># this particular service, within the cluster.</span>
+      <span class="hljs-comment">#</span>
+      <span class="hljs-comment"># to get the exposed URL (with IP): `kubectl describe service my-service | findstr &quot;IP&quot;`.</span>
+      <span class="hljs-comment">#   =&gt; http://&lt;service-ip&gt;:&lt;port&gt;</span>
+      port: 80
+
+      <span class="hljs-comment"># then from the service, it&apos;ll be directed to the available pods</span>
+      <span class="hljs-comment"># (in round-robin style), to pod IP with port 8080.</span>
+      <span class="hljs-comment">#   =&gt; http://&lt;pod-ip&gt;:&lt;targetPort&gt;</span>
+      targetPort: 8080
+</code></pre>
+<p>The <code>LoadBalancer</code> is chosen as the type of the service. Load balancer service will accept requests from <code>&lt;publicIP&gt;:&lt;nodePort&gt;</code> and direct it to port <code>80</code> in the service. And then the request on the port <code>80</code> will be directed to the <code>&lt;pod&gt;:&lt;targetPort&gt;</code> in round-robin style (since it&apos;s load balancer after all).</p>
+<p>One important note here, since our cluster is within the Minikube environment, so the public IP here refers to the public IP of Minikube. To get the Minikube IP, use command below:</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># show minikube public IP</span>
+minikube ip
+</code></pre>
+<p>Ok, let&apos;s apply our new <code>k8s.yaml</code> file and test the service.</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># apply the config</span>
+kubectl apply <span class="hljs-_">-f</span> k8s.yaml
+
+<span class="hljs-comment"># show all services</span>
+kubectl get services
+
+<span class="hljs-comment"># show all pods</span>
+kubectl get pods
+
+<span class="hljs-comment"># test app using curl</span>
+curl &lt;minikubeIP&gt;:&lt;nodePort&gt;
+curl &lt;minikubeIP&gt;:32199
+</code></pre>
+<p style="text-align: center;">
+  <img src="https://i.imgur.com/IoEpMFH.jpg" alt="Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler - create service object">
+</p>
+
+<p>As we can see from the image above, we did dispatch multiple HTTP requests to the service. The result from the <code>curl</code> is different from one another, this is because the service will direct incoming request into available pods in round-robin style (like what load balancer usually do).</p>
+<blockquote>
+<p>Tips! Rather than find the Service URL using <code>minikube ip</code> and then concat it with node port from config, use command below:</p>
+<p><code>minikube service &lt;service-name&gt; --url</code><br><code>minikube service my-service --url</code></p>
+</blockquote>
+<h4 id="33-horizontal-pod-auto-scaler-hpa-object">3.3. Horizontal Pod Auto Scaler (HPA) Object</h4>
+<p>In this section, we are going to make our pods (within deployment object) scalable in an automated manner. So in case, there is a spike in the total number of users that currently accessing the app, then we shall not be worried.</p>
+<p>One way to make the pod scaled automatically is by adding HPA or Horizontal Pod Auto Scaler. The Horizontal Pod Autoscaler automatically scales the number of pods in a replication controller, deployment, replica set or stateful set based on observed CPU utilization (or, with custom metrics support, on some other application-provided metrics). </p>
+<p>Do append below configuration into <code>k8s.yaml</code> file.</p>
+<pre><code class="lang-yaml"><span class="hljs-meta">---</span>
+<span class="hljs-comment"># pick API version `autoscaling/v2beta2` for auto scaler.</span>
+<span class="hljs-attr">apiVersion:</span> autoscaling/v2beta2
+
+<span class="hljs-comment"># book this block of yaml for HPA (HorizontalPodAutoscaler).</span>
+<span class="hljs-attr">kind:</span> HorizontalPodAutoscaler
+
+<span class="hljs-comment"># name it `my-auto-scaler`.</span>
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> my-auto-scaler
+
+<span class="hljs-comment"># spec of the desired behavior of the auto scaler.</span>
+<span class="hljs-attr">spec:</span>
+
+  <span class="hljs-comment"># min replica allowed.</span>
+<span class="hljs-attr">  minReplicas:</span> <span class="hljs-number">3</span>
+
+  <span class="hljs-comment"># max replica allowed.</span>
+<span class="hljs-attr">  maxReplicas:</span> <span class="hljs-number">10</span>
+
+  <span class="hljs-comment"># the deployment that will be scalled is `my-app-deployment`.</span>
+<span class="hljs-attr">  scaleTargetRef:</span>
+<span class="hljs-attr">    apiVersion:</span> apps/v1
+<span class="hljs-attr">    kind:</span> Deployment
+<span class="hljs-attr">    name:</span> my-app-deployment
+
+  <span class="hljs-comment"># metrics contains the specifications for which to use to calculate the desired</span>
+  <span class="hljs-comment"># replica count (the maximum replica count across all metrics).</span>
+  <span class="hljs-comment"># the desired replica count is calculated multiplying the ratio between the</span>
+  <span class="hljs-comment"># target value and the current value by the current number of pods.</span>
+<span class="hljs-attr">  metrics:</span>
+
+      <span class="hljs-comment"># resource refers to a resource metric known to Kubernetes describing each pod</span>
+      <span class="hljs-comment"># in the current scale target (e.g. CPU or memory).</span>
+      <span class="hljs-comment"># in below we define the scaling criteria as, if CPU utilization is changed between</span>
+      <span class="hljs-comment"># the amount of 50% utilization, then scalling process shall happen.</span>
+<span class="hljs-attr">    - type:</span> Resource
+<span class="hljs-attr">      resource:</span>
+<span class="hljs-attr">        name:</span> cpu
+<span class="hljs-attr">        target:</span>
+<span class="hljs-attr">          type:</span> Utilization
+<span class="hljs-attr">          averageUtilization:</span> <span class="hljs-number">50</span>
+</code></pre>
+<p>The remarks on each part of the config above are quite clear. In summary, an HPA will be created attached to <code>my-app-deployment</code>, numbers on the replication rules are defined, with scaling criteria is focusing on CPU utilization when average utilization is between 50%.</p>
+<p>Ok now let&apos;s re-apply our HPA.</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># apply the config</span>
+kubectl apply <span class="hljs-_">-f</span> k8s.yaml
+
+<span class="hljs-comment"># show all HPA</span>
+kubectl get hpa
+
+<span class="hljs-comment"># show describe HPA</span>
+kubectl describe hpa &lt;hpa-name&gt;
+</code></pre>
+<p style="text-align: center;">
+  <img src="https://i.imgur.com/R63y8dL.png" alt="Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler - horizontal pod auto scaler object">
+</p>
+
+<p>Previously we only have two pods running. After we apply the HPA, the new pod is created, so total there are three pods. This is because in our HPA the <code>spec.minReplicas</code> is set to <code>3</code>.</p>
+<h4 id="331-stress-test-on-horizontal-pod-auto-scaler">3.3.1. Stress test on Horizontal Pod Auto scaler</h4>
+<p>Ok, next let&apos;s do some stress test! Let&apos;s see how the HPA will handle very high traffic coming. The below command will trigger a concurrent 50 request to the service URL for 5 minutes. Run it on a new CMD/PowerShell window.</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># show service URL</span>
+minikube service my-service --url
+
+<span class="hljs-comment"># start the stress test</span>
+hey -c 50 -z 5m &lt;service-URL&gt;
+</code></pre>
+<p>And then back to our main PowerShell window, do regularly check the pods.</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># show all HPA and pods</span>
+kubectl get hpa
+kubectl get pods
+</code></pre>
+<p style="text-align: center;">
+  <img src="https://i.imgur.com/0lHYlxc.png" alt="Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler - horizontal pod auto scaler object">
+</p>
+
+<p>After a minute passed, suddenly a total of 6 pods created. This is happening because the CPU utilization is high enough, greater than the threshold that we defined in the config.</p>
+<p>HPA is not only able to magically scale the pod during high traffic but on low traffic, the scaling process will happen as well. Do stop the stress test and wait for a few minutes, and check the HPA and pods again, you will see the number of pods reduced to <code>spec.minReplicas</code> again.</p>
+<p>Ok, that&apos;s it.</p>
+<!-- ```bash
+kubectl delete clusterrolebinding kubernetes-dashboard
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml
+minikube dashboard
+``` -->
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Pod Autoscaler","level":"1.9","depth":1,"next":{"title":"Oracle","level":"1.10","depth":1,"ref":"","articles":[]},"previous":{"title":"Kubernetes","level":"1.8","depth":1,"ref":"","articles":[]},"dir":"ltr"},"config":{"plugins":["ga","disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-27602984-32"},"disqus":{"useIdentifier":false,"shortName":"devops-novalagung-com"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","lunr":{"maxIndexSize":1000000000},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"kubernetes-minikube-deployment-service-horizontal-autoscale.md","mtime":"2022-10-14T07:47:33.376Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-10-14T07:48:18.047Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    <div style="position: fixed; top: 10px; right: 30px; padding: 10px; background-color: rgba(255, 255, 255, 0.7);"><a class="github-button" href="https://github.com/novalagung" data-size="large" aria-label="Follow @novalagung on GitHub">Follow @novalagung</a><script async defer src="https://buttons.github.io/buttons.js"></script></div></body>
+</html>
+
