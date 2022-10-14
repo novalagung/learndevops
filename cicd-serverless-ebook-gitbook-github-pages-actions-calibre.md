@@ -8,31 +8,31 @@ For every incoming push to the upstream, Github Actions (CI/CD) will trigger cer
 
 ---
 
-### 1. Prerequisites
+## 1. Prerequisites
 
-#### 1.1. Gitbook CLI
+### 1.1. Gitbook CLI
 
 Install gitbook CLI (if you haven't). Do follow the guide on https://github.com/GitbookIO/gitbook-cli.
 
-#### 1.2. Github account
+### 1.2. Github account
 
 Ensure you have a Github account.
 
-#### 1.3. Git client
+### 1.3. Git client
 
 Ensure you have Git client installed in your local machine.
 
 ---
 
-### 2. Guide
+## 2. Guide
 
-#### 2.1. Create a Github repo
+### 2.1. Create a Github repo
 
 First, create a new repo in your Github account, it can be a private one or public, doesn't matter. Just for the sake of this tutorial, I am going to pick `softwareengineering` as the repo name.
 
 ![Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - create Github repo](https://i.imgur.com/diIHwxE.png)
 
-#### 2.2. Create a new Gitbook project
+### 2.2. Create a new Gitbook project
 
 Next, use `gitbook` command line to initialize a new project, name it anyhing. Here I'll use `softwareengineering`, the same one as the git repo name.
 
@@ -48,7 +48,7 @@ gitbook serve
 
 As we can see from image above, the web version of the book is running up.
 
-#### 2.3. Prepare ssh Github deploy key
+### 2.3. Prepare ssh Github deploy key
 
 Next, we are going to use Github Action plugin [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages) to automate pushing resources from git repo server to the `gh-pages`.
 
@@ -70,7 +70,7 @@ Upload these two files into repo's project keys and secret menu respectively. To
 
 ![Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - prepare Github deploy key](https://i.imgur.com/t8RVwN7.png)
 
-#### 2.4. Create Github workflow CI/CD file for generating the web version of the ebook
+### 2.4. Create Github workflow CI/CD file for generating the web version of the ebook
 
 Now we are going to make Github able to automatically deploy the web version of the ebook on every push. And we want that to be applied into the first push as well.
 
@@ -116,7 +116,7 @@ In summary, the workflow above will do these things sequentially:
 - Build the project.
 - use `peaceiris/actions-gh-pages` plugin to deploy the built result to `gh-pages` branch. The Github deploy key that we just uploaded is used by this plugin.
 
-#### 2.5. Push project to Github repo
+### 2.5. Push project to Github repo
 
 ```bash
 cd softwareengineering
@@ -152,7 +152,7 @@ If you are still not sure about what is the valid URL, open **Settings** menu of
 
 ![Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - Github pages url](https://i.imgur.com/eD5BmPv.jpg)
 
-#### 2.6. Modify the workflow file to be able to generate the ebook files
+### 2.6. Modify the workflow file to be able to generate the ebook files
 
 Ok, now we will modify the workflow so it will be able to generate the ebook files (`.pdf`, `.epub`, and `.mobi`), not just the web version.
 
@@ -227,7 +227,7 @@ https://github.com/novalagung/softwareengineering/raw/ebooks/softwareengineering
 
 FYI! Since the ebook files are accessible through Github direct link, this means the visibility of the repo needs to be public (not private). If you want the repo to be in private but keep the files accessible, then do push the files into `gh-pages` branch.
 
-#### 2.7. Add custom domain
+### 2.7. Add custom domain
 
 This one is optional, but probably important. We are going to apply custom domain to our Github Page.
 
@@ -270,7 +270,7 @@ Watch the workflow progress in the repo **Actions** menu. After it is finished, 
 
 ![Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - custom domain](https://i.imgur.com/9GBMruL.png)
 
-#### 2.8. Enable `SSL/HTTPS` to our Github Pages
+### 2.8. Enable `SSL/HTTPS` to our Github Pages
 
 Lastly, before we end this tutorial, let's enable `SSL/HTTPS` into our page. No need to generate a SSL certificate file and etc, since Github will handle the setup. We just need to navigate to the **Settings** menu on the the repo, then scroll down a little bit until **GitHub Pages** section appears. Do check the **Enforce HTTPS** option. After that, wait for a few minutes, then try the custom domain again.
 

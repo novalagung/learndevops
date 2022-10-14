@@ -4,17 +4,17 @@ In this post, we are going to learn about how to push a Docker image to [Docker 
 
 ---
 
-### 1. Prerequisites
+## 1. Prerequisites
 
-#### 1.1. Docker engine
+### 1.1. Docker engine
 
 Ensure the Docker engine is running. If you haven't installed it, then install it first.
 
-#### 1.2. Docker Hub account
+### 1.2. Docker Hub account
 
 Prepare a Docker Hub account. If you don't have it, then follow a guide on [Create Docker Hub Account](docker-hub-create-account.html).
 
-#### 1.3. Login to Docker Hub on the local machine
+### 1.3. Login to Docker Hub on the local machine
 
 Do log in to Docker Hub via CLI command below:
 
@@ -26,9 +26,9 @@ Or use the UI menu. It is available by doing a right-click on the docker menu â†
 
 ---
 
-### 2. Guide
+## 2. Guide
 
-#### 2.1. Create repo at Docker Hub
+### 2.1. Create repo at Docker Hub
 
 First of all, we need to book a repo on Docker Hub. Later we will push the image to that particular repo.
 
@@ -36,7 +36,7 @@ Go to https://hub.docker.com/repository/create, create a new repo (under your ac
 
 ![Docker - Push Image to hub.docker.com - create a repo on Docker Hub](https://i.imgur.com/uvLjxqv.png)
 
-#### 2.2. Clone the example app then build as Docker image
+### 2.2. Clone the example app then build as Docker image
 
 Next, we need to create a simple dockerized hello world app. But to make the thing faster, we will use a ready-to-deploy-dockerized hello world app crafted using Go. It's available on Github (via Github token), just run the command below.
 
@@ -57,7 +57,7 @@ As we can see from the command above, the tag `v0` is used on this image.
 
 ![Docker - Push Image to hub.docker.com - build image](https://i.imgur.com/aiduEji.png)
 
-#### 2.3. Push image into Docker Hub
+### 2.3. Push image into Docker Hub
 
 Next, use `docker push` command below to push the image that we just built.
 
@@ -72,7 +72,7 @@ Ok, done.
 
 ---
 
-### 3. Test - Pull the Image from Docker Hub
+## 3. Test - Pull the Image from Docker Hub
 
 > This step is optional.
 
@@ -87,7 +87,7 @@ docker pull novalagung/hello-world:v0
 
 ---
 
-### 4. The `latest` tag
+## 4. The `latest` tag
 
 By default, when we pull a certain image from the Hub without a tag specified, then the `latest` tag of the particular image will be pulled.
 

@@ -8,33 +8,33 @@ You can also deploy your app, just do push it into Docker Hub. This guide might 
 
 ---
 
-### 1. Prerequisites
+## 1. Prerequisites
 
-#### 1.1. Docker engine
+### 1.1. Docker engine
 
 Ensure the Docker engine is running. If you haven't installed it, then do install it first.
 
-#### 1.2. Minikube
+### 1.2. Minikube
 
 Ensure the Minikube is running. Run `minikube start` command on PowerShell (opened with an administrator privilege). If you haven't installed it, then do install it first.
 
-#### 1.3. Kubernetes CLI tool
+### 1.3. Kubernetes CLI tool
 
 Ensure the `kubectl` command is available. If you haven't installed it, then do install it first.
 
-#### 1.4. The `hey` tool (an HTTP load generator)
+### 1.4. The `hey` tool (an HTTP load generator)
 
 Install this tool in your local machine https://github.com/rakyll/hey. It's similar to the Apache Benchmark tool. We are going to use this to perform the stress test to our app to check whether the auto-scaling capability is working or not.
 
 ---
 
-### 2. Preparation
+## 2. Preparation
 
-#### 2.1. For Windows user only, run PowerShell with admin privilege
+### 2.1. For Windows user only, run PowerShell with admin privilege
 
 CMD won't be helpful here. Run the PowerShell as an administrator.
 
-#### 2.2. Create the Kubernetes objects configuration file (in `.yaml` format)
+### 2.2. Create the Kubernetes objects configuration file (in `.yaml` format)
 
 We are going to create three Kubernetes objects: the deployment, horizontal pod auto scaler, and service. But to make things easier, we will do the creation by using the config file.
 
@@ -44,9 +44,9 @@ Now create a file called `k8s.yaml` (or use another name, it is fine). Open the 
 
 ---
 
-### 3. Object Definitions
+## 3. Object Definitions
 
-#### 3.1. Deployment Object
+### 3.1. Deployment Object
 
 Deployment is a controller used to manage both pod and replica sets. In this section, we are going to create the object.
 
@@ -145,7 +145,7 @@ kubectl get pods
   <img src="https://i.imgur.com/VXlFDch.png" alt="Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler - apply deployment object">
 </p>
 
-#### 3.1. Testing one of the pod
+### 3.1. Testing one of the pod
 
 As we can see from the image above, the deployment is working and two pods are currently running.
 
@@ -170,7 +170,7 @@ netstat -tulpn | grep :8081
 
 It's clear from the image above that the app is running on port `8081`.
 
-#### 3.2. Apply changes on the deployment object
+### 3.2. Apply changes on the deployment object
 
 Other than deployment, there are some other controllers available in k8s. What makes deployment controller special is whenever there is a change happen in the pod config within deployment resource, when we apply it then the pods will be updated by the controller seamlessly.
 
@@ -240,7 +240,7 @@ See, the changes that we made on the pod are applied in a controlled way. And th
 
 > `kubectl get pods`<br />`kubectl describe pod <pod-name>`<br />`kubectl logs <pod-name>`
 
-#### 3.2. Service Object
+### 3.2. Service Object
 
 In this section, we are going to create a new service. This service shall enable access between pod within the cluster, and also enable access for incoming request from external into the cluster pod.
 
@@ -335,7 +335,7 @@ As we can see from the image above, we did dispatch multiple HTTP requests to th
 
 > `minikube service <service-name> --url`<br />`minikube service my-service --url`
 
-#### 3.3. Horizontal Pod Auto Scaler (HPA) Object
+### 3.3. Horizontal Pod Auto Scaler (HPA) Object
 
 In this section, we are going to make our pods (within deployment object) scalable in an automated manner. So in case, there is a spike in the total number of users that currently accessing the app, then we shall not be worried.
 
@@ -409,7 +409,7 @@ kubectl describe hpa <hpa-name>
 
 Previously we only have two pods running. After we apply the HPA, the new pod is created, so total there are three pods. This is because in our HPA the `spec.minReplicas` is set to `3`.
 
-#### 3.3.1. Stress test on Horizontal Pod Auto scaler
+### 3.3.1. Stress test on Horizontal Pod Auto scaler
 
 Ok, next let's do some stress test! Let's see how the HPA will handle very high traffic coming. The below command will trigger a concurrent 50 request to the service URL for 5 minutes. Run it on a new CMD/PowerShell window.
 
