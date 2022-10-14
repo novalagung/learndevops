@@ -1,0 +1,700 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Setup Oracle XE Database Server - Learn DevOps</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="oracle-setup-instantclient.html" />
+    
+
+    <script async defer src="https://buttons.github.io/buttons.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJMMV9WFV8"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-ZJMMV9WFV8');
+		</script><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1247398778924723');fbq('track','PageView');</script><noscript><imgheight="1"width="1"style="display:none"src="https://www.facebook.com/tr?id=1247398778924723&ev=PageView&noscript=1"/></noscript><link rel="stylesheet" href="/adjustment.css?v=1.2022.10.14.091450"></head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <a target="_blank" href="https://github.com/novalagung/learndevops/blob/ebooks/learndevops.pdf">
+            
+                    
+                    Read PDF version
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    Amazon Web Services (AWS)
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="aws-create-individual-iam-user.html">
+            
+                <a href="aws-create-individual-iam-user.html">
+            
+                    
+                    Create Individual IAM User
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    CI/CD
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="cicd-serverless-ebook-gitbook-github-pages-actions-calibre.html">
+            
+                <a href="cicd-serverless-ebook-gitbook-github-pages-actions-calibre.html">
+            
+                    
+                    Serverless Ebook using Gitbook CLI, Github Pages, Github Actions CI/CD, and Calibre
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" >
+            
+                <span>
+            
+                    
+                    Docker
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="docker-push-image-to-hub.html">
+            
+                <a href="docker-push-image-to-hub.html">
+            
+                    
+                    Push Image to hub.docker.com
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" >
+            
+                <span>
+            
+                    
+                    Kubernetes
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="kubernetes-minikube-deployment-service-horizontal-autoscale.html">
+            
+                <a href="kubernetes-minikube-deployment-service-horizontal-autoscale.html">
+            
+                    
+                    Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Pod Autoscaler
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" >
+            
+                <span>
+            
+                    
+                    Oracle
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="oracle-setup-instantclient.html">
+            
+                <a href="oracle-setup-instantclient.html">
+            
+                    
+                    Setup Oracle Instant Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.13" data-path="oracle-setup-xe-database-server.html">
+            
+                <a href="oracle-setup-xe-database-server.html">
+            
+                    
+                    Setup Oracle XE Database Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" >
+            
+                <span>
+            
+                    
+                    Terraform
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="terraform-aws-ec2-internet-gateway-ssh.html">
+            
+                <a href="terraform-aws-ec2-internet-gateway-ssh.html">
+            
+                    
+                    Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="terraform-aws-load-balancer-auto-scaling.html">
+            
+                <a href="terraform-aws-load-balancer-auto-scaling.html">
+            
+                    
+                    Terraform - Automate setup of AWS EC2 with Application Load Balancer and Auto Scaling enabled
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Setup Oracle XE Database Server</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="setup-oracle-xe-database-server">Setup Oracle XE Database Server</h1>
+<p>In this post, we are going to learn how to setup Oracle XE Database Server on CentOS, Oracle Linux, and using Docker Container.</p>
+<hr>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#a-setup-oracle-xe-database-server-on-centos-6-oracle-linux">Setup Oracle XE Database Server on CentOS 6 (Oracle Linux)</a></li>
+<li><a href="#b-setup-oracle-xe-database-server-using-docker">Setup Oracle XE Database Server using Docker</a></li>
+</ul>
+<hr>
+<h2 id="a-setup-oracle-xe-database-server-on-centos-6-oracle-linux">A. Setup Oracle XE Database Server on CentOS 6 (Oracle Linux)</h2>
+<h3 id="a1-convert-centos-6-into-oracle-linux">A.1. Convert CentOS 6 into Oracle Linux</h3>
+<p>The easiest way to install Oracle Database Server is through <strong>Oracle Linux</strong> distribution.</p>
+<p>Oracle Linux is a Linux distribution packaged and freely distributed by Oracle, available partially under the GNU General Public License since late 2006. It&apos;s free, we can easily get it from <a href="https://www.oracle.com/linux/" target="_blank">Oracle Linux Download Page</a>.</p>
+<p>There is also an alternative way to get the Oracle Linux, by converting CentOS into Oracle Linux. In this post we&apos;ll learn to do that.</p>
+<p>OK let&apos;s start. First of all, update os package repository.</p>
+<pre><code class="lang-bash">sudo yum update
+</code></pre>
+<p>Oracle provides us capability to convert CentOS into Oracle Linux, and they make it to be so easy to use. For detailed information just take a look at <a href="https://linux.oracle.com/switch/centos" target="_blank">https://linux.oracle.com/switch/centos</a>.</p>
+<p>Ok, let&apos;s download the <code>centos2ol.sh</code> file then execute it.</p>
+<pre><code class="lang-bash">curl -O https://linux.oracle.com/switch/centos2ol.sh 
+sudo sh centos2ol.sh
+
+<span class="hljs-comment"># Checking for required packages...</span>
+<span class="hljs-comment"># Checking your distribution...</span>
+<span class="hljs-comment"># Checking for yum lock...</span>
+<span class="hljs-comment"># Looking for yumdownloader...</span>
+<span class="hljs-comment"># Finding your repository directory...</span>
+<span class="hljs-comment"># Downloading Oracle Linux yum repository file...</span>
+<span class="hljs-comment"># Backing up and removing old repository files...</span>
+<span class="hljs-comment"># Downloading Oracle Linux release package...</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># ... will take sometime</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Dependency Updated:</span>
+<span class="hljs-comment">#   plymouth-core-libs.x86_64 0:0.8.3-29.0.1.el6</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># Replaced:</span>
+<span class="hljs-comment">#   redhat-logos.noarch 0:60.0.14-12.el6.centos</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># Finished Transaction</span>
+<span class="hljs-comment"># &gt; Leaving Shell</span>
+<span class="hljs-comment"># Updating initrd...</span>
+<span class="hljs-comment"># Installation successful!</span>
+<span class="hljs-comment"># Run &apos;yum distro-sync&apos; to synchronize your installed packages</span>
+<span class="hljs-comment"># with the Oracle Linux repository.</span>
+</code></pre>
+<p>Next, synchronize the installed packages to the Oracle Linux repository by using command below.</p>
+<pre><code class="lang-bash">sudo yum distro-sync
+
+<span class="hljs-comment"># Loaded plugins: fastestmirror, security</span>
+<span class="hljs-comment"># Setting up Distribution Synchronization Process</span>
+<span class="hljs-comment"># Loading mirror speeds from cached hostfile</span>
+<span class="hljs-comment"># Only Upgrade available on package: sysstat-9.0.4-33.el6_9.1.x86_64</span>
+<span class="hljs-comment"># Resolving Dependencies</span>
+<span class="hljs-comment"># --&gt; Running transaction check</span>
+<span class="hljs-comment"># ---&gt; Package acpid.x86_64 0:1.0.10-3.el6 will be updated</span>
+<span class="hljs-comment"># ---&gt; Package acpid.x86_64 0:2.0.19-6.0.1.el6 will be an update</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># ...</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># Updated:</span>
+<span class="hljs-comment">#   sos.noarch 0:3.2-63.0.1.el6_10.2</span>
+<span class="hljs-comment">#   system-config-network-tui.noarch 0:1.6.0.el6.3-4.0.1.el6</span>
+<span class="hljs-comment">#   systemtap-runtime.x86_64 0:2.9-9.0.1.el6</span>
+<span class="hljs-comment">#   yum-plugin-security.noarch 0:1.1.30-42.0.1.el6_10</span>
+<span class="hljs-comment">#   yum-utils.noarch 0:1.1.30-42.0.1.el6_10</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># Complete!</span>
+</code></pre>
+<p>Just that, your Oracle Linux is ready.</p>
+<h3 id="a2-setup-oracle-xe-database-server-on-oracle-linux">A.2. Setup Oracle XE Database Server on Oracle Linux</h3>
+<p>You can get Oracle linux from <a href="https://www.oracle.com/linux/" target="_blank">Oracle Linux download page</a>, or by <a href="convert-linux-centos-into-oracle-linux.md">converting CentOS into Oracle Linux</a>.</p>
+<p>Download the <strong>Oracle Database Express Edition 11g Release 2 for Linux x64</strong> from <a href="https://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/xe-prior-releases-5172097.html" target="_blank">https://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/xe-prior-releases-5172097.html</a>. You might need to download it from the web browser since the download process require us to log in using oracle account (create one on the website if you haven&apos;t).</p>
+<p>Unzip the downloaded oracle xe installer.</p>
+<pre><code class="lang-bash">mkdir -p /home/novalagung/oracle-xe
+<span class="hljs-built_in">cd</span> /home/novalagung/oracle-xe
+cp /path/to/file/oracle-xe-11.2.0-1.0.x86_64.rpm.zip .
+unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip
+
+sudo rpm -ivh Disk1/oracle-xe-11.2.0-1.0.x86_64.rpm
+</code></pre>
+<p>Now the Oracle XE 11g is installed. Next we need to run the Oracle XE Configuration. In this step few prompts will appear asking certain information like port for Oracle Application Express and for database listener.</p>
+<p>One default user will be created, it&apos;s <code>SYSTEM</code> user. We&apos;ll need to put some password for this user (cannot left it empty). In this example we use <code>MANAGER</code> as the password.</p>
+<pre><code class="lang-bash">sudo /etc/init.d/oracle-xe configure
+
+<span class="hljs-comment"># Oracle Database 11g Express Edition Configuration</span>
+<span class="hljs-comment"># -------------------------------------------------</span>
+<span class="hljs-comment"># This will configure on-boot properties of Oracle Database 11g Express </span>
+<span class="hljs-comment"># Edition.  The following questions will determine whether the database should </span>
+<span class="hljs-comment"># be starting upon system boot, the ports it will use, and the passwords that </span>
+<span class="hljs-comment"># will be used for database accounts.  Press &lt;Enter&gt; to accept the defaults. </span>
+<span class="hljs-comment"># Ctrl-C will abort.</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># Specify the HTTP port that will be used for Oracle Application Express [8080]:</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># Specify a port that will be used for the database listener [1521]:</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># Specify a password to be used for database accounts.  Note that the same</span>
+<span class="hljs-comment"># password will be used for SYS and SYSTEM.  Oracle recommends the use of </span>
+<span class="hljs-comment"># different passwords for each database account.  This can be done after </span>
+<span class="hljs-comment"># initial configuration: MANAGER</span>
+<span class="hljs-comment"># Confirm the password: MANAGER</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># Do you want Oracle Database 11g Express Edition to be started on boot (y/n) [y]:y</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># Starting Oracle Net Listener...Done</span>
+<span class="hljs-comment"># Configuring database...Done</span>
+<span class="hljs-comment"># Starting Oracle Database 11g Express Edition instance...Done</span>
+<span class="hljs-comment"># Installation completed successfully.</span>
+</code></pre>
+<p>Ok, now our Oracle XE is 100% ready. Next, we need to perform some tests, to make sure everything is working fine. We&apos;ll try to connect to the database server using default user <code>SYSTEM</code> and password <code>MANAGER</code>.</p>
+<pre><code class="lang-bash">sqlplus SYSTEM/MANAGER@//localhost:1521/xe
+
+<span class="hljs-comment"># SQL*Plus: Release 11.2.0.4.0 Production on Wed Oct 3 06:48:54 2018</span>
+<span class="hljs-comment"># Copyright (c) 1982, 2013, Oracle.  All rights reserved.</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># Connected to:</span>
+<span class="hljs-comment"># Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production</span>
+</code></pre>
+<p>The result is: <strong>connected</strong>. Try to perform a simple query like getting the database version.</p>
+<pre><code class="lang-bash">SQL&gt; SELECT * FROM V<span class="hljs-variable">$VERSION</span>;
+
+BANNER
+--------------------------------------------------------------------------------
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+PL/SQL Release 11.2.0.2.0 - Production
+CORE    11.2.0.2.0    Production
+TNS <span class="hljs-keyword">for</span> Linux: Version 11.2.0.2.0 - Production
+NLSRTL Version 11.2.0.2.0 - Production
+</code></pre>
+<hr>
+<h2 id="b-setup-oracle-xe-database-server-using-docker">B. Setup Oracle XE Database Server using Docker</h2>
+<blockquote>
+<p>This tutorial can be implemented in both Windows, Linux, or MacOS operating systems.</p>
+</blockquote>
+<p>Download the <strong>Oracle Database Express Edition 11g Release 2 for Linux x64</strong> from <a href="https://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/xe-prior-releases-5172097.html" target="_blank">https://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/xe-prior-releases-5172097.html</a>. You might need to download it from the web browser since the download process require us to log in using oracle account (create one on the website if you haven&apos;t).</p>
+<blockquote>
+<p>REMINDER: Even you perform this installation on Windows or MacOS, you must download the Linux x64 installer! not the windows version or the macos version.</p>
+</blockquote>
+<p>Then clone the official oracle docker images from their github.</p>
+<pre><code class="lang-bash">git <span class="hljs-built_in">clone</span> https://github.com/oracle/docker-images.git
+</code></pre>
+<p>Move the downloaded oracle xe installer into this path.</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> docker-images/OracleDatabase/SingleInstance/dockerfiles
+cp oracle-xe-11.2.0-1.0.x86_64.rpm.zip /11.2.0.2/
+</code></pre>
+<p>Next, execute the <code>./buildDockerImage.sh</code> command with several arguments:</p>
+<ul>
+<li>Flag <code>-v 11.2.0.2</code> to specify the oracle version (in this case it&apos;s 11.2.0.2). The choosen version must match with the installer version.</li>
+<li>Flag <code>-x</code> to pick the <strong>Express Edition</strong> image.</li>
+<li>Flag <code>-i</code> to skip the md5sum verification.</li>
+</ul>
+<pre><code class="lang-bash">./buildDockerImage.sh -v 11.2.0.2 -x -i
+
+<span class="hljs-comment"># Ignored MD5 checksum.</span>
+<span class="hljs-comment"># ==========================</span>
+<span class="hljs-comment"># DOCKER info:</span>
+<span class="hljs-comment"># Containers: 3</span>
+<span class="hljs-comment">#  Running: 0</span>
+<span class="hljs-comment">#  Paused: 0</span>
+<span class="hljs-comment">#  Stopped: 3</span>
+<span class="hljs-comment"># Images: 10</span>
+<span class="hljs-comment"># Server Version: 18.09.0</span>
+<span class="hljs-comment"># ...</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># ==========================</span>
+<span class="hljs-comment"># Building image &apos;oracle/database:11.2.0.2-xe&apos; ...</span>
+<span class="hljs-comment"># Sending build context to Docker daemon  631.8MB</span>
+<span class="hljs-comment"># Step 1/10 : FROM oraclelinux:7-slim</span>
+<span class="hljs-comment"># 7-slim: Pulling from library/oraclelinux</span>
+<span class="hljs-comment"># a8d84c1f755a: Pulling fs layer</span>
+<span class="hljs-comment"># a8d84c1f755a: Verifying Checksum</span>
+<span class="hljs-comment"># a8d84c1f755a: Download complete</span>
+<span class="hljs-comment"># ...</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># Removing intermediate container 51a3bdde4e7e</span>
+<span class="hljs-comment">#  ---&gt; bf56ef57fe4c</span>
+<span class="hljs-comment"># Step 9/10 : HEALTHCHECK --interval=1m --start-period=5m    CMD &quot;$ORACLE_BASE/$CHECK_DB_FILE&quot; &gt;/dev/null || exit 1</span>
+<span class="hljs-comment">#  ---&gt; Running in dcee11bca78e</span>
+<span class="hljs-comment"># Removing intermediate container dcee11bca78e</span>
+<span class="hljs-comment">#  ---&gt; 4fbcb8aec67f</span>
+<span class="hljs-comment"># Step 10/10 : CMD exec $ORACLE_BASE/$RUN_FILE</span>
+<span class="hljs-comment">#  ---&gt; Running in 253bd5706098</span>
+<span class="hljs-comment"># Removing intermediate container 253bd5706098</span>
+<span class="hljs-comment">#  ---&gt; 97fb5f2328d0</span>
+<span class="hljs-comment"># [Warning] One or more build-args [DB_EDITION] were not consumed</span>
+<span class="hljs-comment"># Successfully built 97fb5f2328d0</span>
+<span class="hljs-comment"># Successfully tagged oracle/database:11.2.0.2-xe</span>
+<span class="hljs-comment"># SECURITY WARNING: You are building a Docker image from Windows against a non-Windows Docker host. All files and directories added to build context will have &apos;-rwxr-xr-x&apos; permissions. It is recommended to double check and reset permissions for sensitive files and directories.</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment">#   Oracle Database Docker Image for &apos;xe&apos; version 11.2.0.2 is ready to be extended:</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment">#     --&gt; oracle/database:11.2.0.2-xe</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment">#   Build completed in 303 seconds.</span>
+</code></pre>
+<p>The process will take some time. In the end a new docker image called <code>oracle/database</code> will be created.</p>
+<p>Next, start a new container using the <code>oracle/database</code> image.</p>
+<pre><code class="lang-bash">docker run --name my-oracle-db-server \
+    -p 1521:1521 \
+    -p 5500:5500 \
+    <span class="hljs-_">-e</span> ORACLE_SID=xe \
+    <span class="hljs-_">-e</span> ORACLE_PWD=MANAGER \
+    -v oradata:/opt/oracle/oradata \
+    --shm-size=2g \
+    oracle/database:11.2.0.2-xe
+
+<span class="hljs-comment"># ORACLE PASSWORD FOR SYS AND SYSTEM: MANAGER</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># Oracle Database 11g Express Edition Configuration</span>
+<span class="hljs-comment"># -------------------------------------------------</span>
+<span class="hljs-comment"># This will configure on-boot properties of Oracle Database 11g Express</span>
+<span class="hljs-comment"># Edition.  The following questions will determine whether the database should</span>
+<span class="hljs-comment"># be starting upon system boot, the ports it will use, and the passwords that</span>
+<span class="hljs-comment"># will be used for database accounts.  Press &lt;Enter&gt; to accept the defaults.</span>
+<span class="hljs-comment"># Ctrl-C will abort.</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># Specify the HTTP port that will be used for Oracle Application Express [8080]:</span>
+<span class="hljs-comment"># Specify a port that will be used for the database listener [1521]:</span>
+<span class="hljs-comment"># Specify a password to be used for database accounts.  Note that the same</span>
+<span class="hljs-comment"># password will be used for SYS and SYSTEM.  Oracle recommends the use of</span>
+<span class="hljs-comment"># different passwords for each database account.  This can be done after</span>
+<span class="hljs-comment"># initial configuration:</span>
+<span class="hljs-comment"># Confirm the password:</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># Do you want Oracle Database 11g Express Edition to be started on boot (y/n) [y]:</span>
+<span class="hljs-comment"># Starting Oracle Net Listener...Done</span>
+<span class="hljs-comment"># Configuring database...</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># ...</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># #########################</span>
+<span class="hljs-comment"># DATABASE IS READY TO USE!</span>
+<span class="hljs-comment"># #########################</span>
+<span class="hljs-comment"># The following output is now a tail of the alert.log:</span>
+<span class="hljs-comment"># QMNC started with pid=24, OS id=685</span>
+<span class="hljs-comment"># Completed: ALTER DATABASE OPEN</span>
+<span class="hljs-comment"># Fri Feb 22 08:17:28 2019</span>
+<span class="hljs-comment"># db_recovery_file_dest_size of 10240 MB is 0.98% used. This is a</span>
+<span class="hljs-comment"># user-specified limit on the amount of space that will be used by this</span>
+<span class="hljs-comment"># database for recovery-related files, and does not reflect the amount of</span>
+<span class="hljs-comment"># space available in the underlying filesystem or ASM diskgroup.</span>
+<span class="hljs-comment"># Starting background process CJQ0</span>
+<span class="hljs-comment"># Fri Feb 22 08:17:28 2019</span>
+<span class="hljs-comment"># CJQ0 started with pid=25, OS id=699</span>
+</code></pre>
+<p>Few explanations about above command arguments:</p>
+<ul>
+<li>Flag <code>-p 1521:1521</code>, export the oracle listener port.</li>
+<li>Flag <code>-p 5500:5500</code>, export the oem express port.</li>
+<li>Flag <code>-e ORACLE_SID=xe</code>, specify the oracle SID.</li>
+<li>Flag <code>-e ORACLE_PWD=MANAGER</code>, set the default password of <code>SYS</code>, <code>SYSTEM</code> and <code>PDB_ADMIN</code> users.</li>
+<li>Flag <code>-v oradata:/opt/oracle/oradata</code>, mirror the volume.</li>
+<li>Flag <code>--shm-size=2g</code>, allocate memory size for particular container.</li>
+</ul>
+<p>Ok, now lets try to connect to the database server using default user <code>SYSTEM</code>.</p>
+<pre><code class="lang-bash">sqlplus SYSTEM/MANAGER@//localhost:1521/XE
+
+<span class="hljs-comment"># SQL*Plus: Release 11.2.0.4.0 Production on Wed Oct 3 06:48:54 2018</span>
+<span class="hljs-comment"># Copyright (c) 1982, 2013, Oracle.  All rights reserved.</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># Connected to:</span>
+<span class="hljs-comment"># Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production</span>
+</code></pre>
+<p>The result is: <strong>connected</strong>. Try to perform a simple query like getting the database version.</p>
+<pre><code class="lang-bash">SQL&gt; SELECT * FROM V<span class="hljs-variable">$VERSION</span>;
+
+BANNER
+--------------------------------------------------------------------------------
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+PL/SQL Release 11.2.0.2.0 - Production
+CORE    11.2.0.2.0    Production
+TNS <span class="hljs-keyword">for</span> Linux: Version 11.2.0.2.0 - Production
+NLSRTL Version 11.2.0.2.0 - Production
+</code></pre>
+<p>If you the container stopped, then you just need to start it. No need to create new container using same specification.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="oracle-setup-instantclient.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Setup Oracle Instant Client">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Setup Oracle XE Database Server","level":"1.13","depth":1,"next":{"title":"Terraform","level":"1.14","depth":1,"ref":"","articles":[]},"previous":{"title":"Setup Oracle Instant Client","level":"1.12","depth":1,"path":"oracle-setup-instantclient.md","ref":"oracle-setup-instantclient.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"oracle-setup-xe-database-server.md","mtime":"2022-10-14T09:13:32.057Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-10-14T09:14:48.058Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    <div style="position: fixed; top: 10px; right: 30px; padding: 10px; background-color: rgba(255, 255, 255, 0.7);"><a class="github-button" href="https://github.com/novalagung/learndevops" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star novalagung/learndevops on GitHub">Star</a>&nbsp;<a class="github-button" href="https://github.com/novalagung" data-size="large" aria-label="Follow @novalagung on GitHub">Follow @novalagung</a><script async defer src="https://buttons.github.io/buttons.js"></script></div></body>
+</html>
+

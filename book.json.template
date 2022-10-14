@@ -1,0 +1,13 @@
+{
+    "plugins": [
+        "disqus"
+    ],
+    "pluginsConfig": {
+        "disqus": {
+            "shortName": "devops-novalagung-com"
+        }
+    },
+    "lunr": {
+        "maxIndexSize": 1000000000
+    }
+}
