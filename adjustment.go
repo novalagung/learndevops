@@ -14,6 +14,8 @@ import (
 
 const (
 	baseVersion = 1
+	bookName    = "Devops Tutorial"
+	ga4tagId    = "G-ZJMMV9WFV8"
 )
 
 func main() {
@@ -39,10 +41,6 @@ type sitemap struct {
 }
 
 func doAdjustment() error {
-	bookName := "Devops Tutorial"
-	adClient := "ca-pub-1417781814120840"
-	googleSiteVerification := "UZnxS2Dk3fm2_Elms3a__56Q_oQ3sQ1h0SVXXlHSmbE"
-
 	regex := regexp.MustCompile(`<title>(.*?)<\/title>`)
 
 	basePath, _ := os.Getwd()
@@ -90,15 +88,8 @@ func doAdjustment() error {
 		if isLandingPage {
 			metaReplacement = `<meta content="` + bookName + `" name="description">`
 		}
-		metaReplacement = metaReplacement + `
-			<meta http-equiv="content-language" content="en-US"/>
-			<meta name="google-site-verification" content="` + googleSiteVerification + `" />`
+		metaReplacement = metaReplacement + `<meta http-equiv="content-language" content="en-US"/>`
 		htmlString = strings.Replace(htmlString, metaToFind, metaReplacement, -1)
-
-		// ==== google ads
-		googleAdsToFind := `</head>`
-		googleAdsReplacement := `<script data-ad-client="` + adClient + `" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>` + googleAdsToFind
-		htmlString = strings.Replace(htmlString, googleAdsToFind, googleAdsReplacement, -1)
 
 		// ==== inject github stars button
 		buttonToFind := `</body>`
@@ -109,6 +100,17 @@ func doAdjustment() error {
 		buttonScriptToFind := `</head>`
 		buttonScriptReplacement := `<script async defer src="https://buttons.github.io/buttons.js"></script>` + buttonScriptToFind
 		htmlString = strings.Replace(htmlString, buttonScriptToFind, buttonScriptReplacement, -1)
+
+		// ==== inject ga4
+		ga4propertyToFind := `</head>`
+		ga4propertyReplacement := `<script async src="https://www.googletagmanager.com/gtag/js?id=` + ga4tagId + `"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', '` + ga4tagId + `');
+		</script>` + ga4propertyToFind
+		htmlString = strings.Replace(htmlString, ga4propertyToFind, ga4propertyReplacement, -1)
 
 		// ===== inject fb pixel
 		fbPixelToFind := `</head>`
@@ -169,10 +171,6 @@ func doAdjustment() error {
 		return err
 	}
 	indexHTMLString := string(indexHTMLBuf)
-
-	metaToFind := `</head>`
-	metaReplacement := `<meta name="google-site-verification" content="` + googleSiteVerification + `" />` + metaToFind
-	indexHTMLString = strings.Replace(indexHTMLString, metaToFind, metaReplacement, -1)
 
 	err = ioutil.WriteFile(indexHTMLPath, []byte(indexHTMLString), os.ModePerm)
 	if err != nil {
