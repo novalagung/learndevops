@@ -26,6 +26,7 @@ jobs:
         gitbook build
         go run adjustment.go
         cd _book
+        echo '<html><head><meta http-equiv="refresh" content="0; url=https://dasarpemrogramangolang.novalagung.com/"></head></html>' > 404.html
         rm -rf LICENSE
         rm -rf book*
         rm -rf .git
