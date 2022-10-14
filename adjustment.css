@@ -3,7 +3,7 @@ body {
     font-family: Source Sans Pro, Helvetica Neue, Arial, sans-serif;
 }
 
-/* disable search bar, replace it with the book title instead */
+/* disable search bar, replace with the book title instead */
 .book-summary #book-search-input {
     position: relative;
 }
