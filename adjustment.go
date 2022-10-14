@@ -14,7 +14,7 @@ import (
 
 const (
 	baseVersion = 1
-	bookName    = "Devops Tutorial"
+	bookName    = "Learn DevOps"
 	ga4tagId    = "G-ZJMMV9WFV8"
 )
 

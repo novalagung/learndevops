@@ -8,7 +8,7 @@ body {
     position: relative;
 }
 .book-summary #book-search-input:after {
-    content: "Devops Tutorial";
+    content: "Learn DevOps";
     padding-top: 17px;
     padding-left: 15px;
     top: 0;
