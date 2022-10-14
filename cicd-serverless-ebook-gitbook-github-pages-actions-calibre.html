@@ -69,7 +69,7 @@
 			function gtag(){dataLayer.push(arguments);}
 			gtag('js', new Date());
 			gtag('config', 'G-ZJMMV9WFV8');
-		</script><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1247398778924723');fbq('track','PageView');</script><noscript><imgheight="1"width="1"style="display:none"src="https://www.facebook.com/tr?id=1247398778924723&ev=PageView&noscript=1"/></noscript><link rel="stylesheet" href="/adjustment.css?v=1.2022.10.14.080600"></head>
+		</script><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1247398778924723');fbq('track','PageView');</script><noscript><imgheight="1"width="1"style="display:none"src="https://www.facebook.com/tr?id=1247398778924723&ev=PageView&noscript=1"/></noscript><link rel="stylesheet" href="/adjustment.css?v=1.2022.10.14.081837"></head>
     <body>
         
 <div class="book">
@@ -342,19 +342,19 @@
 </blockquote>
 <p>For every incoming push to the upstream, Github Actions (CI/CD) will trigger certain processes (like compiling and generating the ebook), then the result will be pushed to the <code>gh-pages</code> branch, make it publicly accessible.</p>
 <hr>
-<h3 id="1-prerequisites">1. Prerequisites</h3>
-<h4 id="11-gitbook-cli">1.1. Gitbook CLI</h4>
+<h2 id="1-prerequisites">1. Prerequisites</h2>
+<h3 id="11-gitbook-cli">1.1. Gitbook CLI</h3>
 <p>Install gitbook CLI (if you haven&apos;t). Do follow the guide on <a href="https://github.com/GitbookIO/gitbook-cli" target="_blank">https://github.com/GitbookIO/gitbook-cli</a>.</p>
-<h4 id="12-github-account">1.2. Github account</h4>
+<h3 id="12-github-account">1.2. Github account</h3>
 <p>Ensure you have a Github account.</p>
-<h4 id="13-git-client">1.3. Git client</h4>
+<h3 id="13-git-client">1.3. Git client</h3>
 <p>Ensure you have Git client installed in your local machine.</p>
 <hr>
-<h3 id="2-guide">2. Guide</h3>
-<h4 id="21-create-a-github-repo">2.1. Create a Github repo</h4>
+<h2 id="2-guide">2. Guide</h2>
+<h3 id="21-create-a-github-repo">2.1. Create a Github repo</h3>
 <p>First, create a new repo in your Github account, it can be a private one or public, doesn&apos;t matter. Just for the sake of this tutorial, I am going to pick <code>softwareengineering</code> as the repo name.</p>
 <p><img src="https://i.imgur.com/diIHwxE.png" alt="Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - create Github repo"></p>
-<h4 id="22-create-a-new-gitbook-project">2.2. Create a new Gitbook project</h4>
+<h3 id="22-create-a-new-gitbook-project">2.2. Create a new Gitbook project</h3>
 <p>Next, use <code>gitbook</code> command line to initialize a new project, name it anyhing. Here I&apos;ll use <code>softwareengineering</code>, the same one as the git repo name.</p>
 <p>After the project setup is finished, try to test it locally.</p>
 <pre><code class="lang-bash">gitbook init softwareengineering
@@ -363,7 +363,7 @@ gitbook serve
 </code></pre>
 <p><img src="https://i.imgur.com/99Q5kvv.png" alt="Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - Gitbook init project"></p>
 <p>As we can see from image above, the web version of the book is running up.</p>
-<h4 id="23-prepare-ssh-github-deploy-key">2.3. Prepare ssh Github deploy key</h4>
+<h3 id="23-prepare-ssh-github-deploy-key">2.3. Prepare ssh Github deploy key</h3>
 <p>Next, we are going to use Github Action plugin <a href="https://github.com/peaceiris/actions-gh-pages" target="_blank">peaceiris/actions-gh-pages</a> to automate pushing resources from git repo server to the <code>gh-pages</code>.</p>
 <p>To make this scenario happen, first, generate new key pair using <code>ssh-keygen</code> command below. We will use the keys as Github deploy key.</p>
 <pre><code class="lang-bash">ssh-keygen -t rsa -b 4096 -C <span class="hljs-string">&quot;<span class="hljs-variable">$(git config user.email)</span>&quot;</span> <span class="hljs-_">-f</span> gh-pages -N <span class="hljs-string">&quot;&quot;</span>
@@ -378,7 +378,7 @@ gitbook serve
 </ul>
 <p>Upload these two files into repo&apos;s project keys and secret menu respectively. To do that, open the repo, click <strong>Settings</strong>, then do follow the steps below:</p>
 <p><img src="https://i.imgur.com/t8RVwN7.png" alt="Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - prepare Github deploy key"></p>
-<h4 id="24-create-github-workflow-cicd-file-for-generating-the-web-version-of-the-ebook">2.4. Create Github workflow CI/CD file for generating the web version of the ebook</h4>
+<h3 id="24-create-github-workflow-cicd-file-for-generating-the-web-version-of-the-ebook">2.4. Create Github workflow CI/CD file for generating the web version of the ebook</h3>
 <p>Now we are going to make Github able to automatically deploy the web version of the ebook on every push. And we want that to be applied into the first push as well.</p>
 <p>Create a new workflow file named <code>deploy.yml</code>, place it in <code>&lt;yourproject&gt;/.github/workflows</code>, then fill it with the configuration below:</p>
 <pre><code class="lang-yaml"><span class="hljs-comment"># file ./softwareengineering/.github/workflow/deploy.yml</span>
@@ -419,7 +419,7 @@ gitbook serve
 <li>Build the project.</li>
 <li>use <code>peaceiris/actions-gh-pages</code> plugin to deploy the built result to <code>gh-pages</code> branch. The Github deploy key that we just uploaded is used by this plugin.</li>
 </ul>
-<h4 id="25-push-project-to-github-repo">2.5. Push project to Github repo</h4>
+<h3 id="25-push-project-to-github-repo">2.5. Push project to Github repo</h3>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> softwareengineering
 
 <span class="hljs-comment"># ignore certain directory</span>
@@ -444,7 +444,7 @@ https://novalagung.github.io/softwareengineering/
 <p><img src="https://i.imgur.com/HzCygaX.png" alt="Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - open web version of the book"></p>
 <p>If you are still not sure about what is the valid URL, open <strong>Settings</strong> menu of your Github repo then scrolls down a little bit until <strong>Github Pages</strong> section appears. The Github Pages URL will appear there.</p>
 <p><img src="https://i.imgur.com/eD5BmPv.jpg" alt="Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - Github pages url"></p>
-<h4 id="26-modify-the-workflow-file-to-be-able-to-generate-the-ebook-files">2.6. Modify the workflow file to be able to generate the ebook files</h4>
+<h3 id="26-modify-the-workflow-file-to-be-able-to-generate-the-ebook-files">2.6. Modify the workflow file to be able to generate the ebook files</h3>
 <p>Ok, now we will modify the workflow so it will be able to generate the ebook files (<code>.pdf</code>, <code>.epub</code>, and <code>.mobi</code>), not just the web version.</p>
 <p>Do open the previous <code>deploy.yml</code> file, add a new job called <code>job_deploy_ebooks</code>.</p>
 <pre><code class="lang-yaml"><span class="hljs-comment"># file ./softwareengineering/.github/workflow/deploy.yml</span>
@@ -505,7 +505,7 @@ https://github.com/novalagung/softwareengineering/raw/ebooks/softwareengineering
 https://github.com/novalagung/softwareengineering/raw/ebooks/softwareengineeringtutorial.mobi
 </code></pre>
 <p>FYI! Since the ebook files are accessible through Github direct link, this means the visibility of the repo needs to be public (not private). If you want the repo to be in private but keep the files accessible, then do push the files into <code>gh-pages</code> branch.</p>
-<h4 id="27-add-custom-domain">2.7. Add custom domain</h4>
+<h3 id="27-add-custom-domain">2.7. Add custom domain</h3>
 <p>This one is optional, but probably important. We are going to apply custom domain to our Github Page.</p>
 <p>Let&apos;s do it. Navigate to your domain control panel, add a new <strong>CNAME</strong> record that points to your Github page domain <code>&lt;github-username&gt;.github.io</code>.</p>
 <p><img src="https://i.imgur.com/a1vF2Xk.png" alt="Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - custom domain Github pages"></p>
@@ -531,7 +531,7 @@ git push origin master
 </code></pre>
 <p>Watch the workflow progress in the repo <strong>Actions</strong> menu. After it is finished, try to test the custom domain.</p>
 <p><img src="https://i.imgur.com/9GBMruL.png" alt="Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - custom domain"></p>
-<h4 id="28-enable-sslhttps-to-our-github-pages">2.8. Enable <code>SSL/HTTPS</code> to our Github Pages</h4>
+<h3 id="28-enable-sslhttps-to-our-github-pages">2.8. Enable <code>SSL/HTTPS</code> to our Github Pages</h3>
 <p>Lastly, before we end this tutorial, let&apos;s enable <code>SSL/HTTPS</code> into our page. No need to generate a SSL certificate file and etc, since Github will handle the setup. We just need to navigate to the <strong>Settings</strong> menu on the the repo, then scroll down a little bit until <strong>GitHub Pages</strong> section appears. Do check the <strong>Enforce HTTPS</strong> option. After that, wait for a few minutes, then try the custom domain again.</p>
 <p><img src="https://i.imgur.com/r5ca0Qw.png" alt="Serverless Ebook using Gitbook, Github Pages, Github Actions, and Calibre - enforce https to Github pages"></p>
 <p>Have a go! <a href="https://softwareengineering.novalagung.com" target="_blank">https://softwareengineering.novalagung.com</a></p>
@@ -570,7 +570,7 @@ git push origin master
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Serverless Ebook using Gitbook CLI, Github Pages, Github Actions CI/CD, and Calibre","level":"1.5","depth":1,"next":{"title":"Docker","level":"1.6","depth":1,"ref":"","articles":[]},"previous":{"title":"CI/CD","level":"1.4","depth":1,"ref":"","articles":[]},"dir":"ltr"},"config":{"plugins":["ga","disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-27602984-32"},"disqus":{"useIdentifier":false,"shortName":"devops-novalagung-com"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","lunr":{"maxIndexSize":1000000000},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"cicd-serverless-ebook-gitbook-github-pages-actions-calibre.md","mtime":"2022-10-14T08:05:11.930Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-10-14T08:05:57.876Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Serverless Ebook using Gitbook CLI, Github Pages, Github Actions CI/CD, and Calibre","level":"1.5","depth":1,"next":{"title":"Docker","level":"1.6","depth":1,"ref":"","articles":[]},"previous":{"title":"CI/CD","level":"1.4","depth":1,"ref":"","articles":[]},"dir":"ltr"},"config":{"plugins":["disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"devops-novalagung-com"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","lunr":{"maxIndexSize":1000000000},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"cicd-serverless-ebook-gitbook-github-pages-actions-calibre.md","mtime":"2022-10-14T08:17:55.385Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-10-14T08:18:35.431Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -578,10 +578,6 @@ git push origin master
         
     <script src="gitbook/gitbook.js"></script>
     <script src="gitbook/theme.js"></script>
-    
-        
-        <script src="gitbook/gitbook-plugin-ga/plugin.js"></script>
-        
     
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>

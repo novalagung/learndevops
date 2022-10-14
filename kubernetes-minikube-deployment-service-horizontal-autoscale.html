@@ -69,7 +69,7 @@
 			function gtag(){dataLayer.push(arguments);}
 			gtag('js', new Date());
 			gtag('config', 'G-ZJMMV9WFV8');
-		</script><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1247398778924723');fbq('track','PageView');</script><noscript><imgheight="1"width="1"style="display:none"src="https://www.facebook.com/tr?id=1247398778924723&ev=PageView&noscript=1"/></noscript><link rel="stylesheet" href="/adjustment.css?v=1.2022.10.14.080600"></head>
+		</script><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1247398778924723');fbq('track','PageView');</script><noscript><imgheight="1"width="1"style="display:none"src="https://www.facebook.com/tr?id=1247398778924723&ev=PageView&noscript=1"/></noscript><link rel="stylesheet" href="/adjustment.css?v=1.2022.10.14.081837"></head>
     <body>
         
 <div class="book">
@@ -340,26 +340,26 @@
 <p>The application that we are going to use on the tutorial is a simple hello world app written in Go. The app is dockerized and the image is available on <a href="https://hub.docker.com/repository/docker/novalagung/hello-world" target="_blank">Docker Hub</a>.</p>
 <p>You can also deploy your app, just do push it into Docker Hub. This guide might help you <a href="docker-push-image-to-hub.html">Push Image to hub.docker.com</a>.</p>
 <hr>
-<h3 id="1-prerequisites">1. Prerequisites</h3>
-<h4 id="11-docker-engine">1.1. Docker engine</h4>
+<h2 id="1-prerequisites">1. Prerequisites</h2>
+<h3 id="11-docker-engine">1.1. Docker engine</h3>
 <p>Ensure the Docker engine is running. If you haven&apos;t installed it, then do install it first.</p>
-<h4 id="12-minikube">1.2. Minikube</h4>
+<h3 id="12-minikube">1.2. Minikube</h3>
 <p>Ensure the Minikube is running. Run <code>minikube start</code> command on PowerShell (opened with an administrator privilege). If you haven&apos;t installed it, then do install it first.</p>
-<h4 id="13-kubernetes-cli-tool">1.3. Kubernetes CLI tool</h4>
+<h3 id="13-kubernetes-cli-tool">1.3. Kubernetes CLI tool</h3>
 <p>Ensure the <code>kubectl</code> command is available. If you haven&apos;t installed it, then do install it first.</p>
-<h4 id="14-the-hey-tool-an-http-load-generator">1.4. The <code>hey</code> tool (an HTTP load generator)</h4>
+<h3 id="14-the-hey-tool-an-http-load-generator">1.4. The <code>hey</code> tool (an HTTP load generator)</h3>
 <p>Install this tool in your local machine <a href="https://github.com/rakyll/hey" target="_blank">https://github.com/rakyll/hey</a>. It&apos;s similar to the Apache Benchmark tool. We are going to use this to perform the stress test to our app to check whether the auto-scaling capability is working or not.</p>
 <hr>
-<h3 id="2-preparation">2. Preparation</h3>
-<h4 id="21-for-windows-user-only-run-powershell-with-admin-privilege">2.1. For Windows user only, run PowerShell with admin privilege</h4>
+<h2 id="2-preparation">2. Preparation</h2>
+<h3 id="21-for-windows-user-only-run-powershell-with-admin-privilege">2.1. For Windows user only, run PowerShell with admin privilege</h3>
 <p>CMD won&apos;t be helpful here. Run the PowerShell as an administrator.</p>
-<h4 id="22-create-the-kubernetes-objects-configuration-file-in-yaml-format">2.2. Create the Kubernetes objects configuration file (in <code>.yaml</code> format)</h4>
+<h3 id="22-create-the-kubernetes-objects-configuration-file-in-yaml-format">2.2. Create the Kubernetes objects configuration file (in <code>.yaml</code> format)</h3>
 <p>We are going to create three Kubernetes objects: the deployment, horizontal pod auto scaler, and service. But to make things easier, we will do the creation by using the config file.</p>
 <p>So the three objects mentioned above will be defined in a <code>.yaml</code> file. One object usually represented by one config file, however, in this tutorial, we will write all configs in a single file.</p>
 <p>Now create a file called <code>k8s.yaml</code> (or use another name, it is fine). Open the file using your favorite editor. Next, we shall begin the config definition.</p>
 <hr>
-<h3 id="3-object-definitions">3. Object Definitions</h3>
-<h4 id="31-deployment-object">3.1. Deployment Object</h4>
+<h2 id="3-object-definitions">3. Object Definitions</h2>
+<h3 id="31-deployment-object">3.1. Deployment Object</h3>
 <p>Deployment is a controller used to manage both pod and replica sets. In this section, we are going to create the object.</p>
 <p>On the <code>k8s.yaml</code>, write the following config below. Each part of the script has some remark that explains what it does.</p>
 <pre><code class="lang-yaml"><span class="hljs-meta">---</span>
@@ -450,7 +450,7 @@ kubectl get pods
   <img src="https://i.imgur.com/VXlFDch.png" alt="Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Autoscaler - apply deployment object">
 </p>
 
-<h4 id="31-testing-one-of-the-pod">3.1. Testing one of the pod</h4>
+<h3 id="31-testing-one-of-the-pod">3.1. Testing one of the pod</h3>
 <p>As we can see from the image above, the deployment is working and two pods are currently running.</p>
 <blockquote>
 <p>Two pods automatically created. This is because we don&apos;t specify the <code>spec.replicas</code> value. If we specify some value like <code>4</code>, then there will be 4 pods running. The default replicas value is <code>2</code>.</p>
@@ -470,7 +470,7 @@ netstat -tulpn | grep :8081
 </p>
 
 <p>It&apos;s clear from the image above that the app is running on port <code>8081</code>.</p>
-<h4 id="32-apply-changes-on-the-deployment-object">3.2. Apply changes on the deployment object</h4>
+<h3 id="32-apply-changes-on-the-deployment-object">3.2. Apply changes on the deployment object</h3>
 <p>Other than deployment, there are some other controllers available in k8s. What makes deployment controller special is whenever there is a change happen in the pod config within deployment resource, when we apply it then the pods will be updated by the controller seamlessly.</p>
 <p>Ok, now let&apos;s prove the above statement by doing some changes on the deployment config. Do the following changes:</p>
 <ul>
@@ -531,7 +531,7 @@ netstat -tulpn | grep :8080
 <p>Tips! Use the command below to see the error log on certain pods. Probably useful is something wrong going on, like the webserver not starting, etc.</p>
 <p><code>kubectl get pods</code><br><code>kubectl describe pod &lt;pod-name&gt;</code><br><code>kubectl logs &lt;pod-name&gt;</code></p>
 </blockquote>
-<h4 id="32-service-object">3.2. Service Object</h4>
+<h3 id="32-service-object">3.2. Service Object</h3>
 <p>In this section, we are going to create a new service. This service shall enable access between pod within the cluster, and also enable access for incoming request from external into the cluster pod.</p>
 <blockquote>
 <p>The <code>NodePort</code> service type can be used in our situation as well, not just <code>LoadBalancer</code> type</p>
@@ -614,7 +614,7 @@ curl &lt;minikubeIP&gt;:32199
 <p>Tips! Rather than find the Service URL using <code>minikube ip</code> and then concat it with node port from config, use command below:</p>
 <p><code>minikube service &lt;service-name&gt; --url</code><br><code>minikube service my-service --url</code></p>
 </blockquote>
-<h4 id="33-horizontal-pod-auto-scaler-hpa-object">3.3. Horizontal Pod Auto Scaler (HPA) Object</h4>
+<h3 id="33-horizontal-pod-auto-scaler-hpa-object">3.3. Horizontal Pod Auto Scaler (HPA) Object</h3>
 <p>In this section, we are going to make our pods (within deployment object) scalable in an automated manner. So in case, there is a spike in the total number of users that currently accessing the app, then we shall not be worried.</p>
 <p>One way to make the pod scaled automatically is by adding HPA or Horizontal Pod Auto Scaler. The Horizontal Pod Autoscaler automatically scales the number of pods in a replication controller, deployment, replica set or stateful set based on observed CPU utilization (or, with custom metrics support, on some other application-provided metrics). </p>
 <p>Do append below configuration into <code>k8s.yaml</code> file.</p>
@@ -677,7 +677,7 @@ kubectl describe hpa &lt;hpa-name&gt;
 </p>
 
 <p>Previously we only have two pods running. After we apply the HPA, the new pod is created, so total there are three pods. This is because in our HPA the <code>spec.minReplicas</code> is set to <code>3</code>.</p>
-<h4 id="331-stress-test-on-horizontal-pod-auto-scaler">3.3.1. Stress test on Horizontal Pod Auto scaler</h4>
+<h3 id="331-stress-test-on-horizontal-pod-auto-scaler">3.3.1. Stress test on Horizontal Pod Auto scaler</h3>
 <p>Ok, next let&apos;s do some stress test! Let&apos;s see how the HPA will handle very high traffic coming. The below command will trigger a concurrent 50 request to the service URL for 5 minutes. Run it on a new CMD/PowerShell window.</p>
 <pre><code class="lang-bash"><span class="hljs-comment"># show service URL</span>
 minikube service my-service --url
@@ -737,7 +737,7 @@ minikube dashboard
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Pod Autoscaler","level":"1.9","depth":1,"next":{"title":"Oracle","level":"1.10","depth":1,"ref":"","articles":[]},"previous":{"title":"Kubernetes","level":"1.8","depth":1,"ref":"","articles":[]},"dir":"ltr"},"config":{"plugins":["ga","disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-27602984-32"},"disqus":{"useIdentifier":false,"shortName":"devops-novalagung-com"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","lunr":{"maxIndexSize":1000000000},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"kubernetes-minikube-deployment-service-horizontal-autoscale.md","mtime":"2022-10-14T08:05:11.930Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-10-14T08:05:57.876Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Kubernetes - Deploy App into Minikube Cluster using Deployment controller, Service, and Horizontal Pod Autoscaler","level":"1.9","depth":1,"next":{"title":"Oracle","level":"1.10","depth":1,"ref":"","articles":[]},"previous":{"title":"Kubernetes","level":"1.8","depth":1,"ref":"","articles":[]},"dir":"ltr"},"config":{"plugins":["disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"devops-novalagung-com"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","lunr":{"maxIndexSize":1000000000},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"kubernetes-minikube-deployment-service-horizontal-autoscale.md","mtime":"2022-10-14T08:17:55.385Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-10-14T08:18:35.431Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -745,10 +745,6 @@ minikube dashboard
         
     <script src="gitbook/gitbook.js"></script>
     <script src="gitbook/theme.js"></script>
-    
-        
-        <script src="gitbook/gitbook-plugin-ga/plugin.js"></script>
-        
     
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>

@@ -69,7 +69,7 @@
 			function gtag(){dataLayer.push(arguments);}
 			gtag('js', new Date());
 			gtag('config', 'G-ZJMMV9WFV8');
-		</script><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1247398778924723');fbq('track','PageView');</script><noscript><imgheight="1"width="1"style="display:none"src="https://www.facebook.com/tr?id=1247398778924723&ev=PageView&noscript=1"/></noscript><link rel="stylesheet" href="/adjustment.css?v=1.2022.10.14.080600"></head>
+		</script><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1247398778924723');fbq('track','PageView');</script><noscript><imgheight="1"width="1"style="display:none"src="https://www.facebook.com/tr?id=1247398778924723&ev=PageView&noscript=1"/></noscript><link rel="stylesheet" href="/adjustment.css?v=1.2022.10.14.081837"></head>
     <body>
         
 <div class="book">
@@ -338,23 +338,23 @@
                                 <h1 id="docker---push-image-to-hubdockercom">Docker - Push Image to hub.docker.com</h1>
 <p>In this post, we are going to learn about how to push a Docker image to <a href="https://hub.docker.com/" target="_blank">Docker Hub</a>.</p>
 <hr>
-<h3 id="1-prerequisites">1. Prerequisites</h3>
-<h4 id="11-docker-engine">1.1. Docker engine</h4>
+<h2 id="1-prerequisites">1. Prerequisites</h2>
+<h3 id="11-docker-engine">1.1. Docker engine</h3>
 <p>Ensure the Docker engine is running. If you haven&apos;t installed it, then install it first.</p>
-<h4 id="12-docker-hub-account">1.2. Docker Hub account</h4>
+<h3 id="12-docker-hub-account">1.2. Docker Hub account</h3>
 <p>Prepare a Docker Hub account. If you don&apos;t have it, then follow a guide on <a href="docker-hub-create-account.html">Create Docker Hub Account</a>.</p>
-<h4 id="13-login-to-docker-hub-on-the-local-machine">1.3. Login to Docker Hub on the local machine</h4>
+<h3 id="13-login-to-docker-hub-on-the-local-machine">1.3. Login to Docker Hub on the local machine</h3>
 <p>Do log in to Docker Hub via CLI command below:</p>
 <pre><code class="lang-bash">docker login --username=novalagung --password=&lt;your-password&gt;
 </code></pre>
 <p>Or use the UI menu. It is available by doing a right-click on the docker menu &#x2192; sign in.</p>
 <hr>
-<h3 id="2-guide">2. Guide</h3>
-<h4 id="21-create-repo-at-docker-hub">2.1. Create repo at Docker Hub</h4>
+<h2 id="2-guide">2. Guide</h2>
+<h3 id="21-create-repo-at-docker-hub">2.1. Create repo at Docker Hub</h3>
 <p>First of all, we need to book a repo on Docker Hub. Later we will push the image to that particular repo.</p>
 <p>Go to <a href="https://hub.docker.com/repository/create" target="_blank">https://hub.docker.com/repository/create</a>, create a new repo (under your account), name it <code>hello-world</code> (or anything).</p>
 <p><img src="https://i.imgur.com/uvLjxqv.png" alt="Docker - Push Image to hub.docker.com - create a repo on Docker Hub"></p>
-<h4 id="22-clone-the-example-app-then-build-as-docker-image">2.2. Clone the example app then build as Docker image</h4>
+<h3 id="22-clone-the-example-app-then-build-as-docker-image">2.2. Clone the example app then build as Docker image</h3>
 <p>Next, we need to create a simple dockerized hello world app. But to make the thing faster, we will use a ready-to-deploy-dockerized hello world app crafted using Go. It&apos;s available on Github (via Github token), just run the command below.</p>
 <pre><code class="lang-bash">git <span class="hljs-built_in">clone</span> https://30542dd8874ba3745c55203a091c345340c18b7a:x-oauth-basic@github.com/novalagung/hello-world.git
 </code></pre>
@@ -366,14 +366,14 @@ docker build . -t novalagung/hello-world:v0
 </code></pre>
 <p>As we can see from the command above, the tag <code>v0</code> is used on this image.</p>
 <p><img src="https://i.imgur.com/aiduEji.png" alt="Docker - Push Image to hub.docker.com - build image"></p>
-<h4 id="23-push-image-into-docker-hub">2.3. Push image into Docker Hub</h4>
+<h3 id="23-push-image-into-docker-hub">2.3. Push image into Docker Hub</h3>
 <p>Next, use <code>docker push</code> command below to push the image that we just built.</p>
 <pre><code># docker push &lt;username&gt;/&lt;repo-name&gt;[:&lt;tag&gt;]
 docker push novalagung/hello-world
 </code></pre><p><img src="https://i.imgur.com/TUy6Ffa.png" alt="Docker - Push Image to hub.docker.com - push image to Docker Hub"></p>
 <p>Ok, done.</p>
 <hr>
-<h3 id="3-test---pull-the-image-from-docker-hub">3. Test - Pull the Image from Docker Hub</h3>
+<h2 id="3-test---pull-the-image-from-docker-hub">3. Test - Pull the Image from Docker Hub</h2>
 <blockquote>
 <p>This step is optional.</p>
 </blockquote>
@@ -383,7 +383,7 @@ docker pull novalagung/hello-world:v0
 </code></pre>
 <p><img src="https://i.imgur.com/tdRlNr7.png" alt="Docker - Push Image to hub.docker.com - pull image from Docker Hub"></p>
 <hr>
-<h3 id="4-the-latest-tag">4. The <code>latest</code> tag</h3>
+<h2 id="4-the-latest-tag">4. The <code>latest</code> tag</h2>
 <p>By default, when we pull a certain image from the Hub without a tag specified, then the <code>latest</code> tag of the particular image will be pulled.</p>
 <p>Take a look at two commands below, they are equivalent.</p>
 <pre><code>docker pull novalagung/hello-world
@@ -430,7 +430,7 @@ docker push novalagung/hello-world:latest
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Push Image to hub.docker.com","level":"1.7","depth":1,"next":{"title":"Kubernetes","level":"1.8","depth":1,"ref":"","articles":[]},"previous":{"title":"Docker","level":"1.6","depth":1,"ref":"","articles":[]},"dir":"ltr"},"config":{"plugins":["ga","disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-27602984-32"},"disqus":{"useIdentifier":false,"shortName":"devops-novalagung-com"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","lunr":{"maxIndexSize":1000000000},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"docker-push-image-to-hub.md","mtime":"2022-10-14T08:05:11.930Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-10-14T08:05:57.876Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Push Image to hub.docker.com","level":"1.7","depth":1,"next":{"title":"Kubernetes","level":"1.8","depth":1,"ref":"","articles":[]},"previous":{"title":"Docker","level":"1.6","depth":1,"ref":"","articles":[]},"dir":"ltr"},"config":{"plugins":["disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"devops-novalagung-com"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","lunr":{"maxIndexSize":1000000000},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"docker-push-image-to-hub.md","mtime":"2022-10-14T08:17:55.385Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-10-14T08:18:35.431Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -438,10 +438,6 @@ docker push novalagung/hello-world:latest
         
     <script src="gitbook/gitbook.js"></script>
     <script src="gitbook/theme.js"></script>
-    
-        
-        <script src="gitbook/gitbook-plugin-ga/plugin.js"></script>
-        
     
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>

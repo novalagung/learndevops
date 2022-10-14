@@ -71,7 +71,7 @@
 			function gtag(){dataLayer.push(arguments);}
 			gtag('js', new Date());
 			gtag('config', 'G-ZJMMV9WFV8');
-		</script><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1247398778924723');fbq('track','PageView');</script><noscript><imgheight="1"width="1"style="display:none"src="https://www.facebook.com/tr?id=1247398778924723&ev=PageView&noscript=1"/></noscript><link rel="stylesheet" href="/adjustment.css?v=1.2022.10.14.080600"></head>
+		</script><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1247398778924723');fbq('track','PageView');</script><noscript><imgheight="1"width="1"style="display:none"src="https://www.facebook.com/tr?id=1247398778924723&ev=PageView&noscript=1"/></noscript><link rel="stylesheet" href="/adjustment.css?v=1.2022.10.14.081837"></head>
     <body>
         
 <div class="book">
@@ -340,15 +340,15 @@
                                 <h1 id="terraform---automate-setup-of-aws-ec2-with-internet-gateway-and-ssh-access-enabled">Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled</h1>
 <p>In this post, we are going to learn about the usage of Terraform to automate the setup of AWS EC2 instance with internet gateway and ssh access enabled.</p>
 <hr>
-<h3 id="1-prerequisites">1. Prerequisites</h3>
-<h4 id="11-terraform-cli">1.1. Terraform CLI</h4>
+<h2 id="1-prerequisites">1. Prerequisites</h2>
+<h3 id="11-terraform-cli">1.1. Terraform CLI</h3>
 <p>Ensure terraform CLI is available. If not, then do install it first.</p>
-<h4 id="12-individual-aws-iam-user">1.2. Individual AWS IAM user</h4>
+<h3 id="12-individual-aws-iam-user">1.2. Individual AWS IAM user</h3>
 <p>Prepare a new individual IAM user with programmatic access key enabled and have access to EC2 management. We will use the <code>access_key</code> and <code>secret_key</code> on this tutorial. If you haven&apos;t created the IAM user, then follow the guide on <a href="aws-create-individual-iam-user.html">Create Individual IAM User</a>.</p>
-<h4 id="13-ssh-keygen-and-ssh-commands">1.3. <code>ssh-keygen</code> and <code>ssh</code> commands</h4>
+<h3 id="13-ssh-keygen-and-ssh-commands">1.3. <code>ssh-keygen</code> and <code>ssh</code> commands</h3>
 <p>Ensure both <code>ssh-keygen</code> and <code>ssh</code> command are available.</p>
 <hr>
-<h3 id="2-preparation">2. Preparation</h3>
+<h2 id="2-preparation">2. Preparation</h2>
 <p>Create a new folder contains a file named <code>infrastructure.tf</code>. We will use the file as the infrastructure code. Every resource setup will be written in HCL language inside the file, including: </p>
 <ul>
 <li>Uploading key pair (for ssh access to the instance).</li>
@@ -368,9 +368,9 @@ ssh-keygen -t rsa <span class="hljs-_">-f</span> ./id_rsa
 </code></pre>
 <p><img src="https://i.imgur.com/ZB16oJB.png" alt="Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled - generate key pair"></p>
 <hr>
-<h3 id="3-infrastructure-code">3. Infrastructure Code</h3>
+<h2 id="3-infrastructure-code">3. Infrastructure Code</h2>
 <p>Now we shall start writing the infrastructure config. Open <code>infrastructure.tf</code> in any editor.</p>
-<h4 id="31-define-aws-provider">3.1. Define AWS provider</h4>
+<h3 id="31-define-aws-provider">3.1. Define AWS provider</h3>
 <p>Define the provider block with <a href="https://www.terraform.io/docs/providers/aws/index.html" target="_blank">AWS as chosen cloud provider</a>. Also define these properties: <code>region</code>, <code>access_key</code>, and <code>secret_key</code>; with values derived from the created IAM user.</p>
 <p>Write a block of code below into <code>infrastructure.tf</code></p>
 <pre><code class="lang-bash">provider <span class="hljs-string">&quot;aws&quot;</span> {
@@ -379,14 +379,14 @@ ssh-keygen -t rsa <span class="hljs-_">-f</span> ./id_rsa
     secret_key = <span class="hljs-string">&quot;+IiZmuocoN7ypY8emE79awHzjAjG8wC2Mc/ZAHK6&quot;</span>
 }
 </code></pre>
-<h4 id="32-generate-new-key-pair-then-upload-to-aws">3.2. Generate new key pair then upload to AWS</h4>
+<h3 id="32-generate-new-key-pair-then-upload-to-aws">3.2. Generate new key pair then upload to AWS</h3>
 <p>Define new <a href="https://www.terraform.io/docs/providers/aws/r/key_pair.html" target="_blank"><code>aws_key_pair</code> resource</a> block with local name: <code>my_instance_key_pair</code>. Put the previously generated <code>id_rsa.pub</code> public key inside the block to upload it to AWS.</p>
 <pre><code class="lang-bash">resource <span class="hljs-string">&quot;aws_key_pair&quot;</span> <span class="hljs-string">&quot;my_instance_key_pair&quot;</span> {
     key_name = <span class="hljs-string">&quot;terraform_learning_key_1&quot;</span>
     public_key = file(<span class="hljs-string">&quot;id_rsa.pub&quot;</span>)
 }
 </code></pre>
-<h4 id="33-create-a-new-ec2-instance">3.3. Create a new EC2 instance</h4>
+<h3 id="33-create-a-new-ec2-instance">3.3. Create a new EC2 instance</h3>
 <p>Define another resource block, but this one will be the <a href="https://www.terraform.io/docs/providers/aws/r/instance.html" target="_blank"><code>aws_instance</code> resource</a>. Name the EC2 instance as <code>my_instance</code>, then specify the values of VPC, instance type, key pair, security group, subnet, and public IP within the block.</p>
 <p>Each part of the code below is self-explanatory.</p>
 <pre><code class="lang-bash"><span class="hljs-comment"># create a new AWS ec2 instance.</span>
@@ -415,7 +415,7 @@ resource <span class="hljs-string">&quot;aws_instance&quot;</span> <span class="
 <p>The <code>key_name</code> property filled with a value coming from the <code>my_instance_key_pair</code> that we defined previously. Statement <code>aws_key_pair.my_instance_key_pair.key_name</code> return the <code>key_name</code> of the particular key pair, in this example it is <code>terraform_learning_key_1</code>.</p>
 <p>For both <code>vpc_security_group_ids</code> and <code>subnet_id</code>, the values are taken from another resource block, similar to the <code>key_name</code>. However, for these two properties, we haven&apos;t defined the resource block yet.</p>
 <p>Btw, property <code>vpc_security_group_ids</code> accept an array of string as the value, so that&apos;s why it&apos;s wrapped inside <code>[]</code>. Even it is only one security group, the value needs to be in an array format.</p>
-<h4 id="34-allocate-a-vpc-resource-with-a-security-group-attached-to-it">3.4. Allocate a VPC resource with a security group attached to it</h4>
+<h3 id="34-allocate-a-vpc-resource-with-a-security-group-attached-to-it">3.4. Allocate a VPC resource with a security group attached to it</h3>
 <p>Allocate <a href="https://www.terraform.io/docs/providers/aws/r/vpc.html" target="_blank">a VPC resource</a> block, and then define <a href="https://www.terraform.io/docs/providers/aws/r/security_group.html" target="_blank">a security group resource</a> within the VPC.</p>
 <pre><code class="lang-bash"><span class="hljs-comment"># allocate a VPC named my_vpc.</span>
 resource <span class="hljs-string">&quot;aws_vpc&quot;</span> <span class="hljs-string">&quot;my_vpc&quot;</span> {
@@ -463,7 +463,7 @@ resource <span class="hljs-string">&quot;aws_security_group&quot;</span> <span c
 <blockquote>
 <p>ingress is equivalent to inbound, and egress for outbound</p>
 </blockquote>
-<h4 id="35-allocate-new-public-subnet-to-vpc">3.5. Allocate new public subnet to VPC</h4>
+<h3 id="35-allocate-new-public-subnet-to-vpc">3.5. Allocate new public subnet to VPC</h3>
 <p>We have defined a VPC <code>my_vpc</code> with CIDR block <code>10.0.0.0/16</code> allocated. Now we shall create a <a href="https://www.terraform.io/docs/providers/aws/r/subnet.html" target="_blank">subnet</a> (for public access) with CIDR block slightly smaller, <code>10.0.0.0/24</code>.</p>
 <pre><code class="lang-bash"><span class="hljs-comment"># create a subnet for my_vpc.</span>
 resource <span class="hljs-string">&quot;aws_subnet&quot;</span> <span class="hljs-string">&quot;my_public_subnet&quot;</span> {
@@ -472,7 +472,7 @@ resource <span class="hljs-string">&quot;aws_subnet&quot;</span> <span class="hl
 }
 </code></pre>
 <p>If we go back to the definition of <code>my_instance</code> block above, this particular subnet is attached there.</p>
-<h4 id="36-create-an-internet-gateway-and-route-table-association">3.6. Create an internet gateway and route table association</h4>
+<h3 id="36-create-an-internet-gateway-and-route-table-association">3.6. Create an internet gateway and route table association</h3>
 <p>Now create an <a href="https://www.terraform.io/docs/providers/aws/r/internet_gateway.html" target="_blank">internet gateway</a> for <code>my_vpc</code>. Then attach it to a new <a href="https://www.terraform.io/docs/providers/aws/r/route_table.html" target="_blank">route table</a> for public access.</p>
 <pre><code class="lang-bash"><span class="hljs-comment"># create an internet gateway, tag it to my_vpc.</span>
 resource <span class="hljs-string">&quot;aws_internet_gateway&quot;</span> <span class="hljs-string">&quot;my_internet_gateway&quot;</span> {
@@ -505,16 +505,16 @@ output <span class="hljs-string">&quot;public-ip&quot;</span> {
 </code></pre>
 <p>The infra file is ready. Now we shall perform the terraforming process.</p>
 <hr>
-<h3 id="4-run-terraform">4. Run Terraform</h3>
-<h4 id="41-terraform-initialization">4.1. Terraform initialization</h4>
+<h2 id="4-run-terraform">4. Run Terraform</h2>
+<h3 id="41-terraform-initialization">4.1. Terraform initialization</h3>
 <p>First, run the <code>terraform init</code> command. This command will do some setup/initialization, certain dependencies (like AWS provider that we used) will be downloaded.</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> terraform-automate-aws-ec2-instance
 terraform init
 </code></pre>
 <p><img src="https://i.imgur.com/6PnpyNc.png" alt="Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled - terraform init"></p>
-<h4 id="42-terraform-plan">4.2. Terraform plan</h4>
+<h3 id="42-terraform-plan">4.2. Terraform plan</h3>
 <p>Next, run <code>terraform plan</code>, to see the plan of our infrastructure. This step is optional, however, might be useful for us to see the outcome from the infra file.</p>
-<h4 id="43-terraform-apply">4.3. Terraform apply</h4>
+<h3 id="43-terraform-apply">4.3. Terraform apply</h3>
 <p>Last, run the <code>terraform apply</code> command to execute the infrastructure plan.</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> terraform-automate-aws-ec2-instance
 terraform apply -auto-approve
@@ -523,7 +523,7 @@ terraform apply -auto-approve
 <p><img src="https://i.imgur.com/rK1LX8c.png" alt="Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled - terraform apply"></p>
 <p>In the infra file, we defined two outputs, DNS and public IP, it shows up after the terraforming process is done.</p>
 <hr>
-<h3 id="5-test-instance">5. Test Instance</h3>
+<h2 id="5-test-instance">5. Test Instance</h2>
 <p>Now we shall test the instance. Use the <code>ssh</code> command to remotely connect to a particular instance. Either DNS or public IP can be used, just pick one.</p>
 <pre><code class="lang-bash">ssh -i id_rsa ec2-user@ec2-18-140-245-218.ap-southeast-1.compute.amazonaws.com
 </code></pre>
@@ -568,7 +568,7 @@ terraform apply -auto-approve
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled","level":"1.14","depth":1,"next":{"title":"Terraform - Automate setup of AWS EC2 with Application Load Balancer and Auto Scaling enabled","level":"1.15","depth":1,"path":"terraform-aws-load-balancer-auto-scaling.md","ref":"terraform-aws-load-balancer-auto-scaling.md","articles":[]},"previous":{"title":"Terraform","level":"1.13","depth":1,"ref":"","articles":[]},"dir":"ltr"},"config":{"plugins":["ga","disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-27602984-32"},"disqus":{"useIdentifier":false,"shortName":"devops-novalagung-com"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","lunr":{"maxIndexSize":1000000000},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"terraform-aws-ec2-internet-gateway-ssh.md","mtime":"2022-10-14T08:05:11.934Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-10-14T08:05:57.876Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled","level":"1.14","depth":1,"next":{"title":"Terraform - Automate setup of AWS EC2 with Application Load Balancer and Auto Scaling enabled","level":"1.15","depth":1,"path":"terraform-aws-load-balancer-auto-scaling.md","ref":"terraform-aws-load-balancer-auto-scaling.md","articles":[]},"previous":{"title":"Terraform","level":"1.13","depth":1,"ref":"","articles":[]},"dir":"ltr"},"config":{"plugins":["disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"devops-novalagung-com"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","lunr":{"maxIndexSize":1000000000},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"terraform-aws-ec2-internet-gateway-ssh.md","mtime":"2022-10-14T08:17:55.385Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-10-14T08:18:35.431Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -576,10 +576,6 @@ terraform apply -auto-approve
         
     <script src="gitbook/gitbook.js"></script>
     <script src="gitbook/theme.js"></script>
-    
-        
-        <script src="gitbook/gitbook-plugin-ga/plugin.js"></script>
-        
     
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>

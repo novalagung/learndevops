@@ -71,7 +71,7 @@
 			function gtag(){dataLayer.push(arguments);}
 			gtag('js', new Date());
 			gtag('config', 'G-ZJMMV9WFV8');
-		</script><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1247398778924723');fbq('track','PageView');</script><noscript><imgheight="1"width="1"style="display:none"src="https://www.facebook.com/tr?id=1247398778924723&ev=PageView&noscript=1"/></noscript><link rel="stylesheet" href="/adjustment.css?v=1.2022.10.14.080600"></head>
+		</script><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1247398778924723');fbq('track','PageView');</script><noscript><imgheight="1"width="1"style="display:none"src="https://www.facebook.com/tr?id=1247398778924723&ev=PageView&noscript=1"/></noscript><link rel="stylesheet" href="/adjustment.css?v=1.2022.10.14.081837"></head>
     <body>
         
 <div class="book">
@@ -342,15 +342,15 @@
 <p>Since we will be using the auto-scaling feature, then the app within the instance needs to be deployed in an automated manner.</p>
 <p>The application is a simple go app, currently hosted on Github in a private repo. We will clone the app using Github token, we will talk about it in details in some part of this tutorial.</p>
 <hr>
-<h3 id="1-prerequisites">1. Prerequisites</h3>
-<h4 id="11-terraform-cli">1.1. Terraform CLI</h4>
+<h2 id="1-prerequisites">1. Prerequisites</h2>
+<h3 id="11-terraform-cli">1.1. Terraform CLI</h3>
 <p>Ensure terraform CLI is available. If not, then do install it first.</p>
-<h4 id="12-individual-aws-iam-user">1.2. Individual AWS IAM user</h4>
+<h3 id="12-individual-aws-iam-user">1.2. Individual AWS IAM user</h3>
 <p>Prepare a new individual IAM user with programmatic access key enabled and have access to EC2 management. We will use the <code>access_key</code> and <code>secret_key</code> on this tutorial. If you haven&apos;t created the IAM user, then follow a guide on <a href="aws-create-individual-iam-user.html">Create Individual IAM User</a>.</p>
-<h4 id="13-ssh-keygen-and-ssh-commands">1.3. <code>ssh-keygen</code> and <code>ssh</code> commands</h4>
+<h3 id="13-ssh-keygen-and-ssh-commands">1.3. <code>ssh-keygen</code> and <code>ssh</code> commands</h3>
 <p>Ensure both <code>ssh-keygen</code> and <code>ssh</code> command are available.</p>
 <hr>
-<h3 id="2-preparation">2. Preparation</h3>
+<h2 id="2-preparation">2. Preparation</h2>
 <p>Create a new folder contains a file named <code>infrastructure.tf</code>. We will use the file as the infrastructure code. Every resource setup will be written in HCL language inside the file, including: </p>
 <ul>
 <li>Uploading key pair (for ssh access to the instance).</li>
@@ -369,9 +369,9 @@ ssh-keygen -t rsa <span class="hljs-_">-f</span> ./id_rsa
 </code></pre>
 <p><img src="https://i.imgur.com/ZB16oJB.png" alt="Terraform - Automate setup of AWS EC2 with Load Balancer and Auto Scaling enabled - generate key pair"></p>
 <hr>
-<h3 id="3-infrastructure-code">3. Infrastructure Code</h3>
+<h2 id="3-infrastructure-code">3. Infrastructure Code</h2>
 <p>Now we shall start writing the infrastructure config. Open <code>infrastructure.tf</code> in any editor.</p>
-<h4 id="31-define-aws-provider">3.1. Define AWS provider</h4>
+<h3 id="31-define-aws-provider">3.1. Define AWS provider</h3>
 <p>Define the provider block with <a href="https://www.terraform.io/docs/providers/aws/index.html" target="_blank">AWS as chosen cloud provider</a>. Also define these properties: <code>region</code>, <code>access_key</code>, and <code>secret_key</code>; with values derived from the created IAM user.</p>
 <p>Write a block of code below into <code>infrastructure.tf</code></p>
 <pre><code class="lang-bash">provider <span class="hljs-string">&quot;aws&quot;</span> {
@@ -380,14 +380,14 @@ ssh-keygen -t rsa <span class="hljs-_">-f</span> ./id_rsa
     secret_key = <span class="hljs-string">&quot;+IiZmuocoN7ypY8emE79awHzjAjG8wC2Mc/ZAHK6&quot;</span>
 }
 </code></pre>
-<h4 id="32-generate-new-key-pair-then-upload-to-aws">3.2. Generate new key pair then upload to AWS</h4>
+<h3 id="32-generate-new-key-pair-then-upload-to-aws">3.2. Generate new key pair then upload to AWS</h3>
 <p>Define new <a href="https://www.terraform.io/docs/providers/aws/r/key_pair.html" target="_blank"><code>aws_key_pair</code> resource</a> block with local name: <code>my_instance_key_pair</code>. Put the previously generated <code>id_rsa.pub</code> public key inside the block to upload it to AWS.</p>
 <pre><code class="lang-bash">resource <span class="hljs-string">&quot;aws_key_pair&quot;</span> <span class="hljs-string">&quot;my_instance_key_pair&quot;</span> {
     key_name = <span class="hljs-string">&quot;terraform_learning_key_1&quot;</span>
     public_key = file(<span class="hljs-string">&quot;id_rsa.pub&quot;</span>)
 }
 </code></pre>
-<h4 id="33-book-a-vpc-and-enable-internet-gateway-on-it">3.3. Book a VPC, and enable internet gateway on it</h4>
+<h3 id="33-book-a-vpc-and-enable-internet-gateway-on-it">3.3. Book a VPC, and enable internet gateway on it</h3>
 <p>Book a VPC, name it <code>my_vpc</code>. Then enable internet gateway on it. Each part of the code below is self-explanatory.</p>
 <pre><code class="lang-bash"><span class="hljs-comment"># allocate a vpc named my_vpc.</span>
 resource <span class="hljs-string">&quot;aws_vpc&quot;</span> <span class="hljs-string">&quot;my_vpc&quot;</span> {
@@ -409,7 +409,7 @@ resource <span class="hljs-string">&quot;aws_route_table&quot;</span> <span clas
     }
 }
 </code></pre>
-<h4 id="34-allocate-two-different-subnets-on-two-different-availability-zones-within-the-same-region">3.4. Allocate two different subnets on two different availability zones (within the same region)</h4>
+<h3 id="34-allocate-two-different-subnets-on-two-different-availability-zones-within-the-same-region">3.4. Allocate two different subnets on two different availability zones (within the same region)</h3>
 <p>Application Load Balancer or ALB requires two subnets setup on two availability zones (within the same region).</p>
 <p>In this example, the region we used is <code>ap-southeast-1</code>, as defined in the provider block above (see 3.1). There are two zones available within this region, <code>ap-southeast-1a</code> and <code>ap-southeast-1b</code>. The ALB (not classic network load balancer) requires at least to be enabled on two different zones, so we will use those two.</p>
 <pre><code class="lang-bash"><span class="hljs-comment"># prepare a subnet for availability zone ap-southeast-1a.</span>
@@ -437,7 +437,7 @@ resource <span class="hljs-string">&quot;aws_route_table_association&quot;</span
 }
 </code></pre>
 <p>The internet gateway associated with two zones that we just created. In this example, it is required for the application hosted within instances on these zones to be able to connect to the internet.</p>
-<h4 id="35-define-alb-resource-block-listener-security-group-and-target-group">3.5. Define ALB resource block, listener, security group, and target group</h4>
+<h3 id="35-define-alb-resource-block-listener-security-group-and-target-group">3.5. Define ALB resource block, listener, security group, and target group</h3>
 <p>The ALB will be created with two subnets attached (subnets from <code>ap-southeast-1a</code> and <code>ap-southeast-1b</code>).</p>
 <pre><code class="lang-bash"><span class="hljs-comment"># create an Application Load Balancer.</span>
 <span class="hljs-comment"># attach the previous availability zones&apos; subnets into this load balancer.</span>
@@ -497,7 +497,7 @@ resource <span class="hljs-string">&quot;aws_lb_target_group&quot;</span> <span 
     vpc_id = aws_vpc.my_vpc.id
 }
 </code></pre>
-<h4 id="36-define-launch-config-and-its-required-dependencies-for-auto-scaling">3.6. Define launch config (and it&apos;s required dependencies) for auto-scaling</h4>
+<h3 id="36-define-launch-config-and-its-required-dependencies-for-auto-scaling">3.6. Define launch config (and it&apos;s required dependencies) for auto-scaling</h3>
 <p>We are not going to simply create an instance then deploy the application into it. Instead, the instance creation and app deployment will be automated using AWS auto-scaling feature.</p>
 <p>In the resource block below, we will set up the launch configuration for the auto-scaling. This launch config is the one that decides how the instance will be created.</p>
 <ul>
@@ -599,7 +599,7 @@ resource <span class="hljs-string">&quot;aws_autoscaling_group&quot;</span> <spa
     }
 }
 </code></pre>
-<h4 id="37-print-the-alb-public-dns">3.7. Print the ALB public DNS</h4>
+<h3 id="37-print-the-alb-public-dns">3.7. Print the ALB public DNS</h3>
 <p>Everything is pretty much done, except we need to print the ALB public DNS, so then we can do the testing.</p>
 <pre><code class="lang-bash"><span class="hljs-comment"># print load balancer&apos;s DNS, test it using curl.</span>
 <span class="hljs-comment">#</span>
@@ -609,7 +609,7 @@ output <span class="hljs-string">&quot;alb-url&quot;</span> {
 }
 </code></pre>
 <hr>
-<h3 id="4-app-deployment-script">4. App Deployment Script</h3>
+<h2 id="4-app-deployment-script">4. App Deployment Script</h2>
 <p>We have done with the infrastructure code, next prepare the deployment script.</p>
 <p>Create a file named <code>deployment.sh</code> in the same directory where the infra code is placed. It will contain bash scripts for automating app deployment. This file will be used by auto-scaling launcher to automate app setup during instance bootstrap.</p>
 <p>The application is written in Go, and the AMI <em>Amazon Linux 2 AMI t2.micro</em> that used here does not have any Go tools ready, that&apos;s why we need to set it up.</p>
@@ -657,15 +657,15 @@ mkdir -p <span class="hljs-variable">$GOPATH</span>
 nohup ./binary &amp;
 </code></pre>
 <hr>
-<h3 id="5-run-terraform">5. Run Terraform</h3>
-<h4 id="51-terraform-initialization">5.1. Terraform initialization</h4>
+<h2 id="5-run-terraform">5. Run Terraform</h2>
+<h3 id="51-terraform-initialization">5.1. Terraform initialization</h3>
 <p>First, run the <code>terraform init</code> command. This command will do some setup/initialization, certain dependencies (like AWS provider that we used) will be downloaded.</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> terraform-automate-aws-ec2-instance
 terraform init
 </code></pre>
-<h4 id="52-terraform-plan">5.2. Terraform plan</h4>
+<h3 id="52-terraform-plan">5.2. Terraform plan</h3>
 <p>Next, run <code>terraform plan</code>, to see the plan of our infrastructure. This step is optional, however, might be useful for us to see the outcome from the infra file.</p>
-<h4 id="53-terraform-apply">5.3. Terraform apply</h4>
+<h3 id="53-terraform-apply">5.3. Terraform apply</h3>
 <p>Last, run the <code>terraform apply</code> command to execute the infrastructure plan.</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> terraform-automate-aws-ec2-instance
 terraform apply -auto-approve
@@ -673,7 +673,7 @@ terraform apply -auto-approve
 <p>The <code>-auto-approve</code> flag is optional, it will skip the confirmation prompt during execution.</p>
 <p>After the process is done, public DNS shall appear. Next, we shall test the instance. </p>
 <hr>
-<h3 id="6-test-instance">6. Test Instance</h3>
+<h2 id="6-test-instance">6. Test Instance</h2>
 <p>Use the <code>curl</code> command to make an HTTP request to the ALB public DNS instance.</p>
 <pre><code class="lang-bash">curl -X GET my-alb-613171058.ap-southeast-1.elb.amazonaws.com
 </code></pre>
@@ -720,7 +720,7 @@ terraform apply -auto-approve
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Terraform - Automate setup of AWS EC2 with Application Load Balancer and Auto Scaling enabled","level":"1.15","depth":1,"previous":{"title":"Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled","level":"1.14","depth":1,"path":"terraform-aws-ec2-internet-gateway-ssh.md","ref":"terraform-aws-ec2-internet-gateway-ssh.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga","disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-27602984-32"},"disqus":{"useIdentifier":false,"shortName":"devops-novalagung-com"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","lunr":{"maxIndexSize":1000000000},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"terraform-aws-load-balancer-auto-scaling.md","mtime":"2022-10-14T08:05:11.934Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-10-14T08:05:57.876Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Terraform - Automate setup of AWS EC2 with Application Load Balancer and Auto Scaling enabled","level":"1.15","depth":1,"previous":{"title":"Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled","level":"1.14","depth":1,"path":"terraform-aws-ec2-internet-gateway-ssh.md","ref":"terraform-aws-ec2-internet-gateway-ssh.md","articles":[]},"dir":"ltr"},"config":{"plugins":["disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"devops-novalagung-com"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","lunr":{"maxIndexSize":1000000000},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"terraform-aws-load-balancer-auto-scaling.md","mtime":"2022-10-14T08:17:55.385Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-10-14T08:18:35.431Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -728,10 +728,6 @@ terraform apply -auto-approve
         
     <script src="gitbook/gitbook.js"></script>
     <script src="gitbook/theme.js"></script>
-    
-        
-        <script src="gitbook/gitbook-plugin-ga/plugin.js"></script>
-        
     
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
