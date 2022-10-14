@@ -37,4 +37,40 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./_book
-        cname: learndevops.novalagung.com
+
+  job_deploy_ebook:
+    name: 'deploy ebook'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 11
+        check-latest: true
+    - uses: actions/setup-go@v2
+      with:
+        go-version: 1.14
+    - name: 'Installing requirements'
+      run: |
+        npm install -g gitbook-cli svgexport
+        sudo apt install libegl1 libopengl0
+        sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+    - name: 'Generating distributable files'
+      run: |
+        gitbook install
+        gitbook build
+        go run adjustment.go
+        cd _book
+        gitbook install
+    - name: 'Generating ebook in pdf'
+      run: gitbook pdf ./ ./_book/learndevops.pdf
+    - name: 'Generating ebook in epub'
+      run: gitbook epub ./ ./_book/learndevops.epub
+    - name: 'Generating ebook in mobi'
+      run: gitbook mobi ./ ./_book/learndevops.mobi
+    - name: 'Deploying'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./_book
+        publish_branch: ebooks
