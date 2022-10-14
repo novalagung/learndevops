@@ -1,12 +1,8 @@
 {
     "plugins": [
-        "ga",
         "disqus"
     ],
     "pluginsConfig": {
-        "ga": {
-            "token": "UA-27602984-32"
-        },
         "disqus": {
             "shortName": "devops-novalagung-com"
         }
