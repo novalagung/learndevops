@@ -3,10 +3,6 @@
 * [Introduction](README.md)
 * [Read PDF version](https://github.com/novalagung/learndevops/blob/ebooks/learndevops.pdf)
 
-* Other Links
-* [E-book: Dasar Pemrograman Rust (december release)]()
-* [E-book: Learn DevOps](https://learndevops.novalagung.com/)
-
 * Amazon Web Services (AWS)
 * [Create Individual IAM User](aws-create-individual-iam-user.md)
 
@@ -26,3 +22,4 @@
 * Terraform
 * [Terraform - Automate setup of AWS EC2 with Internet Gateway and SSH Access enabled](terraform-aws-ec2-internet-gateway-ssh.md)
 * [Terraform - Automate setup of AWS EC2 with Application Load Balancer and Auto Scaling enabled](terraform-aws-load-balancer-auto-scaling.md)
+
