@@ -4,7 +4,7 @@
     ],
     "pluginsConfig": {
         "disqus": {
-            "shortName": "devops-novalagung-com"
+            "shortName": "dasarpemrogramangolang"
         }
     },
     "lunr": {
