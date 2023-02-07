@@ -9,6 +9,7 @@
 
 * CI/CD
 * [Serverless Ebook using Gitbook CLI, Github Pages, Github Actions CI/CD, and Calibre](cicd-serverless-ebook-gitbook-github-pages-actions-calibre.md)
+* [Serverless E-book/Web-book using Docusaurus v2, GitHub Pages & Actions, and PDF tools](https://novalagung.medium.com/serverless-e-book-web-book-using-docusaurus-v2-github-pages-actions-and-pdf-tools-4fef54847b85)
 
 * Docker
 * [Push Image to hub.docker.com](docker-push-image-to-hub.md)
