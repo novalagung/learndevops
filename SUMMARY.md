@@ -5,6 +5,7 @@
 
 * Amazon Web Services (AWS)
 * [Create Individual IAM User](aws-create-individual-iam-user.md)
+* [Automating Cloudflare IPs Whitelisting on AWS Security Group (part 1)](https://novalagung.medium.com/automating-cloudflare-ips-whitelisting-on-aws-security-group-part-1-6215469a4f47)
 
 * CI/CD
 * [Serverless Ebook using Gitbook CLI, Github Pages, Github Actions CI/CD, and Calibre](cicd-serverless-ebook-gitbook-github-pages-actions-calibre.md)
